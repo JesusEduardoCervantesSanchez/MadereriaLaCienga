@@ -1,0 +1,5 @@
+Tamaño panel: 700X460
+Color Verde: 055D26
+Color gris: D9D9D9
+Color blanco: FFFFFF
+Color rojo: CC2626
