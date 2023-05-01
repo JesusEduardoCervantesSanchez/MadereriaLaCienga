@@ -41,7 +41,7 @@ public class DevolucionVenta extends javax.swing.JPanel {
         jtTotalVenta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
         jtCantidad = new javax.swing.JTextField();
-        btnRealizarVenta1 = new javax.swing.JButton();
+        btnRealizarDevolucion = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -107,15 +107,15 @@ public class DevolucionVenta extends javax.swing.JPanel {
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 130, -1));
         add(jtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
 
-        btnRealizarVenta1.setBackground(new java.awt.Color(5, 93, 38));
-        btnRealizarVenta1.setForeground(new java.awt.Color(255, 255, 255));
-        btnRealizarVenta1.setText("Realizar Devolución");
-        btnRealizarVenta1.addActionListener(new java.awt.event.ActionListener() {
+        btnRealizarDevolucion.setBackground(new java.awt.Color(5, 93, 38));
+        btnRealizarDevolucion.setForeground(new java.awt.Color(255, 255, 255));
+        btnRealizarDevolucion.setText("Realizar Devolución");
+        btnRealizarDevolucion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnRealizarVenta1ActionPerformed(evt);
+                btnRealizarDevolucionActionPerformed(evt);
             }
         });
-        add(btnRealizarVenta1, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 160, -1));
+        add(btnRealizarDevolucion, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 410, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -130,15 +130,15 @@ public class DevolucionVenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_jtTablaMouseClicked
 
-    private void btnRealizarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVenta1ActionPerformed
+    private void btnRealizarDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarDevolucionActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_btnRealizarVenta1ActionPerformed
+    }//GEN-LAST:event_btnRealizarDevolucionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnInsertarProducto;
-    private javax.swing.JButton btnRealizarVenta1;
+    private javax.swing.JButton btnRealizarDevolucion;
     private javax.swing.JComboBox<String> cmbClave;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
