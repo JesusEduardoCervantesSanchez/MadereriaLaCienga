@@ -12,12 +12,12 @@ import javax.swing.JLabel;
  *
  * @author hg710
  */
-public class AltaProveedor extends javax.swing.JPanel {
+public class ModificarProveedor extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public AltaProveedor() {
+    public ModificarProveedor() {
         initComponents();
     }
 
@@ -41,8 +41,8 @@ public class AltaProveedor extends javax.swing.JPanel {
         txtTelefono = new javax.swing.JTextField();
         txtLocalidad = new javax.swing.JTextField();
         txtNombre = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
+        cmbClave = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
 
@@ -52,8 +52,8 @@ public class AltaProveedor extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Alta Proveedor");
-        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 40));
+        titulo.setText("Modificar Proveedor");
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 200, 40));
 
         jLabel2.setText("Clave");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 120, -1));
@@ -76,8 +76,9 @@ public class AltaProveedor extends javax.swing.JPanel {
         add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 280, 30));
         add(txtLocalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 280, 30));
         add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 280, 30));
-        add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
         add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 280, 30));
+
+        add(cmbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -112,6 +113,7 @@ public class AltaProveedor extends javax.swing.JPanel {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox<String> cmbClave;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -119,7 +121,6 @@ public class AltaProveedor extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel titulo;
-    private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtEstado;
     private javax.swing.JTextField txtLocalidad;
