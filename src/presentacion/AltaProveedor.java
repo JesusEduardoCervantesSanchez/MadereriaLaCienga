@@ -40,9 +40,9 @@ public class AltaProveedor extends javax.swing.JPanel {
         txtEstado = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtLocalidad = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
+        txtClave = new javax.swing.JTextField();
+        txtNombre = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
 
@@ -75,9 +75,9 @@ public class AltaProveedor extends javax.swing.JPanel {
         add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 280, 30));
         add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 280, 30));
         add(txtLocalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 280, 30));
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 280, 30));
-        add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
         add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 280, 30));
+        add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
+        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 280, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
