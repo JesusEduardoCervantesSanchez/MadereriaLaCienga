@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JPanel.java to edit this template
  */
 package presentacion;
 
@@ -8,7 +8,7 @@ package presentacion;
  *
  * @author cp
  */
-public class AltaEmpleado extends javax.swing.JFrame {
+public class AltaEmpleado extends javax.swing.JPanel {
 
     /**
      * Creates new form AltaEmpleado
@@ -26,29 +26,30 @@ public class AltaEmpleado extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel9 = new javax.swing.JLabel();
+        txtMedidas1 = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         titulo = new javax.swing.JLabel();
-        claveTxt = new javax.swing.JLabel();
-        nombreTxt = new javax.swing.JLabel();
-        apellidoTxt = new javax.swing.JLabel();
-        telefonoTxt = new javax.swing.JLabel();
-        direccionTxt = new javax.swing.JLabel();
-        coloniaTxt = new javax.swing.JLabel();
-        nomUsuTxt = new javax.swing.JLabel();
-        contraceñaTxt = new javax.swing.JLabel();
-        txtNombre = new javax.swing.JTextField();
+        clave = new javax.swing.JLabel();
+        nombres = new javax.swing.JLabel();
+        apellidos = new javax.swing.JLabel();
+        telefono = new javax.swing.JLabel();
+        direccion = new javax.swing.JLabel();
+        colonia = new javax.swing.JLabel();
+        nomUsuario = new javax.swing.JLabel();
+        contraceña = new javax.swing.JLabel();
+        txtNombres = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtColonia = new javax.swing.JTextField();
-        txtClave = new javax.swing.JTextField();
         txtNomUsuario = new javax.swing.JTextField();
-        txtContraceña = new javax.swing.JTextField();
-        btnCancelar = new javax.swing.JButton();
+        txtContraseña = new javax.swing.JTextField();
+        txtClave = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
+        btnCancelar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setBackground(new java.awt.Color(255, 255, 255));
+        jLabel9.setText("Nombre de usuario");
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,47 +60,37 @@ public class AltaEmpleado extends javax.swing.JFrame {
         titulo.setText("Alta Empleado");
         jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 40));
 
-        claveTxt.setText("Clave");
-        jPanel1.add(claveTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 120, -1));
+        clave.setText("Clave");
+        jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 120, -1));
 
-        nombreTxt.setText("Nombre[s]");
-        jPanel1.add(nombreTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 140, -1));
+        nombres.setText("Nombre[s]");
+        jPanel1.add(nombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 140, -1));
 
-        apellidoTxt.setText("Apellidos");
-        jPanel1.add(apellidoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 120, -1));
+        apellidos.setText("Apellidos");
+        jPanel1.add(apellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 100, 120, -1));
 
-        telefonoTxt.setText("Teléfono");
-        jPanel1.add(telefonoTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 120, -1));
+        telefono.setText("Teléfono");
+        jPanel1.add(telefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 160, 120, -1));
 
-        direccionTxt.setText("Dirección");
-        jPanel1.add(direccionTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, -1));
+        direccion.setText("Dirección");
+        jPanel1.add(direccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 220, 120, -1));
 
-        coloniaTxt.setText("Colonia");
-        jPanel1.add(coloniaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 120, -1));
+        colonia.setText("Colonia");
+        jPanel1.add(colonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 120, -1));
 
-        nomUsuTxt.setText("Nombre de usuario");
-        jPanel1.add(nomUsuTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 120, -1));
+        nomUsuario.setText("Nombre de usuario");
+        jPanel1.add(nomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 120, -1));
 
-        contraceñaTxt.setText("Contraceña");
-        jPanel1.add(contraceñaTxt, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 120, -1));
-        jPanel1.add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 280, 30));
+        contraceña.setText("Contraseña");
+        jPanel1.add(contraceña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 120, -1));
+        jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 280, 30));
         jPanel1.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 280, 30));
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 280, 30));
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 280, 30));
         jPanel1.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 280, 30));
-        jPanel1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
         jPanel1.add(txtNomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 280, 30));
-        jPanel1.add(txtContraceña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 280, 30));
-
-        btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 160, -1));
+        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 280, 30));
+        jPanel1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, 30));
 
         btnAceptar.setBackground(new java.awt.Color(5, 93, 38));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,22 +102,36 @@ public class AltaEmpleado extends javax.swing.JFrame {
         });
         jPanel1.add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 160, -1));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
+        btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
+        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
+        btnCancelar.setText("Cancelar");
+        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 160, -1));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
+        this.setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 700, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 700, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGap(0, 460, Short.MAX_VALUE)
+            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createSequentialGroup()
+                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGap(0, 0, Short.MAX_VALUE)))
         );
-
-        pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -137,61 +142,29 @@ public class AltaEmpleado extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AltaEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AltaEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AltaEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AltaEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
-
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AltaEmpleado().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel apellidoTxt;
+    private javax.swing.JLabel apellidos;
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JLabel claveTxt;
-    private javax.swing.JLabel coloniaTxt;
-    private javax.swing.JLabel contraceñaTxt;
-    private javax.swing.JLabel direccionTxt;
+    private javax.swing.JLabel clave;
+    private javax.swing.JLabel colonia;
+    private javax.swing.JLabel contraceña;
+    private javax.swing.JLabel direccion;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel nomUsuTxt;
-    private javax.swing.JLabel nombreTxt;
-    private javax.swing.JLabel telefonoTxt;
+    private javax.swing.JLabel nomUsuario;
+    private javax.swing.JLabel nombres;
+    private javax.swing.JLabel telefono;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtContraceña;
+    private javax.swing.JTextField txtContraseña;
     private javax.swing.JTextField txtDireccion;
+    private javax.swing.JTextField txtMedidas1;
     private javax.swing.JTextField txtNomUsuario;
-    private javax.swing.JTextField txtNombre;
+    private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables
 }
