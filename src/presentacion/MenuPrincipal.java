@@ -201,7 +201,7 @@ public class MenuPrincipal extends javax.swing.JFrame {
 
     private void jbMenuPuntoCobroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbMenuPuntoCobroActionPerformed
         hide();
-        MenuPuntoCobro objc = new MenuPuntoCobro();
+        MenuAdministrador objc = new MenuAdministrador();
         objc.setVisible(true);
     }//GEN-LAST:event_jbMenuPuntoCobroActionPerformed
 
