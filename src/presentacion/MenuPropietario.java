@@ -22,7 +22,7 @@ public class MenuPropietario extends javax.swing.JFrame {
                     case 0:
                         switch (subIndex) {
                             case 1:
-                                new CambiaPanel(jpAlmacenador, new ConsultarEmpleado());
+                                new CambiaPanel(jpAlmacenador, new ModificarEmpleado());
                                 break;
                             case 2:
                                 new CambiaPanel(jpAlmacenador, new ConsultarEmpleado());
