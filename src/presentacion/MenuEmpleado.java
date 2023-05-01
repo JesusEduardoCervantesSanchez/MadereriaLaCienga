@@ -4,46 +4,47 @@
  */
 package presentacion;
 
+import javax.swing.text.TabableView;
+
 /**
  *
  * @author CSjes
  */
-public class MenuPropietario extends javax.swing.JFrame {
+public class MenuEmpleado extends javax.swing.JFrame {
 
     /**
      * Creates new form Menu
      */
-    public MenuPropietario() {
+    public MenuEmpleado() {
         initComponents();
-        menuScrollableP1.setEvent(new EventoMenu() {
+        menuScrollableE1.setEvent(new EventoMenu() {
             @Override
             public void selected(int index, int subIndex) {
                 switch (index) {
                     case 0:
                         switch (subIndex) {
                             case 1:
-                                new CambiaPanel(jpAlmacenador, new ConsultarEmpleado());
+                                new CambiaPanel(jpAlmacenador, new TablaRemicion());
                                 break;
                             case 2:
-                                new CambiaPanel(jpAlmacenador, new ConsultarEmpleado());
-                                break;
-                            case 3:
-                                new CambiaPanel(jpAlmacenador, new ModificarProveedor());
-                                break;
-                            case 4:
-                                new CambiaPanel(jpAlmacenador, new ConsultarProveedor());
+                                new CambiaPanel(jpAlmacenador, new DevolucionVenta());
                                 break;
                         }
                         break;
                     case 1:
                         switch (subIndex) {
                             case 1:
-                                new CambiaPanel(jpAlmacenador, new GenerarCompras());
-                                break;
-                            case 2:
-                                new CambiaPanel(jpAlmacenador, new CancelarCompra());
+                                new CambiaPanel(jpAlmacenador, new Inventario());
                                 break;
                         }
+                        break;
+                    case 2:
+                        switch (subIndex) {
+                            case 1:
+                                new CambiaPanel(jpAlmacenador, new CambiarContra());
+                                break;
+                        }
+                        break;
                 }
             }
 
@@ -65,7 +66,7 @@ public class MenuPropietario extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         scrollPaneWin111 = new raven.scroll.win11.ScrollPaneWin11();
-        menuScrollableP1 = new presentacion.MenuScrollableP();
+        menuScrollableE1 = new presentacion.MenuScrollableE();
         jbCerrrar = new javax.swing.JButton();
         jpAlmacenador = new javax.swing.JPanel();
 
@@ -87,7 +88,7 @@ public class MenuPropietario extends javax.swing.JFrame {
 
         scrollPaneWin111.setBackground(new java.awt.Color(217, 217, 217));
         scrollPaneWin111.setBorder(null);
-        scrollPaneWin111.setViewportView(menuScrollableP1);
+        scrollPaneWin111.setViewportView(menuScrollableE1);
 
         jpMenu.add(scrollPaneWin111, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 140, 250, 380));
 
@@ -145,14 +146,46 @@ public class MenuPropietario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(MenuPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(MenuPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(MenuPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(MenuPropietario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(MenuEmpleado.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -189,7 +222,7 @@ public class MenuPropietario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuPropietario().setVisible(true);
+                new MenuEmpleado().setVisible(true);
             }
         });
     }
@@ -201,7 +234,7 @@ public class MenuPropietario extends javax.swing.JFrame {
     private javax.swing.JButton jbCerrrar;
     private javax.swing.JPanel jpAlmacenador;
     private javax.swing.JPanel jpMenu;
-    private presentacion.MenuScrollableP menuScrollableP1;
+    private presentacion.MenuScrollableE menuScrollableE1;
     private raven.scroll.win11.ScrollPaneWin11 scrollPaneWin111;
     // End of variables declaration//GEN-END:variables
 

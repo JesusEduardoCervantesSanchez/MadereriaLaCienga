@@ -22,7 +22,7 @@ public class MenuAdministrador extends javax.swing.JFrame {
                     case 0:
                         switch (subIndex) {
                             case 1:
-
+                                new CambiaPanel(jpAlmacenador, new AltaEmpleado());
                                 break;
                             case 2:
                                 new CambiaPanel(jpAlmacenador, new BajaEmpleado());
