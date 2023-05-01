@@ -8,18 +8,23 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
-/**
- *
- * @author hg710
- */
-public class AltaProveedor extends javax.swing.JPanel {
+public class GenerarCompras extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
-    public AltaProveedor() {
+    public GenerarCompras() {
         initComponents();
     }
+    
+    /*private void setImageLabel(JLabel labelname, String root)
+    {
+        ImageIcon image = new ImageIcon(root);
+        Icon icon = new ImageIcon
+        (
+                image.getImage().getScaledInstance(labelname.getWidth(), labelname.getHeight(), Image.Scale)
+        );
+    }*/
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -35,16 +40,14 @@ public class AltaProveedor extends javax.swing.JPanel {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtEstado = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtLocalidad = new javax.swing.JTextField();
-        txtDireccion = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
+        txtFecha = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
         btnAceptar = new javax.swing.JButton();
+        cmbClvProducto = new javax.swing.JComboBox<>();
+        cmbClvProveedor = new javax.swing.JComboBox<>();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -52,32 +55,26 @@ public class AltaProveedor extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Alta Proveedor");
-        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 40));
+        titulo.setText("Compras");
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, 140, 40));
 
         jLabel2.setText("Clave");
-        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 120, -1));
+        add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 60, 120, -1));
 
-        jLabel3.setText("Nombre del aserradero");
-        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 140, -1));
+        jLabel3.setText("Clave Proveedor");
+        add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 140, -1));
 
-        jLabel4.setText("Dirección");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 120, -1));
+        jLabel4.setText("Clave Producto");
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 120, -1));
 
-        jLabel5.setText("Estado");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 120, -1));
+        jLabel5.setText("Cantidad");
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
 
-        jLabel7.setText("Localidad");
-        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 120, -1));
-
-        jLabel6.setText("Teléfono");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 120, -1));
-        add(txtEstado, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 280, 30));
-        add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 260, 280, 30));
-        add(txtLocalidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 320, 280, 30));
-        add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 280, 30));
-        add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
-        add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 280, 30));
+        jLabel6.setText("Fecha");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 120, -1));
+        add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 280, 30));
+        add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 280, 30));
+        add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 80, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
         btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
@@ -87,17 +84,27 @@ public class AltaProveedor extends javax.swing.JPanel {
                 btnCancelarActionPerformed(evt);
             }
         });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 410, 160, -1));
+        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 160, -1));
 
         btnAceptar.setBackground(new java.awt.Color(5, 93, 38));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Aceptar");
+        btnAceptar.setText("Realizar Compra");
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 160, -1));
+        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 160, -1));
+
+        add(cmbClvProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, 30));
+
+        cmbClvProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cmbClvProveedor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbClvProveedorActionPerformed(evt);
+            }
+        });
+        add(cmbClvProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -108,22 +115,24 @@ public class AltaProveedor extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnAceptarActionPerformed
 
+    private void cmbClvProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClvProveedorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmbClvProveedorActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton btnCancelar;
+    private javax.swing.JComboBox<String> cmbClvProducto;
+    private javax.swing.JComboBox<String> cmbClvProveedor;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel titulo;
+    private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtClave;
-    private javax.swing.JTextField txtDireccion;
-    private javax.swing.JTextField txtEstado;
-    private javax.swing.JTextField txtLocalidad;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtFecha;
     // End of variables declaration//GEN-END:variables
 }
