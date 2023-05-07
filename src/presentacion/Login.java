@@ -16,6 +16,8 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Menu
      */
+    private boolean BA = true, BP = false, BE = false;
+
     public Login() {
         initComponents();
         this.setLocationRelativeTo(this);
@@ -107,7 +109,7 @@ public class Login extends javax.swing.JFrame {
         btnProp.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
         btnProp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnProp.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/Comp_Rol_B.png"))); // NOI18N
-        btnProp.setText("Propietrario");
+        btnProp.setText("Propietario");
         btnProp.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnProp.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnProp.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -136,6 +138,11 @@ public class Login extends javax.swing.JFrame {
         jLabel6.setText("Contraseña");
 
         jPanel3.setBackground(new java.awt.Color(5, 93, 38));
+        jPanel3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanel3MouseClicked(evt);
+            }
+        });
 
         jLabel7.setBackground(new java.awt.Color(5, 93, 38));
         jLabel7.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
@@ -172,9 +179,7 @@ public class Login extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(19, 19, 19)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 258, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -259,6 +264,9 @@ public class Login extends javax.swing.JFrame {
         btnEmp.setForeground(new Color(0, 0, 0));
         btnProp.setIcon(new ImageIcon(getClass().getResource("/imagenesMadereria/Comp_Rol_B.png")));
         btnProp.setForeground(new Color(0, 0, 0));
+        BA = true;
+        BP = false;
+        BE = false;
     }//GEN-LAST:event_btnAdminMouseClicked
 
     private void btnPropMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnPropMouseClicked
@@ -268,6 +276,9 @@ public class Login extends javax.swing.JFrame {
         btnEmp.setForeground(new Color(0, 0, 0));
         btnAdmin.setIcon(new ImageIcon(getClass().getResource("/imagenesMadereria/Comp_Rol_B.png")));
         btnAdmin.setForeground(new Color(0, 0, 0));
+        BA = false;
+        BP = true;
+        BE = false;
     }//GEN-LAST:event_btnPropMouseClicked
 
     private void btnEmpMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEmpMouseClicked
@@ -277,11 +288,27 @@ public class Login extends javax.swing.JFrame {
         btnAdmin.setForeground(new Color(0, 0, 0));
         btnProp.setIcon(new ImageIcon(getClass().getResource("/imagenesMadereria/Comp_Rol_B.png")));
         btnProp.setForeground(new Color(0, 0, 0));
+        BA = false;
+        BP = false;
+        BE = true;
     }//GEN-LAST:event_btnEmpMouseClicked
 
     private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField1ActionPerformed
+
+    private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        if (BA && !BP && !BE) {
+            this.setVisible(false);
+            new MenuAdministrador().setVisible(true);
+        } else if (!BA && BP && !BE) {
+            this.setVisible(false);
+            new MenuPropietario().setVisible(true);
+        } else if (!BA && !BP && BE) {
+            this.setVisible(false);
+            new MenuEmpleado().setVisible(true);
+        }
+    }//GEN-LAST:event_jPanel3MouseClicked
 
     /**
      * @param args the command line arguments

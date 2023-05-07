@@ -44,6 +44,11 @@ public class MenuAdministrador extends javax.swing.JFrame {
                                 new CambiaPanel(jpAlmacenador, new BajaProducto());
                                 break;
                         }
+                        break;
+                    case 2:
+                        new Login().setVisible(true);
+                        setVisible(false);
+                        break;
                 }
             }
 

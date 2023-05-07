@@ -44,6 +44,11 @@ public class MenuPropietario extends javax.swing.JFrame {
                                 new CambiaPanel(jpAlmacenador, new CancelarCompra());
                                 break;
                         }
+                        break;
+                    case 2:
+                        new Login().setVisible(true);
+                        setVisible(false);
+                        break;
                 }
             }
 
