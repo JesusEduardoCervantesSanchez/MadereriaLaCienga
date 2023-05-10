@@ -4,10 +4,6 @@
  */
 package presentacion;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.table.TableRowSorter;
 import negocio.ProveedorControl;
 
@@ -18,11 +14,6 @@ import negocio.ProveedorControl;
 public class ConsultarProveedor extends javax.swing.JPanel {
 
     private final ProveedorControl control;
-    String accion;
-    //private String nombreant;
-    private String[] proveedores = new String [6];
-    private boolean encontrado=false;
-    Object id;
     
     public ConsultarProveedor() {
         initComponents();
@@ -41,7 +32,7 @@ public class ConsultarProveedor extends javax.swing.JPanel {
     }
     
     public void comboProv(){
-        cmbClave.setModel(control.seleccionarProveedores());
+        cmbClave.setModel(control.seleccionarProveedores(1));
     }
 
     
@@ -102,7 +93,12 @@ public class ConsultarProveedor extends javax.swing.JPanel {
     }//GEN-LAST:event_jtListadoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        Listar(cmbClave.getSelectedItem().toString());
+        String accion = cmbClave.getSelectedItem().toString();
+        if(accion.equals("Todos")){
+            Listar("");
+        }else{
+            Listar(accion);
+        }
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

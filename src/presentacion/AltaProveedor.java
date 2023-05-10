@@ -18,9 +18,7 @@ import negocio.ProveedorControl;
 public class AltaProveedor extends javax.swing.JPanel {
 
     private final ProveedorControl control;
-    String accion;
     //private String nombreant;
-    private boolean encontrado=false;
     
     public AltaProveedor() {
         initComponents();
@@ -162,7 +160,7 @@ public class AltaProveedor extends javax.swing.JPanel {
        }
        resp=control.Insertar(txtNombre.getText().trim(), txtDireccion.getText().trim(), txtEstado.getText().trim(), txtTelefono.getText().trim(), txtLocalidad.getText());
         if(resp.equals("OK")){
-            MensajeOK("Compra registrada correctamente");
+            MensajeOK("Proveedor registrado correctamente");
             Limpiar();
         }else{
             MensajeError(resp);

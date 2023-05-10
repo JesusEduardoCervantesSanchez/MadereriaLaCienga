@@ -51,6 +51,20 @@ public class ProveedorControl {
         }
         return modeloTabla;
     }
+    
+    public String[] Buscar(String texto) {
+        List<Proveedores> Lista = new ArrayList();
+        Lista.addAll(datos.listar(texto));
+        String registro[] = new String[6];
+        for (Proveedores item : Lista) {
+            registro[0] = item.getNombrep();
+            registro[1] = item.getDireccionp();
+            registro[2] = item.getEstadop();
+            registro[3] = item.getTelefonop();
+            registro[4] = item.getLocalidadp();
+        }
+        return registro;
+    }
 
     public String Insertar(String nombre, String direccion, String estado, String telefono, String localidad) {
         //verificar si existe la categoria
@@ -88,11 +102,9 @@ public class ProveedorControl {
                 return "ERROR al actualizar el registro";
             }
         } else {
-            //Verificar si existe la categoria
             if (datos.existe(nombre)) {
-                return "el nombre del provedor ya existe";
+                return "Este proveedor ya se encuentra registrado";
             } else {
-                //llenar el objeto
                 obj.setClvprov(clvprov);
                 obj.setNombrep(nombre);
                 obj.setDireccionp(direccion);
@@ -117,9 +129,13 @@ public class ProveedorControl {
         }
     }
     
-    public DefaultComboBoxModel seleccionarProveedores(){
+    public DefaultComboBoxModel seleccionarProveedores(int i){
         DefaultComboBoxModel items = new DefaultComboBoxModel();
         List<Proveedores> registros = new ArrayList();
+        if(i==1)
+            items.addElement("Todos");
+        else
+            items.addElement("Elige");
         registros = datos.listarComboClave();
         for(Proveedores pro:registros){
             items.addElement(new Proveedores(pro.getClvprov()));

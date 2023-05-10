@@ -81,7 +81,6 @@ public class ProveedorDAO implements CrudProveedor<Proveedores,DetalleProveedor>
             rs = null;
             CON.Desconectar();
         }
-        System.out.println(registros);
         return registros;
     }
     

@@ -5,8 +5,9 @@
         <group>
             <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/datos/ProveedorDAO.java</file>
             <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/entidades/Proveedores.java</file>
+            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/presentacion/ModificarProveedor.java</file>
             <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/negocio/ProveedorControl.java</file>
-            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/presentacion/AltaProveedor.java</file>
+            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/presentacion/BajaProveedor.java</file>
         </group>
     </open-files>
 </project-private>
