@@ -5,43 +5,45 @@
 package negocio;
 
 import datos.ProveedorDAO;
-import entidades.Provedores;
+import entidades.Categoria;
+import entidades.Proveedores;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Juan Pablo Campos L
  */
-public class ProvedorControl {
+public class ProveedorControl {
 
     private final ProveedorDAO datos;
-    private Provedores obj;
+    private Proveedores obj;
     private DefaultTableModel modeloTabla;
 
-    public ProvedorControl() {
+    public ProveedorControl() {
         datos = new ProveedorDAO();
-        obj = new Provedores();
+        obj = new Proveedores();
     }
 
     public DefaultTableModel Listar(String texto) {
-        List<Provedores> Lista = new ArrayList();
+        List<Proveedores> Lista = new ArrayList();
         Lista.addAll(datos.listar(texto));
 
         // Crear modelo y establecer los titulos del modelo 
-        String titulos[] = {"id", "Nombre", "Codigo", "Telefono", "Correo", "Empresa"};
+        String titulos[] = {"Clave", "Nombre", "Dirección", "Estado", "Teléfono", "Localidad"};
         modeloTabla = new DefaultTableModel(null, titulos);
         //Donde vamos a recorrer la estructura o los elementos de la lista con for each
         String registro[] = new String[6];
 
-        for (Provedores item : Lista) {
-            registro[0] = Integer.toString(item.getIdProvedores());
-            registro[1] = item.getNombreProvedor();
-            registro[2] = Integer.toString(item.getCodigo());
-            registro[3] = item.getTelefono();
-            registro[4] = item.getCorreo();
-            registro[5] = item.getEmpresa();
+        for (Proveedores item : Lista) {
+            registro[0] = Integer.toString(item.getClvprov());
+            registro[1] = item.getNombrep();
+            registro[2] = item.getDireccionp();
+            registro[3] = item.getEstadop();
+            registro[4] = item.getTelefonop();
+            registro[5] = item.getLocalidadp();
 
             //Insertar el registro en el modelo
             modeloTabla.addRow(registro);
@@ -50,17 +52,17 @@ public class ProvedorControl {
         return modeloTabla;
     }
 
-    public String Insertar(String nombre, int Codigo, String telefono, String correo, String empresa) {
+    public String Insertar(String nombre, String direccion, String estado, String telefono, String localidad) {
         //verificar si existe la categoria
         if (datos.existe(nombre)) {
-            return "El registro ya existe";
+            return "Este proveedro ya se encuentra registrado";
         } else {
             //llenar el objeto
-            obj.setNombreProvedor(nombre);
-            obj.setCodigo(Codigo);
-            obj.setTelefono(telefono);
-            obj.setCorreo(correo);
-            obj.setEmpresa(empresa);
+            obj.setNombrep(nombre);
+            obj.setDireccionp(direccion);
+            obj.setEstadop(estado);
+            obj.setTelefonop(telefono);
+            obj.setLocalidadp(localidad);
             //Insertar el objeto en la base de datos
             if (datos.insertar(obj)) {
                 return "OK";
@@ -70,15 +72,15 @@ public class ProvedorControl {
         }
     }
 
-    public String Actualizar(int id, String nombre, String nombreAnt, int Codigo, String telefono, String correo, String empresa) {
+    public String Actualizar(int clvprov, String nombre, String nombreAnt, String direccion, String estado, String telefono, String localidad) {
         //Verificar si el usuario esta cambiando el nombre de la categoria
         if (nombre.equals(nombreAnt)) {
-            obj.setIdProvedores(id);
-            obj.setNombreProvedor(nombre);
-            obj.setCodigo(Codigo);
-            obj.setTelefono(telefono);
-            obj.setCorreo(correo);
-            obj.setEmpresa(empresa);
+            obj.setClvprov(clvprov);
+            obj.setNombrep(nombre);
+            obj.setDireccionp(direccion);
+            obj.setEstadop(estado);
+            obj.setTelefonop(telefono);
+            obj.setLocalidadp(localidad);
             //Actualizar el registro en la base de datos
             if (datos.actualizar(obj)) {
                 return "OK";
@@ -91,12 +93,12 @@ public class ProvedorControl {
                 return "el nombre del provedor ya existe";
             } else {
                 //llenar el objeto
-                obj.setIdProvedores(id);
-                obj.setNombreProvedor(nombre);
-                obj.setCodigo(Codigo);
-                obj.setTelefono(telefono);
-                obj.setCorreo(correo);
-                obj.setEmpresa(empresa);
+                obj.setClvprov(clvprov);
+                obj.setNombrep(nombre);
+                obj.setDireccionp(direccion);
+                obj.setEstadop(estado);
+                obj.setTelefonop(telefono);
+                obj.setLocalidadp(localidad);
                 //Actualizar el registro en la base de datos
                 if (datos.actualizar(obj)) {
                     return "OK";
@@ -115,8 +117,22 @@ public class ProvedorControl {
         }
     }
     
-     public int total() {
+    public DefaultComboBoxModel seleccionarProveedores(){
+        DefaultComboBoxModel items = new DefaultComboBoxModel();
+        List<Proveedores> registros = new ArrayList();
+        registros = datos.listarComboClave();
+        for(Proveedores pro:registros){
+            items.addElement(new Proveedores(pro.getClvprov()));
+        }
+        return items;
+    }
+    
+    public int total() {
         return datos.total();
+    }
+     
+    public int id() {
+        return datos.ultimoid();
     }
      
      

@@ -9,7 +9,7 @@ import entidades.CompraDetalle;
 import entidades.Compras;
 import entidades.Empleados;
 import entidades.Producto;
-import entidades.Provedores;
+import entidades.Proveedores;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
@@ -110,19 +110,19 @@ public class ComprasControl {
     
     public DefaultTableModel ListarProvedor(String valor)
     {
-        List<Provedores> lista = new ArrayList();
+        List<Proveedores> lista = new ArrayList();
         lista.addAll(datos.ListarProvedor(valor));
         String titulos[] = {"Id", "Nombre", "Codigo", "Telefono", "Correo", "Empresa"};
         modeloTabla = new DefaultTableModel(null, titulos);
         String registro[] = new String[6];
         registrosMostrados = 0;
-        for(Provedores item:lista){
-            registro[0] = Integer.toString(item.getIdProvedores());
-            registro[1] = item.getNombreProvedor();
-            registro[2] = Integer.toString(item.getCodigo());
-            registro[3] = item.getTelefono();
-            registro[4] = item.getCorreo();
-            registro[5] = item.getEmpresa();
+        for(Proveedores item:lista){
+            registro[0] = Integer.toString(item.getClvprov());
+            registro[1] = item.getNombrep();
+            registro[2] = item.getDireccionp();
+            registro[3] = item.getEstadop();
+            registro[4] = item.getTelefonop();
+            registro[5] = item.getLocalidadp();
             modeloTabla.addRow(registro);
             registrosMostrados += 1;
         }

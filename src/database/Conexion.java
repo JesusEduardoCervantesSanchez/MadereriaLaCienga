@@ -11,7 +11,8 @@ import java.sql.SQLException;
 
 public class Conexion {
 
-    private final String DRIVER = "com.mysql.cj.jdbc.Driver", URL = "jdbc:mysql://localhost:3306/", DB = "LaCienegaBD", USER = "root", PASSWORD = "Mysql123/";
+    private final String DRIVER = "com.mysql.cj.jdbc.Driver", URL = "jdbc:mysql://localhost:3307/", DB = "LaCienegaBD", USER = "root", PASSWORD = "";
+    //contra Mysql123/
     public Connection cadena;
     public static Conexion instancia;
     
