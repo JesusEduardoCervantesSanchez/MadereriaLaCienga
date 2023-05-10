@@ -24,14 +24,11 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     public List<Producto> listar(String texto) {
         List<Producto> registros=new ArrayList();
         try{
-            ps=CON.Conectar().prepareStatement("SELECT P.idProductos, C.idCategoria, P.nombreProducto, C.NombreCategoria, P.Existencias, P.PrecioCompra, P.PrecioVenta,\n" +
-                                                " P.Ganancia, P.ImagenProducto\n" +
-                                                " FROM Productos P INNER JOIN Categorias C ON P.idCategoria = C.idCategoria\n" +
-                                                " WHERE nombreProducto like ?;");
+            ps=CON.Conectar().prepareStatement("select clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp from Productos;");
             ps.setString(1, '%' + texto + '%');
             rs=ps.executeQuery();
             while(rs.next())
-                registros.add(new Producto(rs.getInt(1),rs.getInt(2),rs.getString(3),rs.getString(4),rs.getInt(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8),rs.getString(9)));
+                registros.add(new Producto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8)));
             ps.close();
             rs.close();
         }
@@ -49,17 +46,17 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     @Override
     public boolean insertar(Producto obj) {
         resp=false;
-        String consultaSQL="INSERT INTO Productos(idCategoria, nombreProducto, Existencias, PrecioCompra, PrecioVenta, Ganancia, ImagenProducto) \n" +
-                            "VALUES(?,?,?,?,?,?,?);";
+        String consultaSQL="insert into Productos(clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp)\n" +
+                           "values(?,?,?,?,?,?,?)";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, obj.getIdCategoria());
-            ps.setString(2, obj.getNombreProducto());
-            ps.setInt(3, obj.getExistencias());
-            ps.setDouble(4, obj.getPrecioCompra());
-            ps.setDouble(5, obj.getPrecioVenta());
-            ps.setDouble(6, obj.getGanancia());
-            ps.setString(7, obj.getImagenProducto());
+            ps.setString(1, obj.getTipop());
+            ps.setInt(2, obj.getExistenciap());
+            ps.setString(3, obj.getCategoriap());
+            ps.setDouble(4, obj.getPreciovp());
+            ps.setDouble(5, obj.getGananciap());
+            ps.setDouble(6, obj.getPreciop());
+            ps.setDouble(7, obj.getMedidasp());
             
             if(ps.executeUpdate() > 0)
             {
@@ -80,19 +77,18 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     @Override
     public boolean actualizar(Producto obj) {
         resp=false;
-        String consultaSQL="UPDATE Productos SET idCategoria=?, nombreProducto=?, Existencias=?, PrecioCompra=?, \n" +
-                           "PrecioVenta=?, Ganancia=?, ImagenProducto=? WHERE idProductos=?;";
+        String consultaSQL="UPDATE Productos SET tipop=?, existenciap=?, categoriap=?, preciovp=?, gananciap=?, preciop=?, medidasp=? WHERE clvprod=?;";
         try{
+            //ps=CON.Conectar().prepareStatement(consultaSQL);
             ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, obj.getIdCategoria());
-            ps.setString(2, obj.getNombreProducto());
-            ps.setInt(3, obj.getExistencias());
-            ps.setDouble(4, obj.getPrecioCompra());
-            ps.setDouble(5, obj.getPrecioVenta());
-            ps.setDouble(6, obj.getGanancia());
-            ps.setString(7, obj.getImagenProducto());
-            ps.setInt(8, obj.getIdProducto());
+            ps.setString(1, obj.getTipop());
+            ps.setInt(2, obj.getExistenciap());
+            ps.setString(3, obj.getCategoriap());
+            ps.setDouble(4, obj.getPreciovp());
+            ps.setDouble(5, obj.getGananciap());
+            ps.setDouble(6, obj.getPreciop());
+            ps.setDouble(7, obj.getMedidasp());
+            ps.setInt(8, obj.getClvprod());
             
             if(ps.executeUpdate() > 0)
             {
@@ -137,8 +133,31 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     public boolean existe(String texto) {
         resp=false;
         try{
-            ps=CON.Conectar().prepareStatement("SELECT * FROM Productos WHERE nombreProducto=?;");
+            ps=CON.Conectar().prepareStatement("SELECT * FROM Productos WHERE tipop=?;");
             ps.setString(1, texto);
+            rs=ps.executeQuery();
+            if(rs.next()){
+            resp=true;  //getString(String)
+            }
+            ps.close();
+            rs.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            rs=null;
+            CON.Desconectar();
+        }
+        return resp;       
+    }
+    
+    public boolean existe2(int id) {
+        resp=false;
+        try{
+            ps=CON.Conectar().prepareStatement("SELECT * FROM Productos WHERE clvprod=?;");
+            ps.setInt(1, id);
             rs=ps.executeQuery();
             if(rs.next()){
             resp=true;  //getString(String)
@@ -160,7 +179,7 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     @Override
     public boolean eliminar(String NombreProducto) {
         resp=false;
-        String consultaSQL="DELETE FROM Productos WHERE nombreProducto=?;";
+        String consultaSQL="DELETE FROM Productos WHERE clvprod=?;";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
             ps.setString(1, NombreProducto);

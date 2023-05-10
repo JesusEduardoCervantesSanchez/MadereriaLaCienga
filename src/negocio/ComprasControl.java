@@ -93,6 +93,7 @@ public class ComprasControl {
         String registro[] = new String[9];
         registrosMostrados = 0;
         for(Producto item:lista){
+            /*
             registro[0] = Integer.toString(item.getIdProducto());
             registro[1] = Integer.toString(item.getIdCategoria());
             registro[2] = item.getNombreProducto();
@@ -104,6 +105,7 @@ public class ComprasControl {
             registro[8] = item.getImagenProducto();
             modeloTabla3.addRow(registro);
             registrosMostrados += 1;
+*/
         }
         return modeloTabla3;
     }
