@@ -4,8 +4,13 @@
  */
 package presentacion;
 
+import database.Conexion;
 import java.awt.Color;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -37,8 +42,8 @@ public class Login extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        jTextField1 = new javax.swing.JTextField();
-        jPasswordField1 = new javax.swing.JPasswordField();
+        txtboxCorreo = new javax.swing.JTextField();
+        PasswordContrasena = new javax.swing.JPasswordField();
         btnAdmin = new javax.swing.JLabel();
         btnProp = new javax.swing.JLabel();
         btnEmp = new javax.swing.JLabel();
@@ -73,23 +78,33 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
-        jTextField1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jTextField1.setForeground(new java.awt.Color(217, 217, 217));
-        jTextField1.setText("Ingrese su usuario");
-        jTextField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
-        jTextField1.addActionListener(new java.awt.event.ActionListener() {
+        txtboxCorreo.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        txtboxCorreo.setForeground(new java.awt.Color(217, 217, 217));
+        txtboxCorreo.setText("Ingrese su usuario");
+        txtboxCorreo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
+        txtboxCorreo.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                txtboxCorreoMousePressed(evt);
+            }
+        });
+        txtboxCorreo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField1ActionPerformed(evt);
+                txtboxCorreoActionPerformed(evt);
             }
         });
 
-        jPasswordField1.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
-        jPasswordField1.setForeground(new java.awt.Color(217, 217, 217));
-        jPasswordField1.setText("Contrasena");
-        jPasswordField1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
-        jPasswordField1.addActionListener(new java.awt.event.ActionListener() {
+        PasswordContrasena.setFont(new java.awt.Font("Roboto", 0, 12)); // NOI18N
+        PasswordContrasena.setForeground(new java.awt.Color(217, 217, 217));
+        PasswordContrasena.setText("Contrasena");
+        PasswordContrasena.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(217, 217, 217)));
+        PasswordContrasena.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                PasswordContrasenaMousePressed(evt);
+            }
+        });
+        PasswordContrasena.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jPasswordField1ActionPerformed(evt);
+                PasswordContrasenaActionPerformed(evt);
             }
         });
 
@@ -150,6 +165,11 @@ public class Login extends javax.swing.JFrame {
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("Iniciar Sesion");
         jLabel7.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jLabel7.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jLabel7MouseClicked(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -183,8 +203,8 @@ public class Login extends javax.swing.JFrame {
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel6)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jPasswordField1, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(PasswordContrasena, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtboxCorreo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addComponent(jPanel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
@@ -207,11 +227,11 @@ public class Login extends javax.swing.JFrame {
                 .addGap(30, 30, 30)
                 .addComponent(jLabel5)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtboxCorreo, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(PasswordContrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(33, Short.MAX_VALUE))
@@ -253,9 +273,9 @@ public class Login extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_jbCerrrarActionPerformed
 
-    private void jPasswordField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jPasswordField1ActionPerformed
+    private void PasswordContrasenaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_PasswordContrasenaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jPasswordField1ActionPerformed
+    }//GEN-LAST:event_PasswordContrasenaActionPerformed
 
     private void btnAdminMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAdminMouseClicked
         btnAdmin.setIcon(new ImageIcon(getClass().getResource("/imagenesMadereria/Comp_Rol.png")));
@@ -293,11 +313,53 @@ public class Login extends javax.swing.JFrame {
         BE = true;
     }//GEN-LAST:event_btnEmpMouseClicked
 
-    private void jTextField1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField1ActionPerformed
+    private void txtboxCorreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtboxCorreoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField1ActionPerformed
+    }//GEN-LAST:event_txtboxCorreoActionPerformed
 
     private void jPanel3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel3MouseClicked
+        Conexion conn = Conexion.getInstance();
+        PreparedStatement ps;
+        ResultSet rs;
+        String consultaSQL = "SELECT nombreu, contrasenau, rolu FROM Usuarios WHERE nombreu=? and contrasenau = ? and rolu=?;";
+        String rol = BA ? "Administrador" : BP ? "Propietario" : "Empleado";
+        if (!txtboxCorreo.getText().isEmpty()) {
+            if (PasswordContrasena.getPassword().length > 0) {
+                try {
+                    conn.Conectar();
+                    ps = conn.cadena.prepareStatement(consultaSQL);
+                    ps.setString(1, txtboxCorreo.getText());
+                    ps.setString(2, String.valueOf(PasswordContrasena.getPassword()));
+                    ps.setString(3, rol);
+                    rs = ps.executeQuery();
+                    if (rs.next()) {
+                        AbrirMenus();
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Ingrese un usuario valido");
+                    }
+                    ps.close();
+                    rs.close();
+                    conn.Desconectar();
+                    conn.cadena.close();
+                } catch (SQLException e) {
+                    JOptionPane.showMessageDialog(null, e.getMessage());
+                } finally {
+                    ps = null;
+                    conn = null;
+                    rs = null;
+                }
+
+            } else {
+                JOptionPane.showMessageDialog(this, "Escribir una contrasea (8 Caracteres)", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
+                PasswordContrasena.requestFocus();
+            }
+        } else {
+            JOptionPane.showMessageDialog(this, "Escribir un correo valido", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
+            txtboxCorreo.requestFocus();
+        }
+    }//GEN-LAST:event_jPanel3MouseClicked
+
+    private void AbrirMenus() {
         if (BA && !BP && !BE) {
             this.setVisible(false);
             new MenuAdministrador().setVisible(true);
@@ -308,7 +370,24 @@ public class Login extends javax.swing.JFrame {
             this.setVisible(false);
             new MenuEmpleado().setVisible(true);
         }
-    }//GEN-LAST:event_jPanel3MouseClicked
+    }
+    private void txtboxCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtboxCorreoMousePressed
+        if (txtboxCorreo.getText().equals("Ingrese su usuario")) {
+            txtboxCorreo.setText("");
+            txtboxCorreo.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_txtboxCorreoMousePressed
+
+    private void PasswordContrasenaMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PasswordContrasenaMousePressed
+        if (String.valueOf(PasswordContrasena.getPassword()).equals("Contrasena")) {
+            PasswordContrasena.setText("");
+            PasswordContrasena.setForeground(Color.black);
+        }
+    }//GEN-LAST:event_PasswordContrasenaMousePressed
+
+    private void jLabel7MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel7MouseClicked
+        jPanel3MouseClicked(evt);
+    }//GEN-LAST:event_jLabel7MouseClicked
 
     /**
      * @param args the command line arguments
@@ -377,6 +456,7 @@ public class Login extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPasswordField PasswordContrasena;
     private javax.swing.JLabel btnAdmin;
     private javax.swing.JLabel btnEmp;
     private javax.swing.JLabel btnProp;
@@ -388,9 +468,8 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPasswordField jPasswordField1;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JButton jbCerrrar;
+    private javax.swing.JTextField txtboxCorreo;
     // End of variables declaration//GEN-END:variables
 
 }

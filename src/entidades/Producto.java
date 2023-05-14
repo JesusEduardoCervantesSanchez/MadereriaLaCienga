@@ -1,108 +1,95 @@
 package entidades;
 
 public class Producto {
-    private int idProducto;
-    private int idCategoria;
-    private String nombreProducto;
-    private String nombreCategoria;
-    private int existencias;
-    private double precioCompra;
-    private double precioVenta;
-    private double ganancia;
-    private String imagenProducto;
+    private int clvprod;
+    private String tipop;
+    private int existenciap;
+    private String categoriap;
+    private double preciovp;
+    private double gananciap;
+    private double preciop;
+    private double medidasp;
 
     public Producto() {
     }
 
-    public Producto(int idProducto, int idCategoria, String nombreProducto, String nombreCategoria, int existencias, double precioCompra, double precioVenta, double ganancia, String imagenProducto) {
-        this.idProducto = idProducto;
-        this.idCategoria = idCategoria;
-        this.nombreProducto = nombreProducto;
-        this.nombreCategoria = nombreCategoria;
-        this.existencias = existencias;
-        this.precioCompra = precioCompra;
-        this.precioVenta = precioVenta;
-        this.ganancia = ganancia;
-        this.imagenProducto = imagenProducto;
+    public Producto(int clvprod, String tipop, int existenciap, String categoriap, double preciovp, double gananciap, double preciop, double medidasp) {
+        this.clvprod = clvprod;
+        this.tipop = tipop;
+        this.existenciap = existenciap;
+        this.categoriap = categoriap;
+        this.preciovp = preciovp;
+        this.gananciap = gananciap;
+        this.preciop = preciop;
+        this.medidasp = medidasp;
     }
 
-    
-
-    public int getIdProducto() {
-        return idProducto;
+    public int getClvprod() {
+        return clvprod;
     }
 
-    public void setIdProducto(int idProducto) {
-        this.idProducto = idProducto;
+    public void setClvprod(int clvprod) {
+        this.clvprod = clvprod;
     }
 
-    public int getIdCategoria() {
-        return idCategoria;
+    public String getTipop() {
+        return tipop;
     }
 
-    public void setIdCategoria(int idCategoria) {
-        this.idCategoria = idCategoria;
+    public void setTipop(String tipop) {
+        this.tipop = tipop;
     }
 
-    public String getNombreProducto() {
-        return nombreProducto;
+    public int getExistenciap() {
+        return existenciap;
     }
 
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+    public void setExistenciap(int existenciap) {
+        this.existenciap = existenciap;
     }
 
-    public int getExistencias() {
-        return existencias;
+    public String getCategoriap() {
+        return categoriap;
     }
 
-    public void setExistencias(int existencias) {
-        this.existencias = existencias;
+    public void setCategoriap(String categoriap) {
+        this.categoriap = categoriap;
     }
 
-    public double getPrecioCompra() {
-        return precioCompra;
+    public double getPreciovp() {
+        return preciovp;
     }
 
-    public void setPrecioCompra(double precioCompra) {
-        this.precioCompra = precioCompra;
+    public void setPreciovp(double preciovp) {
+        this.preciovp = preciovp;
     }
 
-    public double getPrecioVenta() {
-        return precioVenta;
+    public double getGananciap() {
+        return gananciap;
     }
 
-    public void setPrecioVenta(double precioVenta) {
-        this.precioVenta = precioVenta;
+    public void setGananciap(double gananciap) {
+        this.gananciap = gananciap;
     }
 
-    public double getGanancia() {
-        return ganancia;
+    public double getPreciop() {
+        return preciop;
     }
 
-    public void setGanancia(double ganancia) {
-        this.ganancia = ganancia;
+    public void setPreciop(double preciop) {
+        this.preciop = preciop;
     }
 
-    public String getImagenProducto() {
-        return imagenProducto;
+    public double getMedidasp() {
+        return medidasp;
     }
 
-    public void setImagenProducto(String imagenProducto) {
-        this.imagenProducto = imagenProducto;
-    }
-
-    public String getNombreCategoria() {
-        return nombreCategoria;
-    }
-    
-    public void setNombreCategoria(String nombreCategoria) {
-        this.nombreCategoria = nombreCategoria;
+    public void setMedidasp(double medidasp) {
+        this.medidasp = medidasp;
     }
     
     @Override
     public String toString() {
-        return "Producto{" + "idProducto=" + idProducto + ", idCategoria=" + idCategoria + ", nombreProducto=" + nombreProducto + ", nombreCategoria=" + nombreCategoria + ", existencias=" + existencias + ", precioCompra=" + precioCompra + ", precioVenta=" + precioVenta + ", ganancia=" + ganancia + ", imagenProducto=" + imagenProducto + '}';
+        return "Producto{" + "clvprod=" + clvprod + ", tipop=" + tipop + ", existenciap=" + existenciap + ", categoriap=" + categoriap + ", preciovp=" + preciovp + ", gananciap=" + gananciap + ", preciop=" + preciop + ", medidasp=" + medidasp + '}';
     }
-    
 }
