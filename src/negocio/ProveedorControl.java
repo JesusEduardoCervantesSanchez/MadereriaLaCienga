@@ -122,10 +122,10 @@ public class ProveedorControl {
     }
     
     public String Desactivar(int id) {
-        if (datos.desactivar(id)) {
-            return "OK";
+        if (!datos.existe2(id)) {
+            return "El registro no existe";
         } else {
-            return "No se pudo desactivar el registro";
+            return (datos.desactivar(id))?"OK":"Error";
         }
     }
     
@@ -150,6 +150,8 @@ public class ProveedorControl {
     public int id() {
         return datos.ultimoid();
     }
+    
+    
      
      
 }

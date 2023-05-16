@@ -24,6 +24,12 @@ public class Producto {
         this.medidasp = medidasp;
     }
 
+    public Producto(int clvprod) {
+        this.clvprod = clvprod;
+    }
+    
+    
+
     public int getClvprod() {
         return clvprod;
     }
@@ -88,8 +94,14 @@ public class Producto {
         this.medidasp = medidasp;
     }
     
+    //@Override
+    //public String toString() {
+      //  return "Producto{" + "clvprod=" + clvprod + ", tipop=" + tipop + ", existenciap=" + existenciap + ", categoriap=" + categoriap + ", preciovp=" + preciovp + ", gananciap=" + gananciap + ", preciop=" + preciop + ", medidasp=" + medidasp + '}';
+    //}
+    
     @Override
-    public String toString() {
-        return "Producto{" + "clvprod=" + clvprod + ", tipop=" + tipop + ", existenciap=" + existenciap + ", categoriap=" + categoriap + ", preciovp=" + preciovp + ", gananciap=" + gananciap + ", preciop=" + preciop + ", medidasp=" + medidasp + '}';
+    public String toString()
+    {
+        return clvprod+"";
     }
 }
