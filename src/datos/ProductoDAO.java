@@ -24,8 +24,13 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     public List<Producto> listar(String texto) {
         List<Producto> registros=new ArrayList();
         try{
-            ps=CON.Conectar().prepareStatement("select clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp from Productos;");
-            ps.setString(1, '%' + texto + '%');
+            if(texto.equalsIgnoreCase(""))
+                   ps=CON.Conectar().prepareStatement("select clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp from Productos;");
+            else
+            {
+                ps=CON.Conectar().prepareStatement("select clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp from Productos where clvprod = ?;");
+                ps.setString(1, texto);
+            }
             rs=ps.executeQuery();
             while(rs.next())
                 registros.add(new Producto(rs.getInt(1),rs.getString(2),rs.getInt(3),rs.getString(4),rs.getDouble(5),rs.getDouble(6),rs.getDouble(7),rs.getDouble(8)));
@@ -46,7 +51,7 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     @Override
     public boolean insertar(Producto obj) {
         resp=false;
-        String consultaSQL="insert into Productos(clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp)\n" +
+        String consultaSQL="insert into Productos(tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp)\n" +
                            "values(?,?,?,?,?,?,?)";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
@@ -128,6 +133,29 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
         }
         return numeroRegistros;    
     }
+    
+    @Override
+    public int clvmax() {
+        int numeroMax=0;
+        try{
+            ps=CON.Conectar().prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'LaCienegaBD' AND TABLE_NAME = 'Productos';");
+            rs=ps.executeQuery();
+            while(rs.next()){
+            numeroMax=rs.getInt(1);  // getString(String)
+        }
+        ps.close();
+        rs.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            rs=null;
+            CON.Desconectar();
+        }
+        return numeroMax;    
+    }
 
     @Override
     public boolean existe(String texto) {
@@ -177,12 +205,12 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
     }
     
     @Override
-    public boolean eliminar(String NombreProducto) {
+    public boolean eliminar(int id) {
         resp=false;
         String consultaSQL="DELETE FROM Productos WHERE clvprod=?;";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps.setString(1, NombreProducto);
+            ps.setInt(1, id);
             if(ps.executeUpdate() > 0)
             {
                 resp=true;
@@ -197,5 +225,26 @@ public class ProductoDAO implements CrudProductoInterface<Producto> {
             CON.Desconectar();
         }
         return resp;    
+    }
+    
+    public List<Producto> listarComboClave() {
+        List<Producto> registros = new ArrayList();
+        try{
+            ps = CON.Conectar().prepareStatement("SELECT clvprod FROM Productos ORDER BY clvprod ASC");
+            rs = ps.executeQuery();
+            while(rs.next()){
+                registros.add(new Producto(rs.getInt(1)));
+            }
+            ps.close();
+            rs.close();
+            
+        }catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }finally{
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
     }
 }

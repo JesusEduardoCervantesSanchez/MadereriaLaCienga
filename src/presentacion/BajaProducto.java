@@ -4,9 +4,18 @@
  */
 package presentacion;
 
+import entidades.Producto;
+import java.awt.Image;
+import negocio.ProductoControl;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -14,11 +23,27 @@ import javax.swing.JLabel;
  */
 public class BajaProducto extends javax.swing.JPanel {
 
+    private final ProductoControl CONTROL;
+    String imagenProducto;
     /**
      * Creates new form NewJPanel
      */
     public BajaProducto() {
         initComponents();
+        CONTROL=new ProductoControl();
+        Listar("");
+        comboProd();
+    }
+    
+    public void comboProd(){
+        cmbClave.setModel(CONTROL.seleccionarProductos(1));
+    }
+    
+    public void Listar(String texto)
+    {
+        jtListado.setModel(CONTROL.listar(texto));
+        TableRowSorter modeloOrdenado = new TableRowSorter(jtListado.getModel());
+        jtListado.setRowSorter(modeloOrdenado);
     }
 
     /**
@@ -92,6 +117,11 @@ public class BajaProducto extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 560, 260));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
@@ -100,13 +130,45 @@ public class BajaProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
-        // TODO add your handling code here:
+        String resp;
+        if(jtListado.getSelectedRowCount()==1){
+                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el producto: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Sistema Compras-Ventas", JOptionPane.YES_NO_OPTION)==0){
+                    resp=CONTROL.eliminar(Integer.parseInt(jtListado.getValueAt(jtListado.getSelectedRow(), 0).toString()));
+                    if(resp.equals("OK")){
+                        mensajeOK("Producto eliminado.");
+                        Listar("");
+                        comboProd();
+                    }
+                    else
+                        mensajeError(resp);
+                }
+            else
+                mensajeError("Eliminación cancelada.");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un producto","Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBajaActionPerformed
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoMouseClicked
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String accion = cmbClave.getSelectedItem().toString();
+        if(accion.equals("Todos"))
+            Listar("");
+        else
+            Listar(accion);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+     public void mensajeOK(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBaja;

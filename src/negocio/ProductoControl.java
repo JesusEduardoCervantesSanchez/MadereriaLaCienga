@@ -33,7 +33,7 @@ public class ProductoControl {
         modeloTabla=new DefaultTableModel(null,titulos);
         
         // Recorrer los elementos de la lista con for each
-        String registro []= new String[9];
+        String registro []= new String[8];
         registrosMostrados=0;
         for(Producto item: lista){
             registro[0] = ""+item.getClvprod();
@@ -94,13 +94,13 @@ public class ProductoControl {
         }
     }
     
-    public String eliminar(String nombreProducto){
+    public String eliminar(int id){
         // Verificar si existe la categoria
-        if(!DATOS.existe(nombreProducto))
+        if(!DATOS.existe2(id))
             return "El registro no existe.";
         else
         {
-            return (DATOS.eliminar(nombreProducto))?"OK":"Error al insertar el registro";
+            return (DATOS.eliminar(id))?"OK":"Error";
         }
     }
     /*
@@ -143,8 +143,26 @@ public class ProductoControl {
     }
 */
     
+    public DefaultComboBoxModel seleccionarProductos(int i){
+        DefaultComboBoxModel items = new DefaultComboBoxModel();
+        List<Producto> registros = new ArrayList();
+        if(i==1)
+            items.addElement("Todos");
+        else
+            items.addElement("Elige");
+        registros = DATOS.listarComboClave();
+        for(Producto pro:registros){
+            items.addElement(new Producto(pro.getClvprod()));
+        }
+        return items;
+    }
+    
     public int total(){
         return DATOS.total();
+    }
+    
+    public int clvmax(){
+        return DATOS.clvmax();
     }
     
     public int totalMostrados(){
