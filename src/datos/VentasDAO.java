@@ -207,7 +207,7 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
             ps.setString(2, "%" + valor + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                registros.add(new Producto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
+               // registros.add(new Producto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
             }
             ps.close();
             rs.close();

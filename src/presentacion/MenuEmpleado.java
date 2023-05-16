@@ -4,6 +4,8 @@
  */
 package presentacion;
 
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.text.TabableView;
 
 /**
@@ -44,6 +46,10 @@ public class MenuEmpleado extends javax.swing.JFrame {
                                 new CambiaPanel(jpAlmacenador, new CambiarContra());
                                 break;
                         }
+                        break;
+                    case 3:
+                        new Login().setVisible(true);
+                        setVisible(false);
                         break;
                 }
             }

@@ -14,7 +14,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import Datos.Interfaces.CrudSimpleCompras;
 import entidades.CompraDetalle;
-import entidades.Provedores;
+import entidades.Proveedores;
 import entidades.Empleados;
 import entidades.Producto;
 import java.sql.Connection;
@@ -23,7 +23,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Provedores, Empleados>{
+public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Proveedores, Empleados>{
 
     private final Conexion CON;
     private PreparedStatement ps;
@@ -285,7 +285,7 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
            ps.setString(2, "%" + valor + "%");
            rs = ps.executeQuery();
            while(rs.next()){
-               registros.add(new Producto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
+              // registros.add(new Producto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
            }
            ps.close();
            rs.close();
@@ -345,8 +345,8 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
     }
 
     @Override
-    public List<Provedores> ListarProvedor(String valor) {
-        List<Provedores> registros = new ArrayList();
+    public List<Proveedores> ListarProvedor(String valor) {
+        List<Proveedores> registros = new ArrayList();
         try{
            String sql = "SELECT idProvedores, nombreProvedor, codigoProvedor, telefonoProvedor, correoProvedor, EmpresaProvedor FROM Provedores ORDER BY idProvedores ASC";
            String buscar = "SELECT idProvedores, nombreProvedor, codigoProvedor, telefonoProvedor, correoProvedor, EmpresaProvedor FROM Provedores WHERE nombreProvedor LIKE '%"+valor+"%' OR codigoProvedor LIKE '%"+valor+"%' OR telefonoProvedor LIKE '%"+valor+"%' OR correoProvedor LIKE '%"+valor+"%' ORDER BY idProvedores ASC";
@@ -358,7 +358,7 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
            rs = ps.executeQuery();
            while(rs.next()){
                //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
-               registros.add(new Provedores(rs.getInt(1), rs.getString(2), rs.getInt(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+               registros.add(new Proveedores(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
            }
            ps.close();
            rs.close();
