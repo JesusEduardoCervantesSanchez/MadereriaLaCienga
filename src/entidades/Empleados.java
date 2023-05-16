@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -13,10 +13,7 @@ public class Empleados {
    private String nombreEmpleado; 
    private String telefonoEmpleado;
    private String domicilioEmpleado;
-   private String cpEmpleado;
-   private String correoEmpleado;
-   private String contraseñaEmpleado;
-   private String imagenEmpleado;
+   private String coloniaEmpleado;
    private boolean activo;
 
     public Empleados() 
@@ -24,26 +21,21 @@ public class Empleados {
     
     }
 
-    public Empleados(int idEmpleado, String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String cpEmpleado, String correoEmpleado, String contraseñaEmpleado, String imagenEmpleado, boolean activo) {
+    public Empleados(int idEmpleado, String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado, boolean activo) {
         this.idEmpleado = idEmpleado;
         this.nombreEmpleado = nombreEmpleado;
         this.telefonoEmpleado = telefonoEmpleado;
         this.domicilioEmpleado = domicilioEmpleado;
-        this.cpEmpleado = cpEmpleado;
-        this.correoEmpleado = correoEmpleado;
-        this.contraseñaEmpleado = contraseñaEmpleado;
-        this.imagenEmpleado = imagenEmpleado;
+        this.coloniaEmpleado = coloniaEmpleado;
         this.activo = activo;
     }
     
-    public Empleados(int idEmpleado, String NombreEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String CPEmpleado, String CorreoEmpleado, String ContraseñaEmpleado) {
+    public Empleados(int idEmpleado, String NombreEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
         this.idEmpleado = idEmpleado;
         this.nombreEmpleado = NombreEmpleado;
         this.telefonoEmpleado = TelefonoEmpleado;
         this.domicilioEmpleado = DomicilioEmpleado;
-        this.cpEmpleado = CPEmpleado;
-        this.correoEmpleado = CorreoEmpleado;
-        this.contraseñaEmpleado = ContraseñaEmpleado;
+        this.coloniaEmpleado = ColoniaEmpleado;
     }
 
    
@@ -80,36 +72,12 @@ public class Empleados {
         this.domicilioEmpleado = domicilioEmpleado;
     }
 
-    public String getCpEmpleado() {
-        return cpEmpleado;
+    public String getColoniaEmpleado() {
+        return coloniaEmpleado;
     }
-
-    public void setCpEmpleado(String cpEmpleado) {
-        this.cpEmpleado = cpEmpleado;
-    }
-
-    public String getCorreoEmpleado() {
-        return correoEmpleado;
-    }
-
-    public void setCorreoEmpleado(String correoEmpleado) {
-        this.correoEmpleado = correoEmpleado;
-    }
-
-    public String getContraseñaEmpleado() {
-        return contraseñaEmpleado;
-    }
-
-    public void setContraseñaEmpleado(String contraseñaEmpleado) {
-        this.contraseñaEmpleado = contraseñaEmpleado;
-    }
-
-    public String getImagenEmpleado() {
-        return imagenEmpleado;
-    }
-
-    public void setImagenEmpleado(String imagenEmpleado) {
-        this.imagenEmpleado = imagenEmpleado;
+    
+    public void setColoniaEmpleado(String coloniaEmpleado){
+        this.coloniaEmpleado = coloniaEmpleado;
     }
 
     public boolean isActivo() {
@@ -120,12 +88,10 @@ public class Empleados {
         this.activo = activo;
     }
     
-    
-
     @Override
     public String toString()
     {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", cpEmpleado=" + cpEmpleado + ", correoEmpleado=" + correoEmpleado + ", contraseñaEmpleado=" + contraseñaEmpleado + ", imagenEmpleado=" + imagenEmpleado + "activo="+ activo +'}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", coloniaEmpleado=" + coloniaEmpleado + "activo="+ activo +'}';
     }
    
 }

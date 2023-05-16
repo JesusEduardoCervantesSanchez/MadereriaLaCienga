@@ -38,7 +38,7 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
             ps.setString(1, '%' + texto + '%');
             rs=ps.executeQuery();
             while(rs.next()){
-                registros.add(new Empleados(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getBoolean(9)));
+                registros.add(new Empleados(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5)));
             }
             ps.close();
             rs.close();
@@ -65,11 +65,8 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
             ps.setString(1, obj.getNombreEmpleado());
             ps.setString(2, obj.getTelefonoEmpleado() );
             ps.setString(3, obj.getDomicilioEmpleado());
-            ps.setString(4, obj.getCpEmpleado());
-            ps.setString(5, obj.getCorreoEmpleado());
-            ps.setString(6, obj.getContraseñaEmpleado());
-            ps.setString(7, obj.getImagenEmpleado());
-            ps.setBoolean(8, true);
+            ps.setString(4, obj.getColoniaEmpleado());
+            ps.setBoolean(5, true);
             
             if(ps.executeUpdate() > 0)
             {
@@ -91,7 +88,7 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
     public boolean actualizar(Empleados obj) 
     {
         resp=false;
-        String consultaSQL = "UPDATE Empleados SET NombreEmpleado=?, TelefonoEmpleado=?, DomicilioEmpleado=?, CPEmpleado=?, CorreoEmpleado=?, ContraseñaEmpleado=?, ImagenEmpleado=? " +
+        String consultaSQL = "UPDATE Empleados SET NombreEmpleado=?, TelefonoEmpleado=?, DomicilioEmpleado=?, ColoniaEmpleado=? " +
 "WHERE idEmpleado = ?;";
          try
         {
@@ -99,11 +96,8 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
             ps.setString(1, obj.getNombreEmpleado());
             ps.setString(2, obj.getTelefonoEmpleado());
             ps.setString(3, obj.getDomicilioEmpleado());
-            ps.setString(4, obj.getCpEmpleado());
-            ps.setString(5, obj.getCorreoEmpleado());
-            ps.setString(6, obj.getContraseñaEmpleado());
-            ps.setString(7, obj.getImagenEmpleado());
-            ps.setInt(8, obj.getIdEmpleado());
+            ps.setString(4, obj.getColoniaEmpleado());
+            ps.setInt(5, obj.getIdEmpleado());
             if(ps.executeUpdate() > 0)
                 resp=true;
             ps.close();

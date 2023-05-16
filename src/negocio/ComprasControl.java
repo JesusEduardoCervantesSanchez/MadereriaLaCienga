@@ -133,18 +133,16 @@ public class ComprasControl {
     {
         List<Empleados> lista = new ArrayList();
         lista.addAll(datos.ListarEmpleado(valor));
-        String titulos[] = {"Id", "Nombre", "Telefono", "Domicilio", "CP", "Correo", "Contraseña"};
+        String titulos[] = {"Id", "Nombre", "Telefono", "Domicilio", "Colonia"};
         modeloTabla = new DefaultTableModel(null, titulos);
-        String registro[] = new String[7];
+        String registro[] = new String[5];
         registrosMostrados = 0;
         for(Empleados item:lista){
             registro[0] = Integer.toString(item.getIdEmpleado());
             registro[1] = item.getNombreEmpleado();
             registro[2] = item.getTelefonoEmpleado();
             registro[3] = item.getDomicilioEmpleado();
-            registro[4] = item.getCpEmpleado();
-            registro[5] = item.getCorreoEmpleado();
-            registro[6] = item.getContraseñaEmpleado();
+            registro[4] = item.getColoniaEmpleado();
             modeloTabla.addRow(registro);
             registrosMostrados += 1;
         }

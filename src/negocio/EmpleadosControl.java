@@ -25,23 +25,19 @@ public class EmpleadosControl {
         lista.addAll(DATOS.listar(texto));
         
         //Crear el modelo y establecer los títulos del modelo
-        String titulos[]={"ID Empleado", "Nombre Empleado", "Telefono Empleado", "Domicilio Empleado", "CP Empleado", "Correo Empleado","Contraseña Empleado",
-        "Imagen Empleado", "Estado"};
+        String titulos[]={"ID Empleado", "Nombre Empleado", "Telefono Empleado", "Domicilio Empleado", "Colonia Empleado", "Estado"};
         modeloTabla=new DefaultTableModel(null,titulos);
         
         // Recorrer los elementos de la lista con for each
-        String registro []= new String[9];
+        String registro []= new String[6];
         registrosMostrados=0;
         for(Empleados item: lista){
             registro[0] = ""+item.getIdEmpleado();
             registro[1] = item.getNombreEmpleado();
             registro[2] = item.getTelefonoEmpleado();
             registro[3] = item.getDomicilioEmpleado();
-            registro[4] = item.getCpEmpleado();
-            registro[5] = item.getCorreoEmpleado();
-            registro[6] = item.getContraseñaEmpleado();
-            registro[7] = item.getImagenEmpleado();
-            registro[8] = (item.isActivo())?"Activo":"Inactivo";
+            registro[4] = item.getColoniaEmpleado();
+            registro[5] = (item.isActivo())?"Activo":"Inactivo";
             
             //Insertar el registro en el modelo
             modeloTabla.addRow(registro);
@@ -52,7 +48,7 @@ public class EmpleadosControl {
     
  
     
-    public String insertar(String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String cpEmpleado, String correoEmpleado, String contraseñaEmpleado, String imagenEmpleado){
+    public String insertar(String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
     // Verificar si existe la categoria
         if(DATOS.existe(nombreEmpleado))
             return "El registro ya existe.";
@@ -62,10 +58,7 @@ public class EmpleadosControl {
             obj.setNombreEmpleado(nombreEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
-            obj.setCpEmpleado(cpEmpleado);
-            obj.setCorreoEmpleado(correoEmpleado);
-            obj.setContraseñaEmpleado(contraseñaEmpleado);
-            obj.setImagenEmpleado(imagenEmpleado);
+            obj.setColoniaEmpleado(coloniaEmpleado);
             obj.setActivo(true);
             
             //Insertar el objeto en la base de datos
@@ -73,17 +66,14 @@ public class EmpleadosControl {
         }
     }
     
-    public String actualizar(int idEmpleado, String nombreEmpleado, String nombreAnterior, String telefonoEmpleado, String domicilioEmpleado, String cpEmpleado, String correoEmpleado, String contraseñaEmpleado, String imagenEmpleado){
+    public String actualizar(int idEmpleado, String nombreEmpleado, String nombreAnterior, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
         if(nombreEmpleado.equals(nombreAnterior))
         {
             obj.setIdEmpleado(idEmpleado);
             obj.setNombreEmpleado(nombreEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
-            obj.setCpEmpleado(cpEmpleado);
-            obj.setCorreoEmpleado(correoEmpleado);
-            obj.setContraseñaEmpleado(contraseñaEmpleado);
-            obj.setImagenEmpleado(imagenEmpleado);
+            obj.setColoniaEmpleado(coloniaEmpleado);
             if(DATOS.actualizar(obj))
                 return "OK";
             else
@@ -98,11 +88,9 @@ public class EmpleadosControl {
                 obj.setNombreEmpleado(nombreEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
-            obj.setCpEmpleado(cpEmpleado);
-            obj.setCorreoEmpleado(correoEmpleado);
-            obj.setContraseñaEmpleado(contraseñaEmpleado);
-            obj.setImagenEmpleado(imagenEmpleado);
-                if(DATOS.actualizar(obj))
+            obj.setColoniaEmpleado(coloniaEmpleado);
+
+            if(DATOS.actualizar(obj))
                     return "OK.";
                 else
                     return "Error al actualizar el registro.";

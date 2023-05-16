@@ -235,7 +235,7 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
             rs = ps.executeQuery();
             while (rs.next()) {
                 //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
-                registros.add(new Empleados(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                registros.add(new Empleados(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
             }
             ps.close();
             rs.close();
