@@ -5,10 +5,9 @@
 package entidades;
 
 public class CompraDetalle {
-    private int idCompras;
-    private int idProductos;
-    private String nombreProducto;
-    private int Cantidad;
+    private int clvco;
+    private int clvprod;
+    private int cantidadc;
     private double Precio;
     private double Descuento;
     private double Subtotal;
@@ -17,53 +16,44 @@ public class CompraDetalle {
     }
 
     public CompraDetalle(int idCompras, int idProductos, String nombreProducto, int Cantidad, double Precio, double Descuento, double Subtotal) {
-        this.idCompras = idCompras;
-        this.idProductos = idProductos;
-        this.nombreProducto = nombreProducto;
-        this.Cantidad = Cantidad;
+        this.clvco = idCompras;
+        this.clvprod = idProductos;
+        this.cantidadc = Cantidad;
         this.Precio = Precio;
         this.Descuento = Descuento;
         this.Subtotal = Subtotal;
     }
 
     public CompraDetalle(int idProductos, int Cantidad, double Precio, double Descuento, double Subtotal) {
-        this.idProductos = idProductos;
-        this.Cantidad = Cantidad;
+        this.clvprod = idProductos;
+        this.cantidadc = Cantidad;
         this.Precio = Precio;
         this.Descuento = Descuento;
         this.Subtotal = Subtotal;
     }
 
     public int getIdCompras() {
-        return idCompras;
+        return clvco;
     }
 
     public void setIdCompras(int idCompras) {
-        this.idCompras = idCompras;
+        this.clvco = idCompras;
     }
 
     public int getIdProductos() {
-        return idProductos;
+        return clvprod;
     }
 
     public void setIdProductos(int idProductos) {
-        this.idProductos = idProductos;
-    }
-
-    public String getNombreProducto() {
-        return nombreProducto;
-    }
-
-    public void setNombreProducto(String nombreProducto) {
-        this.nombreProducto = nombreProducto;
+        this.clvprod = idProductos;
     }
 
     public int getCantidad() {
-        return Cantidad;
+        return cantidadc;
     }
 
     public void setCantidad(int Cantidad) {
-        this.Cantidad = Cantidad;
+        this.cantidadc = Cantidad;
     }
 
     public double getPrecio() {
