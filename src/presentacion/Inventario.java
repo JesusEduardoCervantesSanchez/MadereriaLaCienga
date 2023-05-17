@@ -4,9 +4,18 @@
  */
 package presentacion;
 
+import entidades.Producto;
+import java.awt.Image;
+import negocio.ProductoControl;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 /**
  *
@@ -14,11 +23,27 @@ import javax.swing.JLabel;
  */
 public class Inventario extends javax.swing.JPanel {
 
+    private final ProductoControl CONTROL;
+    String imagenProducto;
     /**
      * Creates new form NewJPanel
      */
     public Inventario() {
         initComponents();
+        CONTROL=new ProductoControl();
+        Listar("");
+        comboProd();
+    }
+    
+    public void comboProd(){
+        cmbClave.setModel(CONTROL.seleccionarProductos(1));
+    }
+    
+    public void Listar(String texto)
+    {
+        jtListado.setModel(CONTROL.listar(texto));
+        TableRowSorter modeloOrdenado = new TableRowSorter(jtListado.getModel());
+        jtListado.setRowSorter(modeloOrdenado);
     }
 
     /**
@@ -33,7 +58,6 @@ public class Inventario extends javax.swing.JPanel {
         titulo = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         cmbClave = new javax.swing.JComboBox<>();
-        btnCancelar = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtListado = new javax.swing.JTable();
         btnBuscar = new javax.swing.JButton();
@@ -51,16 +75,6 @@ public class Inventario extends javax.swing.JPanel {
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 60, 120, -1));
 
         add(cmbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 80, 80, 30));
-
-        btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
-        btnCancelar.setForeground(new java.awt.Color(255, 255, 255));
-        btnCancelar.setText("Cancelar");
-        btnCancelar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarActionPerformed(evt);
-            }
-        });
-        add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 410, 160, -1));
 
         jtListado.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,21 +95,29 @@ public class Inventario extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 560, 260));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoMouseClicked
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String accion = cmbClave.getSelectedItem().toString();
+        if(accion.equals("Todos"))
+            Listar("");
+        else
+            Listar(accion);
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbClave;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane3;
