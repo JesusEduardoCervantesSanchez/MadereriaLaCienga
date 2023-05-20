@@ -8,76 +8,79 @@ public class CompraDetalle {
     private int clvco;
     private int clvprod;
     private int cantidadc;
-    private double Precio;
-    private double Descuento;
-    private double Subtotal;
+    private double preciop;
+    private double gananciap;
+    private double medidasp;
 
     public CompraDetalle() {
     }
 
-    public CompraDetalle(int idCompras, int idProductos, String nombreProducto, int Cantidad, double Precio, double Descuento, double Subtotal) {
-        this.clvco = idCompras;
-        this.clvprod = idProductos;
-        this.cantidadc = Cantidad;
-        this.Precio = Precio;
-        this.Descuento = Descuento;
-        this.Subtotal = Subtotal;
+    public CompraDetalle(int clvco, int clvprod, int cantidadc, double preciop, double gananciap, double medidasp) {
+        this.clvco = clvco;
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
+        this.preciop = preciop;
+        this.gananciap = gananciap;
+        this.medidasp = medidasp;
     }
 
-    public CompraDetalle(int idProductos, int Cantidad, double Precio, double Descuento, double Subtotal) {
-        this.clvprod = idProductos;
-        this.cantidadc = Cantidad;
-        this.Precio = Precio;
-        this.Descuento = Descuento;
-        this.Subtotal = Subtotal;
+    public CompraDetalle(int clvprod, int cantidadc, double preciop, double gananciap, double medidasp) {
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
+        this.preciop = preciop;
+        this.gananciap = gananciap;
+        this.medidasp = medidasp;
     }
+    
+    
 
-    public int getIdCompras() {
+    public int getClvco() {
         return clvco;
     }
 
-    public void setIdCompras(int idCompras) {
-        this.clvco = idCompras;
+    public void setClvco(int clvco) {
+        this.clvco = clvco;
     }
 
-    public int getIdProductos() {
+    public int getClvprod() {
         return clvprod;
     }
 
-    public void setIdProductos(int idProductos) {
-        this.clvprod = idProductos;
+    public void setClvprod(int clvprod) {
+        this.clvprod = clvprod;
     }
 
-    public int getCantidad() {
+    public int getCantidadc() {
         return cantidadc;
     }
 
-    public void setCantidad(int Cantidad) {
-        this.cantidadc = Cantidad;
+    public void setCantidadc(int cantidadc) {
+        this.cantidadc = cantidadc;
     }
 
-    public double getPrecio() {
-        return Precio;
+    public double getPreciop() {
+        return preciop;
     }
 
-    public void setPrecio(double Precio) {
-        this.Precio = Precio;
+    public void setPreciop(double preciop) {
+        this.preciop = preciop;
     }
 
-    public double getDescuento() {
-        return Descuento;
+    public double getGananciap() {
+        return gananciap;
     }
 
-    public void setDescuento(double Descuento) {
-        this.Descuento = Descuento;
+    public void setGananciap(double gananciap) {
+        this.gananciap = gananciap;
     }
 
-    public double getSubtotal() {
-        return Subtotal;
+    public double getMedidasp() {
+        return medidasp;
     }
 
-    public void setSubtotal(double Subtotal) {
-        this.Subtotal = Subtotal;
-    } 
+    public void setMedidasp(double medidasp) {
+        this.medidasp = medidasp;
+    }
+
     
 }

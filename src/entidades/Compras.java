@@ -6,16 +6,28 @@ import java.util.List;
 public class Compras {
 
     private int clvprov;
+    private int clvprod;
+    private int cantidadc;
     private int clvco;
-    private Date fechac;
+    private String fechac;
     private int estadoc;
 
     public Compras() {
     }
 
-    public Compras(int clvprov, int clvco, Date fechac, int estadoc) {
+    public Compras(int clvco, int clvprov, int clvprod, int cantidadc, String fechac, int estadoc) {
         this.clvprov = clvprov;
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
         this.clvco = clvco;
+        this.fechac = fechac;
+        this.estadoc = estadoc;
+    }
+
+    public Compras(int clvprov, int clvprod, int cantidadc, String fechac, int estadoc) {
+        this.clvprov = clvprov;
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
         this.fechac = fechac;
         this.estadoc = estadoc;
     }
@@ -28,6 +40,22 @@ public class Compras {
         this.clvprov = clvprov;
     }
 
+    public int getClvprod() {
+        return clvprod;
+    }
+
+    public void setClvprod(int clvprod) {
+        this.clvprod = clvprod;
+    }
+
+    public int getCantidadc() {
+        return cantidadc;
+    }
+
+    public void setCantidadc(int cantidadc) {
+        this.cantidadc = cantidadc;
+    }
+
     public int getClvco() {
         return clvco;
     }
@@ -36,11 +64,11 @@ public class Compras {
         this.clvco = clvco;
     }
 
-    public Date getFechac() {
+    public String getFechac() {
         return fechac;
     }
 
-    public void setFechac(Date fechac) {
+    public void setFechac(String fechac) {
         this.fechac = fechac;
     }
 
@@ -51,7 +79,5 @@ public class Compras {
     public void setEstadoc(int estadoc) {
         this.estadoc = estadoc;
     }
-    
-    
-    
+
 }

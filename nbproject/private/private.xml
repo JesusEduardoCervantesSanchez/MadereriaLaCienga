@@ -3,10 +3,14 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/datos/ProveedorDAO.java</file>
-            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/entidades/Proveedores.java</file>
-            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/presentacion/BajaProveedor.java</file>
-            <file>file:/C:/Users/Tadeo/Documents/GitHub/MadereriaLaCienga/src/presentacion/ConsultarProveedor.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/negocio/ComprasControl.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ProveedorDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ComprasDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ProductoDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/interfaces/CrudSimpleCompras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/presentacion/GenerarCompras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/entidades/Compras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/database/Conexion.java</file>
         </group>
     </open-files>
 </project-private>
