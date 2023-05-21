@@ -67,7 +67,7 @@ public class TablaRemicion extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Tabla de Remicion");
+        titulo.setText("Tabla de Remisión");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 200, 40));
 
         jLabel2.setText("Total de la venta");

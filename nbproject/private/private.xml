@@ -3,13 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/entidades/DetalleDevVentas.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/VentasDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/DevVentasDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/TablaRemicion.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/ProductoDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/negocio/DevVentasControl.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/DevolucionVenta.java</file>
+            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/CancelarCompra.java</file>
+            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/MenuEmpleado.java</file>
+            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/EmpleadosDAO.java</file>
+            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/negocio/EmpleadosControl.java</file>
+            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/CambiarContra.java</file>
         </group>
     </open-files>
 </project-private>
