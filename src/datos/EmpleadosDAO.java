@@ -188,5 +188,27 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
         return resp;       
     }
 
+    public boolean ActualizarContra(int clave, String contra, String nueva)
+    {
+        resp=false;
+        try{
+            ps=CON.Conectar().prepareStatement("Update Usuarios set contrasenau = ? where clvemp = ? and contrasenau = ?;");
+            ps.setString(1, nueva);
+            ps.setInt(2, clave);
+            ps.setString(3, contra);
+            if(ps.executeUpdate()>0){
+            resp=true;  //getString(String)
+            }
+            ps.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            CON.Desconectar();
+        }
+        return resp;  
+    }
     
 }

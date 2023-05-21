@@ -107,4 +107,12 @@ public class EmpleadosControl {
     public int totalMostrados(){
         return registrosMostrados;
     }
+    
+    public String ActualizarContra(int clave, String contra, String nueva)
+    {
+        if(DATOS.ActualizarContra(clave, contra, nueva))
+            return "OK.";
+        else
+            return "Error al actualizar el registro.";
+    }
 }

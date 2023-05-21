@@ -45,7 +45,7 @@ int clvemp;
                     case 2:
                         switch (subIndex) {
                             case 1:
-                                new CambiaPanel(jpAlmacenador, new CambiarContra());
+                                new CambiaPanel(jpAlmacenador, new CambiarContra(clvemp));
                                 break;
                         }
                         break;

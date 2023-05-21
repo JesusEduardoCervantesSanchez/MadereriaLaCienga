@@ -7,17 +7,22 @@ package presentacion;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import negocio.EmpleadosControl;
 
 /**
  *
  * @author hg710
  */
 public class CambiarContra extends javax.swing.JPanel {
-
+private final EmpleadosControl control;
+int clave;
     /**
      * Creates new form NewJPanel
      */
-    public CambiarContra() {
+    public CambiarContra(int clave) {
+        this.clave = clave;
+        control = new EmpleadosControl();
         initComponents();
     }
 
@@ -80,7 +85,23 @@ public class CambiarContra extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        if(txtContrasenaAntigua.getText().isEmpty() || txtNuevaContrasena.getText().isEmpty() || txtConfirmarContrasena.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Hay campos vacios...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        else
+        {
+            if(!txtNuevaContrasena.getText().equals(txtConfirmarContrasena.getText()))
+                JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            else if(txtNuevaContrasena.getText().length() < 8)
+                JOptionPane.showMessageDialog(this, "La contraseña debe ser de mas de 8 caracteres...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            else
+            {
+                String res = control.ActualizarContra(clave, txtContrasenaAntigua.getText(), txtConfirmarContrasena.getText());
+                JOptionPane.showMessageDialog(this, res, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+                txtConfirmarContrasena.setText("");
+                txtNuevaContrasena.setText("");
+                txtContrasenaAntigua.setText("");
+            }
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
