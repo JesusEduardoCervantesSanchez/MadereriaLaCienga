@@ -301,6 +301,113 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
     public double precio(int id)
     {
         double preciop = 0.0;
+    }
+
+    @Override
+    public List<Empleados> ListarEmpleado(String valor) {
+        List<Empleados> registros = new ArrayList();
+        try {
+            String sql = "SELECT idEmpleado, NombreEmpleado, TelefonoEmpleado, DomicilioEmpleado, CPEmpleado, CorreoEmpleado, ContraseñaEmpleado FROM Empleados ORDER BY idEmpleado ASC";
+            String buscar = "SELECT idEmpleado, NombreEmpleado, TelefonoEmpleado, DomicilioEmpleado, CPEmpleado, CorreoEmpleado, ContraseñaEmpleado FROM Empleados WHERE NombreEmpleado LIKE '%" + valor + "%' OR TelefonoEmpleado LIKE '%" + valor + "%' OR CorreoEmpleado LIKE '%" + valor + "%' ORDER BY idEmpleado ASC";
+            if (valor.equalsIgnoreCase("")) {
+                ps = CON.Conectar().prepareStatement(sql);
+            } else {
+                ps = CON.Conectar().prepareStatement(buscar);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
+                registros.add(new Empleados(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6)));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+
+    @Override
+    public boolean insertarEmP_Ven(int idVenta, int idEmpleado) {
+        resp = false;
+        String consultaSQL = "Insert into Emp_Ven(idVentas, idEmpleado)";
+        consultaSQL += "VALUES(?, ?)";
+        try {
+            ps = CON.Conectar().prepareStatement(consultaSQL);
+            ps.setInt(1, idVenta);
+            ps.setInt(2, idEmpleado);
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            CON.Desconectar();
+        }
+        return resp;
+    }
+
+    @Override
+    public boolean insertarCli_Ven(int idVenta, int idCliente) {
+        resp = false;
+        String consultaSQL = "Insert into Cli_Ven(idVentas, idCliente)";
+        consultaSQL += "VALUES(?, ?)";
+        try {
+            ps = CON.Conectar().prepareStatement(consultaSQL);
+            ps.setInt(1, idVenta);
+            ps.setInt(2, idCliente);
+            if (ps.executeUpdate() > 0) {
+                resp = true;
+            }
+            ps.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            CON.Desconectar();
+        }
+        return resp;
+    }
+
+    @Override
+    public List<Clientes> ListarCliente(String valor) {
+        List<Clientes> registros = new ArrayList();
+        try {
+            //int idCliente, String nombreCliente, String apellidosCliente, String telefonoCliente, String correoCliente
+            String sql = "SELECT idCliente, NombreCliente, ApellidosCliente, TelefonoCliente, CorreoCliente FROM Clientes ORDER BY idCliente ASC";
+            String buscar = "SELECT idCliente, NombreCliente, ApellidoCliente, TelefonoCliente, CorreoCliente FROM Clientes WHERE NombreCliente LIKE '%" + valor + "%' ORDER BY idClientes ASC";
+            if (valor.equalsIgnoreCase("")) {
+                ps = CON.Conectar().prepareStatement(sql);
+            } else {
+                ps = CON.Conectar().prepareStatement(buscar);
+            }
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
+                registros.add(new Clientes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+
+    @Override
+    public int ActualizarStock(int cant, int id) {
+        int r = 0;
+        String sql = "UPDATE Productos SET Existencias=? WHERE idProductos=?";
         try {
             String sql = "SELECT preciovp FROM Productos where clvprod = ?";
             ps = CON.Conectar().prepareStatement(sql);

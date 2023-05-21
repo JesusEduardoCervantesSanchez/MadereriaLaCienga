@@ -38,7 +38,7 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
             ps.setString(1, '%' + texto + '%');
             rs=ps.executeQuery();
             while(rs.next()){
-                registros.add(new Empleados(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5),rs.getString(6),rs.getString(7),rs.getString(8),rs.getBoolean(9)));
+                registros.add(new Empleados(rs.getInt(1), rs.getString(2),rs.getString(3),rs.getString(4),rs.getString(5), rs.getString(6)));
             }
             ps.close();
             rs.close();
@@ -58,18 +58,15 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
     public boolean insertar(Empleados obj) 
     {
         resp=false;
-        String consultaSQL="INSERT INTO Empleados(NombreEmpleado, TelefonoEmpleado, DomicilioEmpleado, CPEmpleado, CorreoEmpleado, ContraseñaEmpleado, ImagenEmpleado, activo)\n" +
-                           " values(?,?,?,?,?,?,?,?);";
+        String consultaSQL="INSERT INTO Empleados(nombree, apellidoe, telefonoe, direccione, coloniae)\n" +
+                           " values(?,?,?,?,?);";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
             ps.setString(1, obj.getNombreEmpleado());
-            ps.setString(2, obj.getTelefonoEmpleado() );
-            ps.setString(3, obj.getDomicilioEmpleado());
-            ps.setString(4, obj.getCpEmpleado());
-            ps.setString(5, obj.getCorreoEmpleado());
-            ps.setString(6, obj.getContraseñaEmpleado());
-            ps.setString(7, obj.getImagenEmpleado());
-            ps.setBoolean(8, true);
+            ps.setString(2, obj.getApellidoEmpleado());
+            ps.setString(3, obj.getTelefonoEmpleado() );
+            ps.setString(4, obj.getDomicilioEmpleado());
+            ps.setString(5, obj.getColoniaEmpleado());
             
             if(ps.executeUpdate() > 0)
             {
@@ -91,19 +88,17 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
     public boolean actualizar(Empleados obj) 
     {
         resp=false;
-        String consultaSQL = "UPDATE Empleados SET NombreEmpleado=?, TelefonoEmpleado=?, DomicilioEmpleado=?, CPEmpleado=?, CorreoEmpleado=?, ContraseñaEmpleado=?, ImagenEmpleado=? " +
-"WHERE idEmpleado = ?;";
+        String consultaSQL = "UPDATE Empleados SET nombree=?, apellidoe=?, telefonoe=?, direccione=?, coloniae=? " +
+"WHERE clvemp = ?;";
          try
         {
             ps=CON.Conectar().prepareStatement(consultaSQL);
             ps.setString(1, obj.getNombreEmpleado());
-            ps.setString(2, obj.getTelefonoEmpleado());
-            ps.setString(3, obj.getDomicilioEmpleado());
-            ps.setString(4, obj.getCpEmpleado());
-            ps.setString(5, obj.getCorreoEmpleado());
-            ps.setString(6, obj.getContraseñaEmpleado());
-            ps.setString(7, obj.getImagenEmpleado());
-            ps.setInt(8, obj.getIdEmpleado());
+            ps.setString(2, obj.getApellidoEmpleado());
+            ps.setString(3, obj.getTelefonoEmpleado() );
+            ps.setString(4, obj.getDomicilioEmpleado());
+            ps.setString(5, obj.getColoniaEmpleado());
+            ps.setInt(6, obj.getIdEmpleado());
             if(ps.executeUpdate() > 0)
                 resp=true;
             ps.close();
@@ -124,54 +119,7 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
     public boolean eliminar(int id) 
     {
         resp=false;
-        String consultaSQL="DELETE FROM Empleados WHERE idEmpleado=?";
-        try{
-            ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, id);
-            if(ps.executeUpdate() > 0)
-            {
-                resp=true;
-            }
-            ps.close();
-        }
-        catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        finally{
-            ps=null;
-            CON.Desconectar();
-        }
-        return resp;    
-    }
-
-    @Override
-    public boolean desactivar(int id) 
-    {
-        resp=false;
-        String consultaSQL="UPDATE Empleados SET Activo = 0 WHERE idEmpleado=?";
-        try{
-            ps=CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, id);
-            if(ps.executeUpdate() > 0)
-            {
-                resp=true;
-            }
-            ps.close();
-        }
-        catch(SQLException e){
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        }
-        finally{
-            ps=null;
-            CON.Desconectar();
-        }
-        return resp;    
-    }
-
-    @Override
-    public boolean activar(int id) {
-        resp=false;
-        String consultaSQL="UPDATE Empleados SET Activo = 1 WHERE idEmpleado=?";
+        String consultaSQL="DELETE FROM Empleados WHERE clvemp=?";
         try{
             ps=CON.Conectar().prepareStatement(consultaSQL);
             ps.setInt(1, id);
@@ -220,7 +168,7 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados>{
     {
          resp=false;
         try{
-            ps=CON.Conectar().prepareStatement("SELECT * FROM Empleados WHERE nombreEmpleado =?;");
+            ps=CON.Conectar().prepareStatement("SELECT * FROM Empleados WHERE nombree =?;");
             ps.setString(1, texto);
             rs=ps.executeQuery();
             if(rs.next()){

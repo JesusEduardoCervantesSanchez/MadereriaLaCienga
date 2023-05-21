@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Proveedores, Empleados> {
+public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Proveedores, Empleados>{
 
     private final Conexion CON;
     private PreparedStatement ps;

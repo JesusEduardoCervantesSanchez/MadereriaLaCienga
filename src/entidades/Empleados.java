@@ -1,4 +1,4 @@
-/*
+ /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
@@ -11,12 +11,10 @@ package entidades;
 public class Empleados {
    private int idEmpleado;
    private String nombreEmpleado; 
+   private String apellidoEmpleado;
    private String telefonoEmpleado;
    private String domicilioEmpleado;
-   private String cpEmpleado;
-   private String correoEmpleado;
-   private String contraseñaEmpleado;
-   private String imagenEmpleado;
+   private String coloniaEmpleado;
    private boolean activo;
 
     public Empleados() 
@@ -24,27 +22,23 @@ public class Empleados {
     
     }
 
-    public Empleados(int idEmpleado, String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String cpEmpleado, String correoEmpleado, String contraseñaEmpleado, String imagenEmpleado, boolean activo) {
+    public Empleados(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado) {
         this.idEmpleado = idEmpleado;
         this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
         this.telefonoEmpleado = telefonoEmpleado;
         this.domicilioEmpleado = domicilioEmpleado;
-        this.cpEmpleado = cpEmpleado;
-        this.correoEmpleado = correoEmpleado;
-        this.contraseñaEmpleado = contraseñaEmpleado;
-        this.imagenEmpleado = imagenEmpleado;
-        this.activo = activo;
+        this.coloniaEmpleado = coloniaEmpleado;
     }
     
-    public Empleados(int idEmpleado, String NombreEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String CPEmpleado, String CorreoEmpleado, String ContraseñaEmpleado) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = NombreEmpleado;
-        this.telefonoEmpleado = TelefonoEmpleado;
-        this.domicilioEmpleado = DomicilioEmpleado;
-        this.cpEmpleado = CPEmpleado;
-        this.correoEmpleado = CorreoEmpleado;
-        this.contraseñaEmpleado = ContraseñaEmpleado;
-    }
+//    public Empleados(int idEmpleado, String NombreEmpleado, String apellidoEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
+//        this.idEmpleado = idEmpleado;
+//        this.nombreEmpleado = NombreEmpleado;
+//        this.apellidoEmpleado = apellidoEmpleado;
+//        this.telefonoEmpleado = TelefonoEmpleado;
+//        this.domicilioEmpleado = DomicilioEmpleado;
+//        this.coloniaEmpleado = ColoniaEmpleado;
+//    }
 
    
 
@@ -63,6 +57,14 @@ public class Empleados {
     public void setNombreEmpleado(String nombreEmpleado) {
         this.nombreEmpleado = nombreEmpleado;
     }
+    
+    public String getApellidoEmpleado() {
+        return apellidoEmpleado;
+    }
+
+    public void setApellidoEmpleado(String apellidoEmpleado) {
+        this.apellidoEmpleado = apellidoEmpleado;
+    }
 
     public String getTelefonoEmpleado() {
         return telefonoEmpleado;
@@ -80,52 +82,18 @@ public class Empleados {
         this.domicilioEmpleado = domicilioEmpleado;
     }
 
-    public String getCpEmpleado() {
-        return cpEmpleado;
-    }
-
-    public void setCpEmpleado(String cpEmpleado) {
-        this.cpEmpleado = cpEmpleado;
-    }
-
-    public String getCorreoEmpleado() {
-        return correoEmpleado;
-    }
-
-    public void setCorreoEmpleado(String correoEmpleado) {
-        this.correoEmpleado = correoEmpleado;
-    }
-
-    public String getContraseñaEmpleado() {
-        return contraseñaEmpleado;
-    }
-
-    public void setContraseñaEmpleado(String contraseñaEmpleado) {
-        this.contraseñaEmpleado = contraseñaEmpleado;
-    }
-
-    public String getImagenEmpleado() {
-        return imagenEmpleado;
-    }
-
-    public void setImagenEmpleado(String imagenEmpleado) {
-        this.imagenEmpleado = imagenEmpleado;
-    }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
+    public String getColoniaEmpleado() {
+        return coloniaEmpleado;
     }
     
+    public void setColoniaEmpleado(String coloniaEmpleado){
+        this.coloniaEmpleado = coloniaEmpleado;
+    }
     
-
     @Override
     public String toString()
     {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", cpEmpleado=" + cpEmpleado + ", correoEmpleado=" + correoEmpleado + ", contraseñaEmpleado=" + contraseñaEmpleado + ", imagenEmpleado=" + imagenEmpleado + "activo="+ activo +'}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", apellidoEmpleado=" + apellidoEmpleado +", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", coloniaEmpleado=" + coloniaEmpleado +'}';
     }
    
 }
