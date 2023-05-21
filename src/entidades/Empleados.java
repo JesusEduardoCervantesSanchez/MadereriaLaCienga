@@ -11,6 +11,7 @@ package entidades;
 public class Empleados {
    private int idEmpleado;
    private String nombreEmpleado; 
+   private String apellidoEmpleado;
    private String telefonoEmpleado;
    private String domicilioEmpleado;
    private String coloniaEmpleado;
@@ -21,22 +22,23 @@ public class Empleados {
     
     }
 
-    public Empleados(int idEmpleado, String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado, boolean activo) {
+    public Empleados(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado) {
         this.idEmpleado = idEmpleado;
         this.nombreEmpleado = nombreEmpleado;
+        this.apellidoEmpleado = apellidoEmpleado;
         this.telefonoEmpleado = telefonoEmpleado;
         this.domicilioEmpleado = domicilioEmpleado;
         this.coloniaEmpleado = coloniaEmpleado;
-        this.activo = activo;
     }
     
-    public Empleados(int idEmpleado, String NombreEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = NombreEmpleado;
-        this.telefonoEmpleado = TelefonoEmpleado;
-        this.domicilioEmpleado = DomicilioEmpleado;
-        this.coloniaEmpleado = ColoniaEmpleado;
-    }
+//    public Empleados(int idEmpleado, String NombreEmpleado, String apellidoEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
+//        this.idEmpleado = idEmpleado;
+//        this.nombreEmpleado = NombreEmpleado;
+//        this.apellidoEmpleado = apellidoEmpleado;
+//        this.telefonoEmpleado = TelefonoEmpleado;
+//        this.domicilioEmpleado = DomicilioEmpleado;
+//        this.coloniaEmpleado = ColoniaEmpleado;
+//    }
 
    
 
@@ -54,6 +56,14 @@ public class Empleados {
 
     public void setNombreEmpleado(String nombreEmpleado) {
         this.nombreEmpleado = nombreEmpleado;
+    }
+    
+    public String getApellidoEmpleado() {
+        return apellidoEmpleado;
+    }
+
+    public void setApellidoEmpleado(String apellidoEmpleado) {
+        this.apellidoEmpleado = apellidoEmpleado;
     }
 
     public String getTelefonoEmpleado() {
@@ -79,19 +89,11 @@ public class Empleados {
     public void setColoniaEmpleado(String coloniaEmpleado){
         this.coloniaEmpleado = coloniaEmpleado;
     }
-
-    public boolean isActivo() {
-        return activo;
-    }
-
-    public void setActivo(boolean activo) {
-        this.activo = activo;
-    }
     
     @Override
     public String toString()
     {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", coloniaEmpleado=" + coloniaEmpleado + "activo="+ activo +'}';
+        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", apellidoEmpleado=" + apellidoEmpleado +", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", coloniaEmpleado=" + coloniaEmpleado +'}';
     }
    
 }

@@ -20,10 +20,6 @@ public interface CrudEmpleadosInterface<T> {
     
     public boolean eliminar(int id);//Realiza una eliminación total
 
-    public boolean desactivar(int id);//Realiza un borrado logico (Desactivar)
-
-    public boolean activar(int id);//Activa un registro borrado logicamente
-
     public int total(); //Regresa el total de registros de una tabla
 
     public boolean existe(String texto); //Refresa verdadero si existe un registro o falso sino

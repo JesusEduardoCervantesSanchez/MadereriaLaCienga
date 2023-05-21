@@ -25,7 +25,7 @@ public class EmpleadosControl {
         lista.addAll(DATOS.listar(texto));
         
         //Crear el modelo y establecer los títulos del modelo
-        String titulos[]={"ID Empleado", "Nombre Empleado", "Telefono Empleado", "Domicilio Empleado", "Colonia Empleado", "Estado"};
+        String titulos[]={"ID Empleado", "Nombre Empleado", "Apellido Empleado","Telefono Empleado", "Domicilio Empleado", "Colonia Empleado"};
         modeloTabla=new DefaultTableModel(null,titulos);
         
         // Recorrer los elementos de la lista con for each
@@ -34,10 +34,10 @@ public class EmpleadosControl {
         for(Empleados item: lista){
             registro[0] = ""+item.getIdEmpleado();
             registro[1] = item.getNombreEmpleado();
-            registro[2] = item.getTelefonoEmpleado();
-            registro[3] = item.getDomicilioEmpleado();
-            registro[4] = item.getColoniaEmpleado();
-            registro[5] = (item.isActivo())?"Activo":"Inactivo";
+            registro[2] = item.getNombreEmpleado();
+            registro[3] = item.getTelefonoEmpleado();
+            registro[4] = item.getDomicilioEmpleado();
+            registro[5] = item.getColoniaEmpleado();
             
             //Insertar el registro en el modelo
             modeloTabla.addRow(registro);
@@ -48,7 +48,7 @@ public class EmpleadosControl {
     
  
     
-    public String insertar(String nombreEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
+    public String insertar(String nombreEmpleado, String apellidoEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
     // Verificar si existe la categoria
         if(DATOS.existe(nombreEmpleado))
             return "El registro ya existe.";
@@ -56,21 +56,22 @@ public class EmpleadosControl {
         {
             // Llenar el objeto
             obj.setNombreEmpleado(nombreEmpleado);
+            obj.setApellidoEmpleado(apellidoEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
             obj.setColoniaEmpleado(coloniaEmpleado);
-            obj.setActivo(true);
             
             //Insertar el objeto en la base de datos
             return (DATOS.insertar(obj))?"OK":"Error al insertar el registro";
         }
     }
     
-    public String actualizar(int idEmpleado, String nombreEmpleado, String nombreAnterior, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
+    public String actualizar(int idEmpleado, String nombreEmpleado, String nombreAnterior, String apellidoEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado){
         if(nombreEmpleado.equals(nombreAnterior))
         {
             obj.setIdEmpleado(idEmpleado);
             obj.setNombreEmpleado(nombreEmpleado);
+            obj.setApellidoEmpleado(apellidoEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
             obj.setColoniaEmpleado(coloniaEmpleado);
@@ -85,7 +86,8 @@ public class EmpleadosControl {
                 return "El usuario ya existe.";
             else
             {
-                obj.setNombreEmpleado(nombreEmpleado);
+            obj.setNombreEmpleado(nombreEmpleado);
+            obj.setApellidoEmpleado(apellidoEmpleado);
             obj.setTelefonoEmpleado(telefonoEmpleado);
             obj.setDomicilioEmpleado(domicilioEmpleado);
             obj.setColoniaEmpleado(coloniaEmpleado);
@@ -96,14 +98,6 @@ public class EmpleadosControl {
                     return "Error al actualizar el registro.";
             }
         }
-    }
-    
-    public String desactivar(int id){
-        return(DATOS.desactivar(id))?"OK":"No se pudo desactivar el registro";
-    }
-    
-    public String activar(int id){
-        return(DATOS.activar(id))?"OK":"No se pudo desactivar el registro";
     }
     
     public int total(){
