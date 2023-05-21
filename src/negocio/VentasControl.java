@@ -9,9 +9,12 @@ import entidades.Clientes;
 import entidades.Empleados;
 import entidades.Pro_Ven;
 import entidades.Producto;
+import entidades.VentaDetalle;
+import javax.swing.DefaultComboBoxModel;
 import entidades.Ventas;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.ComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -148,38 +151,27 @@ public class VentasControl {
         return modeloTabla;
     }
 
-    public String insertar(String FolioVenta, double precioVenta, double IVA, DefaultTableModel detalles) {
-        List<Pro_Ven> listaProductos = new ArrayList();
-        int i;
-        int idProducto;
-        int cantidad;
-        double precio;
-        double subtotal;
-        //Verificar si existe la categoria
-        if (DATOS.existe(FolioVenta)) {
-            return "El registro ya existe";
-        } else {
+    public String insertar(int clvemp, ArrayList detalles) {
+        //ArrayList<VentaDetalle> listaProductos = new ArrayList();
+        //Verificar si existe la categoria else {
             //Llenar el objeto
-            obj.setFolioVenta(FolioVenta);
-            obj.setSubTotal(precioVenta);
-            obj.setIVA(IVA);
             //Convertir el Default Table Model a una lista
-            for (i = 0; i < detalles.getRowCount(); i++) {
-                idProducto = Integer.parseInt("" + detalles.getValueAt(i, 0));
-                cantidad = Integer.parseInt("" + detalles.getValueAt(i, 2));
-                precio = Double.parseDouble("" + detalles.getValueAt(i, 3));
-                subtotal = Double.parseDouble("" + detalles.getValueAt(i, 4));
+            //for (int i = 0; i < detalles.getRowCount(); i++) {
                 //Insertar los valores en la lista
-                listaProductos.add(new Pro_Ven(idProducto, cantidad, precio, subtotal));
-            }
-            obj.setDetalles(listaProductos);
+                //listaProductos.add(new VentaDetalle(Integer.parseInt(""+detalles.getValueAt(i, 0)), Integer.parseInt(""+detalles.getValueAt(i, 1))));
+           // }
             //Insertar el objeto en la base de datos
-            if (DATOS.insertar(obj)) {
+            if (DATOS.insertar(clvemp, detalles)) {
                 return "OK";
             } else {
                 return "Error al insertar el registro";
             }
         }
+
+    public ComboBoxModel<String> ListaProductos()
+    {
+        ComboBoxModel<String> combo = new DefaultComboBoxModel<>(DATOS.ListarProductos().toArray(new String[0]));
+        return combo;
     }
 
     public String InsertarEmp_Ven(int idVenta, int idEmpleado)
@@ -220,5 +212,20 @@ public class VentasControl {
     public int ObtenerStock(int idProducto)
     {
         return DATOS.ObtenerStock(idProducto);
+    }
+    
+    public String NombreProducto(int idProducto)
+    {
+        return DATOS.nombrep(idProducto);
+    }
+    
+    public double PrecioProducto(int idProducto)
+    {
+        return DATOS.precio(idProducto);
+    }
+    
+    public int Existencia(int idProducto)
+    {
+        return DATOS.Existencia( idProducto);
     }
 }

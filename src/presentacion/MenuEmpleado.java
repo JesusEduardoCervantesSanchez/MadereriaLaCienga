@@ -13,12 +13,13 @@ import javax.swing.text.TabableView;
  * @author CSjes
  */
 public class MenuEmpleado extends javax.swing.JFrame {
-
+int clvemp;
     /**
      * Creates new form Menu
      */
-    public MenuEmpleado() {
+    public MenuEmpleado(int clvemp) {
         initComponents();
+        this.clvemp = clvemp;
         menuScrollableE1.setEvent(new EventoMenu() {
             @Override
             public void selected(int index, int subIndex) {
@@ -26,7 +27,8 @@ public class MenuEmpleado extends javax.swing.JFrame {
                     case 0:
                         switch (subIndex) {
                             case 1:
-                                new CambiaPanel(jpAlmacenador, new TablaRemicion());
+                                new CambiaPanel(jpAlmacenador, new TablaRemicion(clvemp));
+                                System.out.println("Clave Menu "+clvemp);
                                 break;
                             case 2:
                                 new CambiaPanel(jpAlmacenador, new DevolucionVenta());
@@ -56,6 +58,15 @@ public class MenuEmpleado extends javax.swing.JFrame {
 
         });
         this.setLocationRelativeTo(this);
+    }
+
+    //public MenuEmpleado(int clvemp) {
+      //  this.clvemp = clvemp;
+    //}
+    
+    public int clave()
+    {
+        return clvemp;
     }
 
     /**
@@ -228,7 +239,7 @@ public class MenuEmpleado extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MenuEmpleado().setVisible(true);
+                //new MenuEmpleado().setVisible(true);
             }
         });
     }

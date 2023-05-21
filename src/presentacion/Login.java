@@ -321,7 +321,7 @@ public class Login extends javax.swing.JFrame {
         Conexion conn = Conexion.getInstance();
         PreparedStatement ps;
         ResultSet rs;
-        String consultaSQL = "SELECT nombreu, contrasenau, rolu FROM Usuarios WHERE nombreu=? and contrasenau = ? and rolu=?;";
+        String consultaSQL = "SELECT E.clvemp, U.nombreu, U.contrasenau, U.rolu FROM Usuarios U inner join Empleados E on E.clvemp = U.clvemp WHERE U.nombreu=? and U.contrasenau = ? and U.rolu=?;";
         String rol = BA ? "Administrador" : BP ? "Propietario" : "Empleado";
         if (!txtboxCorreo.getText().isEmpty()) {
             if (PasswordContrasena.getPassword().length > 0) {
@@ -333,7 +333,9 @@ public class Login extends javax.swing.JFrame {
                     ps.setString(3, rol);
                     rs = ps.executeQuery();
                     if (rs.next()) {
-                        AbrirMenus();
+                        //new MenuEmpleado(rs.getInt(1));
+                        System.out.println("Clave Login "+ rs.getInt(1));
+                        AbrirMenus(rs.getInt(1));
                     } else {
                         JOptionPane.showMessageDialog(null, "Ingrese un usuario valido");
                     }
@@ -359,7 +361,7 @@ public class Login extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jPanel3MouseClicked
 
-    private void AbrirMenus() {
+    private void AbrirMenus(int clave) {
         if (BA && !BP && !BE) {
             this.setVisible(false);
             new MenuAdministrador().setVisible(true);
@@ -368,7 +370,7 @@ public class Login extends javax.swing.JFrame {
             new MenuPropietario().setVisible(true);
         } else if (!BA && !BP && BE) {
             this.setVisible(false);
-            new MenuEmpleado().setVisible(true);
+            new MenuEmpleado(clave).setVisible(true);
         }
     }
     private void txtboxCorreoMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtboxCorreoMousePressed

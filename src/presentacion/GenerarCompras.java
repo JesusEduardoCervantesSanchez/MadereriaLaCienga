@@ -176,7 +176,7 @@ public class GenerarCompras extends javax.swing.JPanel {
             System.err.println("Valor clvprov: " + (cmbClvProveedor.getSelectedIndex() + 1));
             System.out.println(cmbClvProveedor.getSelectedIndex() + 1);
             String estado = control.Insertar(Integer.parseInt(cmbClvProveedor.getItemAt(cmbClvProveedor.getSelectedIndex())), detallec);
-            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
         } else {
             JOptionPane.showMessageDialog(this, "Seleccione un proveedor y/o agregue un producto", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
         }

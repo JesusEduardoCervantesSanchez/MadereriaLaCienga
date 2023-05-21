@@ -3,37 +3,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package entidades;
+
 /**
  *
- * @author CSjes
+ * @author hg710
  */
-public class Ventas {
-
+public class VentaDetalle {
+    private int clvprod;
     private int clvve;
+    private int cantidadv;
     private double iva;
     private double subtotalv;
-    private String fechav;
-    private int clvem;
-    private int clvprode;
-    private int cantidadve;
     private String nombre;
     private double preciop;
     private double monto;
 
-    public Ventas() {
+    public VentaDetalle() {
     }
 
-    public Ventas(int clvve, double iva, double subtotalv, String fechav, int clvem, int clvprode, int cantidadve, String nombre, double preciop, double monto) {
+    public VentaDetalle(int clvprod, int clvve, int cantidadv, double iva, double subtotalv) {
+        this.clvprod = clvprod;
         this.clvve = clvve;
+        this.cantidadv = cantidadv;
         this.iva = iva;
         this.subtotalv = subtotalv;
-        this.fechav = fechav;
-        this.clvem = clvem;
-        this.clvprode = clvprode;
-        this.cantidadve = cantidadve;
-        this.nombre = nombre;
-        this.preciop = preciop;
-        this.monto = monto;
+    }
+
+    public VentaDetalle(int clvprod, int cantidadv, double iva, double subtotalv) {
+        this.clvprod = clvprod;
+        this.cantidadv = cantidadv;
+        this.iva = iva;
+        this.subtotalv = subtotalv;
+    }
+    
+    public VentaDetalle(int clvprod, int cantidadv) {
+        this.clvprod = clvprod;
+        this.cantidadv = cantidadv;
+    }
+
+    public int getClvprod() {
+        return clvprod;
+    }
+
+    public void setClvprod(int clvprod) {
+        this.clvprod = clvprod;
     }
 
     public int getClvve() {
@@ -42,6 +55,14 @@ public class Ventas {
 
     public void setClvve(int clvve) {
         this.clvve = clvve;
+    }
+
+    public int getCantidadv() {
+        return cantidadv;
+    }
+
+    public void setCantidadv(int cantidadv) {
+        this.cantidadv = cantidadv;
     }
 
     public double getIva() {
@@ -58,38 +79,6 @@ public class Ventas {
 
     public void setSubtotalv(double subtotalv) {
         this.subtotalv = subtotalv;
-    }
-
-    public String getFechav() {
-        return fechav;
-    }
-
-    public void setFechav(String fechav) {
-        this.fechav = fechav;
-    }
-
-    public int getClvem() {
-        return clvem;
-    }
-
-    public void setClvem(int clvem) {
-        this.clvem = clvem;
-    }
-
-    public int getClvprode() {
-        return clvprode;
-    }
-
-    public void setClvprode(int clvprode) {
-        this.clvprode = clvprode;
-    }
-
-    public int getCantidadve() {
-        return cantidadve;
-    }
-
-    public void setCantidadve(int cantidadve) {
-        this.cantidadve = cantidadve;
     }
 
     public String getNombre() {
@@ -115,11 +104,11 @@ public class Ventas {
     public void setMonto(double monto) {
         this.monto = monto;
     }
-
-    public Ventas(int cantidadve, String nombre, double preciop, double monto) {
-        this.cantidadve = cantidadve;
+    
+    public VentaDetalle(int clvprod, int cantidadve, String nombre, double preciop) {
+        this.clvprod = clvprod;
+        this.cantidadv = cantidadve;
         this.nombre = nombre;
         this.preciop = preciop;
-        this.monto = monto;
     }
 }
