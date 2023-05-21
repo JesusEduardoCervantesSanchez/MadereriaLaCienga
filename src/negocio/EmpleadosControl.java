@@ -91,6 +91,7 @@ public class EmpleadosControl {
     public int totalMostrados() {
         return registrosMostrados;
     }
+<<<<<<< HEAD
 
     public ComboBoxModel<String> ListarC() {
         ComboBoxModel<String> combo = new DefaultComboBoxModel<>(DATOS.ListarE().toArray(new String[0]));
@@ -109,5 +110,14 @@ public class EmpleadosControl {
             registro[4] = item.getColoniae();
         }
         return registro;
+=======
+    
+    public String ActualizarContra(int clave, String contra, String nueva)
+    {
+        if(DATOS.ActualizarContra(clave, contra, nueva))
+            return "OK.";
+        else
+            return "Error al actualizar el registro.";
+>>>>>>> refs/remotes/origin/main
     }
 }

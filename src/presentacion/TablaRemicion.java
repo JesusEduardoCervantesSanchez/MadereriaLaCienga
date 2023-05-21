@@ -4,21 +4,39 @@
  */
 package presentacion;
 
+import entidades.VentaDetalle;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.VentasControl;
 
 /**
  *
  * @author hg710
  */
 public class TablaRemicion extends javax.swing.JPanel {
-
+    DefaultTableModel modelo;
+    private final VentasControl CONTROL=new VentasControl();
+    private int clave;
+    double total=0;
     /**
      * Creates new form NewJPanel
      */
     public TablaRemicion() {
+        
+    }
+
+    public TablaRemicion(int clave) {
+        this.clave = clave;
+        System.out.println("Clave Tabla "+clave);
         initComponents();
+        String titulos[] = {"Clave", "Cantidad", "Nombre", "Precio", "Monto"};
+        modelo=new DefaultTableModel(null, titulos);
+        cmbClave.setModel(CONTROL.ListaProductos());
+        jtTabla.setModel(modelo);
     }
 
     /**
@@ -38,9 +56,9 @@ public class TablaRemicion extends javax.swing.JPanel {
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTabla = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jtTotalVenta = new javax.swing.JTextField();
+        txtTotalVenta = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jtCantidad = new javax.swing.JTextField();
+        txtCantidad = new javax.swing.JTextField();
         btnRealizarVenta1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -98,14 +116,13 @@ public class TablaRemicion extends javax.swing.JPanel {
         jLabel3.setText("Clave del producto");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
 
-        jtTotalVenta.setEditable(false);
-        jtTotalVenta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jtTotalVenta.setText("$0.00");
-        add(jtTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 130, 30));
+        txtTotalVenta.setEditable(false);
+        txtTotalVenta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        add(txtTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 130, 30));
 
         jLabel4.setText("Cantidad de productos");
         add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 130, -1));
-        add(jtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
+        add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 90, 30));
 
         btnRealizarVenta1.setBackground(new java.awt.Color(5, 93, 38));
         btnRealizarVenta1.setForeground(new java.awt.Color(255, 255, 255));
@@ -123,7 +140,26 @@ public class TablaRemicion extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarProductoActionPerformed
-        // TODO add your handling code here:
+        String registro[] = new String[5];
+        if(cmbClave.getSelectedIndex()<0)
+            JOptionPane.showMessageDialog(this, "Debes de agregar productos...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        else if(Integer.parseInt(txtCantidad.getText()) < 1)
+            JOptionPane.showMessageDialog(this, "Selecciona una cantidad valida...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        else if(Integer.parseInt(txtCantidad.getText())>CONTROL.Existencia(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"")))
+            JOptionPane.showMessageDialog(this, "La cantidad no puede ser mayor a lo que hay en existencia", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        else
+        {
+            registro[0] = cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"";
+            registro[1] = txtCantidad.getText();
+            registro[2] = CONTROL.NombreProducto(Integer.parseInt(registro[0]));
+            registro[3] = Double.toString(CONTROL.PrecioProducto(Integer.parseInt(registro[0])));
+            registro[4] = Double.toString(Double.parseDouble(registro[1])*Double.parseDouble(registro[3]));
+            modelo.addRow(registro);
+            total += Double.parseDouble(registro[4]);
+            txtTotalVenta.setText(total+"");
+            txtCantidad.setText("");
+            cmbClave.setSelectedIndex(0);
+        }
     }//GEN-LAST:event_btnInsertarProductoActionPerformed
 
     private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
@@ -131,9 +167,27 @@ public class TablaRemicion extends javax.swing.JPanel {
     }//GEN-LAST:event_jtTablaMouseClicked
 
     private void btnRealizarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVenta1ActionPerformed
-        // TODO add your handling code here:
+        ArrayList<VentaDetalle> lista = new ArrayList();
+        if(jtTabla.getRowCount()>0)
+        {
+            for(int i = 0; i<jtTabla.getRowCount(); i++)
+            {
+                System.out.println("Insertar clvprod: "+jtTabla.getModel().getValueAt(i, 0).toString());
+                lista.add(new VentaDetalle(Integer.parseInt(jtTabla.getModel().getValueAt(i, 0).toString()), Integer.parseInt(jtTabla.getModel().getValueAt(i, 1).toString())));
+            }
+            String estado = CONTROL.insertar(clave, lista);
+            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+            for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
+                modelo.removeRow(i);
+            txtTotalVenta.setText("");
+            total = 0;
+}
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor y/o agregue un producto", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            
+        }
     }//GEN-LAST:event_btnRealizarVenta1ActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
@@ -144,9 +198,9 @@ public class TablaRemicion extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jtCantidad;
     private javax.swing.JTable jtTabla;
-    private javax.swing.JTextField jtTotalVenta;
     private javax.swing.JLabel titulo;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtTotalVenta;
     // End of variables declaration//GEN-END:variables
 }

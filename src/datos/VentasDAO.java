@@ -4,54 +4,109 @@
  */
 package datos;
 
+import entidades.Compras;
 import database.Conexion;
-import datos.interfaces.CrudVentaInterface;
-import entidades.Clientes;
-import entidades.Empleados;
-import entidades.Pro_Ven;
-import entidades.Producto;
+import java.sql.Types;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import javax.swing.JOptionPane;
+import Datos.Interfaces.CrudSimpleCompras;
+import datos.interfaces.CrudSimpleVentas;
+import java.sql.CallableStatement;
+import entidades.CompraDetalle;
+import entidades.Proveedores;
+import entidades.Empleados;
+import entidades.Producto;
+import entidades.VentaDetalle;
 import entidades.Ventas;
 import java.sql.Connection;
 import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
-/**
- *
- * @author CSjes
- */
-public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, Clientes, Empleados> {
+public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Producto, Proveedores, Empleados> {
 
     private final Conexion CON;
     private PreparedStatement ps;
+    private CallableStatement cs;
     private ResultSet rs;
     private boolean resp;
 
     public VentasDAO() {
-        this.CON = Conexion.getInstance();
+        CON = Conexion.getInstance();
     }
 
+//    public List Listar(String texto) {
+//        List<Compras> registros = new ArrayList();
+//        try {
+//            String sql = "SELECT DISTINCT C.idCompras, P.idProvedores, P.nombreProvedor, E.idEmpleado, E.NombreEmpleado, C.FolioCompra, C.Descuento,\n"
+//                    + " C.SubtotalCompra, C.IVA, C.FechaCompra, C.Total, C.Estado\n"
+//                    + " FROM Provedores P INNER JOIN (Prov_Comp PC INNER JOIN (Compras C INNER JOIN (Emp_Com EC INNER JOIN Empleados E ON E.idEmpleado=EC.idEmpleado) ON EC.idCompras=C.idCompras) ON C.idCompras = PC.idCompras) on PC.idProvedores = P.idProvedores\n"
+//                    + " ORDER BY C.idCompras ASC";
+//            String buscar = "SELECT DISTINCT C.idCompras, P.idProvedores, P.nombreProvedor, E.idEmpleado, E.NombreEmpleado, C.FolioCompra, C.Descuento,\n"
+//                    + " C.SubtotalCompra, C.IVA, C.FechaCompra, C.Total, C.Estado\n"
+//                    + " FROM Provedores P INNER JOIN (Prov_Comp PC INNER JOIN (Compras C INNER JOIN (Emp_Com EC INNER JOIN Empleados E ON E.idEmpleado=EC.idEmpleado) ON EC.idCompras=C.idCompras) ON C.idCompras = PC.idCompras) on PC.idProvedores = P.idProvedores\n"
+//                    + " WHERE C.FolioCompra like '%" + texto + "%' OR P.nombreProvedor like '%" + texto + "%' OR C.FechaCompra like '%" + texto + "%' ORDER BY C.idCompras ASC";
+//            if (texto.equalsIgnoreCase("")) {
+//                ps = CON.Conectar().prepareStatement(sql);
+//            } else {
+//                ps = CON.Conectar().prepareStatement(buscar);
+//            }
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+////                registros.add(new Compras(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5), rs.getString(6), rs.getDouble(7), rs.getDouble(8), rs.getDouble(9), rs.getString(10), rs.getDouble(11), rs.getString(12)));
+//            }
+//            ps.close();
+//            rs.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, e.getMessage());
+//        } finally {
+//            ps = null;
+//            rs = null;
+//            CON.Desconectar();
+//        }
+//        return registros;
+//    }
+//    @Override
+//    public List<CompraDetalle> ListarDetalle(int idCompra) {
+//        List<CompraDetalle> registros = new ArrayList();
+//        try {
+//            ps = CON.Conectar().prepareStatement("SELECT PC.idCompras, PC.idProductos, P.nombreProducto, PC.Cantidad, PC.Precio, PC.Descuento, PC.Subtotal\n"
+//                    + " FROM Pro_Comp PC inner join Productos P ON P.idProductos=PC.idProductos\n"
+//                    + " WHERE PC.idCompras=?;");
+//            ps.setInt(1, idCompra);
+//            rs = ps.executeQuery();
+//            while (rs.next()) {
+//                //int idDetalleVenta, int idProducto, int idVenta, String productoNombre, int productoExistencia, int Cantidad, double precio, double descuento, double subTotal) {
+//                //registros.add(new CompraDetalle(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getDouble(5), rs.getDouble(6), rs.getDouble(7)));
+//            }
+//            ps.close();
+//            rs.close();
+//        } catch (SQLException e) {
+//            JOptionPane.showMessageDialog(null, e.getMessage());
+//        } finally {
+//            ps = null;
+//            rs = null;
+//            CON.Desconectar();
+//        }
+//        return registros;
+//    }
+
     @Override
-    public List<Ventas> listar(String texto) {
+    public List<Ventas> Listar() {
         List<Ventas> registros = new ArrayList();
-        //Consulta que busca las ventas por un numero de folio (String)
-        String sql = "SELECT DISTINCT V.idVentas, C.idCliente, C.NombreCliente, E.idEmpleado, E.NombreEmpleado, V.FolioVenta, V.FechaVenta, V.SubTotal, V.IVA\n"
-                + " FROM Clientes C INNER JOIN (Cli_Ven CV INNER JOIN (Ventas V INNER JOIN (Emp_Ven EV INNER JOIN Empleados E ON E.idEmpleado=EV.idEmpleado) ON EV.idVentas=V.idVentas) ON V.idVentas = CV.idVentas) on CV.idCliente = C.idCliente\n"
-                + " WHERE V.FolioVenta like ?;";
         try {
+            String sql = "SELECT DISTINCT C.clvco, P.clvprov, DC.clvprod, DC.cantidadc, C.fechac, C.estadoc\n"
+                    + " FROM comprov P INNER JOIN (compras C INNER JOIN prodcomp DC ON DC.clvco=C.clvco) ON C.clvco=C.clvco\n"
+                    + " WHERE C.estadoc = 1 ORDER BY C.clvco ASC";
             ps = CON.Conectar().prepareStatement(sql);
-            ps.setString(1, "%" + texto + "%");
             rs = ps.executeQuery();
             while (rs.next()) {
-                //int idVentas, int idCliente, String ClienteNombre, int idEmpleado, String NombreEmpleado, String FolioVenta, Date FechaVenta, double SubTotal, double IVA
-                registros.add(new Ventas(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-                        rs.getString(6), rs.getDate(7), rs.getDouble(8), rs.getDouble(9)));
+                registros.add(new Ventas(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
             }
             ps.close();
             rs.close();
@@ -66,20 +121,17 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
     }
 
     @Override
-    public List<Pro_Ven> listarDetalle(int idVenta) {
-        List<Pro_Ven> registros = new ArrayList();
-        //Consulta que busca las ventas por un numero de folio (String)
-        String sql = "SELECT  V.idVentas, P.idProductos, P.nombreProducto, P.Existencias, PV.CantProVen, PV.PrecioU, V.SubTotal \n"
-                + "FROM Ventas V INNER JOIN ( Productos P INNER JOIN Pro_Ven PV ON P.idProductos=PV.idProductos) ON PV.idVentas=V.idVentas \n"
-                + "WHERE V.idVentas = ?;";
+    public List<Ventas> Listar(int idVenta) {
+        List<Ventas> registros = new ArrayList();
         try {
+            String sql = "SELECT DISTINCT C. clvco, P.clvprov, DC.clvprod, DC.cantidadc, C.fechac, C.estadoc\n"
+                    + " FROM comprov P INNER JOIN (compras C INNER JOIN prodcomp DC ON DC.clvco=C.clvco) ON C.clvco=C.clvco\n"
+                    + " WHERE C.clvco = ? AND C.estadoc = 1 ORDER BY C.clvco ASC";
             ps = CON.Conectar().prepareStatement(sql);
-            ps.setInt(1, idVenta);
+            ps.setInt(1, idCompra);
             rs = ps.executeQuery();
             while (rs.next()) {
-                //int idProductos, int idVentas, String NombreProducto, int Existencia, int CantProVen, double PrecioU, double SubTotal
-                registros.add(new Pro_Ven(rs.getInt(1), rs.getInt(2), rs.getString(3),
-                        rs.getInt(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7)));
+                registros.add(new Compras(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
             }
             ps.close();
             rs.close();
@@ -94,37 +146,105 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
     }
 
     @Override
-    public boolean insertar(Ventas obj) {
+    public ArrayList<String> ListarC() {
+        ArrayList<String> registros = new ArrayList();
+        try {
+            String sql = "SELECT clvco FROM compras";
+            ps = CON.Conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(rs.getString(1));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+    
+     @Override
+    public ArrayList<String> ListarProductos() {
+        ArrayList<String> registros = new ArrayList();
+        try {
+            String sql = "SELECT clvprod FROM Productos";
+            ps = CON.Conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(rs.getString(1));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+    
+     @Override
+    public ArrayList<String> ListarEmpleado() {
+        ArrayList<String> registros = new ArrayList();
+        try {
+            String sql = "SELECT clvco FROM compras";
+            ps = CON.Conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(rs.getString(1));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+    
+     @Override
+    public boolean insertar(int clvemp, ArrayList<VentaDetalle> obj1) {
         resp = false;
         Connection conn = null;
-        String InsertarVenta = "INSERT INTO Ventas(FolioVenta, SubTotal, IVA) VALUES(?,?,?);";
+        String InsertarCompra = "CALL InsertaVenta(?,?)";
         try {
             conn = CON.Conectar();
             conn.setAutoCommit(false);
-            ps = conn.prepareStatement(InsertarVenta, Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, obj.getFolioVenta());
-            ps.setDouble(2, obj.getSubTotal());
-            ps.setDouble(3, obj.getIVA());
-            int filasAfectadas = ps.executeUpdate();
-            rs = ps.getGeneratedKeys();
-            int idVenta = 0;
-            if (rs.next()) {
-                idVenta = rs.getInt(1);
-            }
-            if (filasAfectadas == 1) {
-                String insertDetalleVenta = "INSERT INTO Pro_Ven(idVentas, idProductos, CantProVen, PrecioU) values(?,?,?,?);";
-                ps = conn.prepareStatement(insertDetalleVenta);
-                for (Pro_Ven item : obj.getDetalles()) {
-                    ps.setInt(1, idVenta);
-                    ps.setInt(2, item.getIdProductos());
-                    ps.setInt(3, item.getCantProVen());
-                    ps.setDouble(4, item.getPrecioU());
-                    resp = ps.executeUpdate() > 0;
-                }
-                //Cometer la transaccion
+            cs = conn.prepareCall(InsertarCompra);
+            cs.setInt(1, clvemp);
+            cs.registerOutParameter(2, Types.INTEGER);
+            int filasAfectadas = cs.executeUpdate();
+            System.out.println("Se ejecuto la primera inserción?" + filasAfectadas);
+//            rs = cs.getGeneratedKeys();
+            int clvve = cs.getInt(2);
+//            if (rs.next()) {
+//                System.out.println("Entrandoe en el if de asignación clvco");
+//                clvco = rs.getInt(1);
+//            }
+            if (filasAfectadas > 0) {
+                System.out.println("Entrando al if del detalle de compra");
+                //se inserto la venta  correctamente
+                String InsertaDetalleVen = "CALL InsertaDetalleVen(?, ?, ?)";
+                cs = conn.prepareCall(InsertaDetalleVen);
+                for (VentaDetalle item : obj1) {
+                    cs.setInt(1, item.getClvprod());
+                    cs.setInt(2, clvve);
+                    cs.setInt(3, item.getCantidadv());
+                    resp = cs.executeUpdate() > 0;
+                } //aqui se cierra el for
+                System.out.println("Ultimo estado de resp:" + resp);
                 conn.commit();
             } else {
-                //Deshacer la transacción
+                //Deshacer la transaccion
                 conn.rollback();
             }
         } catch (SQLException e) {
@@ -136,10 +256,11 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
             } catch (SQLException ex) {
                 JOptionPane.showMessageDialog(null, "Error" + ex);
             }
+            //JOptionPane.showMessageDialog(null, e.getMessage());
         } finally {
             try {
-                if (ps != null) {
-                    ps.close();
+                if (cs != null) {
+                    cs.close();
                 }
                 if (rs != null) {
                     rs.close();
@@ -153,61 +274,17 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
         }
         return resp;
     }
-
-    @Override
-    public int total() {
-        int numeroregistros = 0;
+    
+    public String nombrep(int id)
+    {
+        String nombrep="";
         try {
-            ps = CON.Conectar().prepareStatement("SELECT COUNT(*) FROM Ventas; ");//El parametro del count, si se le ingresa un asterisco toma en cuenta solo nulos
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                numeroregistros = rs.getInt(1);
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            rs = null;
-            CON.Desconectar();
-        }
-        return numeroregistros;
-    }
-
-    @Override
-    public boolean existe(String texto) {
-        resp = false;
-        try {
-            ps = CON.Conectar().prepareStatement("SELECT 1 FROM Ventas WHERE FolioVenta = ?;");
-            ps.setString(1, texto);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                resp = true;
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            rs = null;
-            CON.Desconectar();
-        }
-        return resp;
-    }
-
-    @Override
-    public List<Producto> ListarProductos(String valor) {
-        List<Producto> registros = new ArrayList();
-        try {
-            String sql = "SELECT P.idProductos, P.idCategoria, P.nombreProducto, C.NombreCategoria, P.Existencias, P.PrecioCompra, P.PrecioVenta, P.Ganancia, P.ImagenProducto FROM Productos P INNER JOIN Categorias C ON C.idCategoria=P.idCategoria WHERE P.nombreProducto LIKE ? OR C.NombreCategoria LIKE ? ORDER BY P.idProductos ASC";
+            String sql = "SELECT tipop FROM Productos where clvprod = ?";
             ps = CON.Conectar().prepareStatement(sql);
-            ps.setString(1, "%" + valor + "%");
-            ps.setString(2, "%" + valor + "%");
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-               // registros.add(new Producto(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getString(4), rs.getInt(5), rs.getDouble(6), rs.getDouble(7), rs.getDouble(8), rs.getString(9)));
+                nombrep = rs.getString(1);
             }
             ps.close();
             rs.close();
@@ -218,7 +295,12 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
             rs = null;
             CON.Desconectar();
         }
-        return registros;
+        return nombrep;
+    }
+    
+    public double precio(int id)
+    {
+        double preciop = 0.0;
     }
 
     @Override
@@ -327,52 +409,12 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
         int r = 0;
         String sql = "UPDATE Productos SET Existencias=? WHERE idProductos=?";
         try {
+            String sql = "SELECT preciovp FROM Productos where clvprod = ?";
             ps = CON.Conectar().prepareStatement(sql);
-            ps.setDouble(1, cant);
-            ps.setInt(2, id);
-            if (ps.executeUpdate() > 0) {
-                resp = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            CON.Desconectar();
-        }
-        return r;
-    }
-
-    @Override
-    public int ObtenerStock(int id) {
-        int r = 0;
-        String sql = "SELECT Existencias FROM Productos WHERE idProductos = ?";
-        try {
-            ps = CON.Conectar().prepareStatement(sql);
-            ps.setDouble(1, id);
+            ps.setInt(1, id);
             rs = ps.executeQuery();
             while (rs.next()) {
-                r = rs.getInt(1);
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            CON.Desconectar();
-        }
-        return r;
-    }
-
-    @Override
-    public int RegresarIdVenta(String Folio) {
-        int idVenta = 0;
-        try {
-            ps = CON.Conectar().prepareStatement(" Select idVentas from Ventas where FolioVenta Like ?;");//El parametro del count, si se le ingresa un asterisco toma en cuenta solo nulos
-            ps.setString(1, "%" + Folio + "%");
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                idVenta = rs.getInt(1);
+                preciop = rs.getDouble(1);
             }
             ps.close();
             rs.close();
@@ -383,7 +425,29 @@ public class VentasDAO implements CrudVentaInterface<Ventas, Pro_Ven, Producto, 
             rs = null;
             CON.Desconectar();
         }
-        return idVenta;
+        return preciop;
     }
-
+    
+   public int Existencia(int id)
+   {
+       int existencia=0;
+       try {
+            String sql = "SELECT existenciap FROM Productos where clvprod = ?";
+            ps = CON.Conectar().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                existencia = rs.getInt(1);
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+       return existencia;
+   }
 }

@@ -4,21 +4,32 @@
  */
 package presentacion;
 
+import entidades.DetalleDevVentas;
+import entidades.VentaDetalle;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import negocio.DevVentasControl;
 
 /**
  *
  * @author hg710
  */
 public class DevolucionVenta extends javax.swing.JPanel {
-
+    private final DevVentasControl CONTROL=new DevVentasControl();
+    DefaultTableModel modelo;
+    int total = 0;
     /**
      * Creates new form NewJPanel
      */
     public DevolucionVenta() {
         initComponents();
+        String titulos[] = {"Clave", "Cantidad", "Nombre", "Precio", "Monto"};
+        modelo=new DefaultTableModel(null, titulos);
+        cmbClave.setModel(CONTROL.ListaClaves());
     }
 
     /**
@@ -34,13 +45,10 @@ public class DevolucionVenta extends javax.swing.JPanel {
         jLabel2 = new javax.swing.JLabel();
         cmbClave = new javax.swing.JComboBox<>();
         btnCancelar = new javax.swing.JButton();
-        btnInsertarProducto = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jtTabla = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
-        jtTotalVenta = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jtCantidad = new javax.swing.JTextField();
+        txtTotalVenta = new javax.swing.JTextField();
         btnRealizarDevolucion = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
@@ -55,6 +63,11 @@ public class DevolucionVenta extends javax.swing.JPanel {
         jLabel2.setText("Total de la devolución");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 330, 130, -1));
 
+        cmbClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbClaveActionPerformed(evt);
+            }
+        });
         add(cmbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 130, 90, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
@@ -66,16 +79,6 @@ public class DevolucionVenta extends javax.swing.JPanel {
             }
         });
         add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 410, 160, -1));
-
-        btnInsertarProducto.setBackground(new java.awt.Color(5, 93, 38));
-        btnInsertarProducto.setForeground(new java.awt.Color(255, 255, 255));
-        btnInsertarProducto.setText("Insertar Producto");
-        btnInsertarProducto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInsertarProductoActionPerformed(evt);
-            }
-        });
-        add(btnInsertarProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 230, 130, -1));
 
         jtTabla.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -95,17 +98,13 @@ public class DevolucionVenta extends javax.swing.JPanel {
 
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 110, 440, 270));
 
-        jLabel3.setText("Clave del producto");
+        jLabel3.setText("Clave de la venta");
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 110, 120, -1));
 
-        jtTotalVenta.setEditable(false);
-        jtTotalVenta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
-        jtTotalVenta.setText("$0.00");
-        add(jtTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 130, 30));
-
-        jLabel4.setText("Cantidad de productos");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 170, 130, -1));
-        add(jtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 190, 80, 30));
+        txtTotalVenta.setEditable(false);
+        txtTotalVenta.setFont(new java.awt.Font("Segoe UI", 1, 16)); // NOI18N
+        txtTotalVenta.setText("$0.00");
+        add(txtTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 350, 130, 30));
 
         btnRealizarDevolucion.setBackground(new java.awt.Color(5, 93, 38));
         btnRealizarDevolucion.setForeground(new java.awt.Color(255, 255, 255));
@@ -122,31 +121,50 @@ public class DevolucionVenta extends javax.swing.JPanel {
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarProductoActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnInsertarProductoActionPerformed
-
     private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtTablaMouseClicked
 
     private void btnRealizarDevolucionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarDevolucionActionPerformed
-        // TODO add your handling code here:
+        ArrayList<DetalleDevVentas> lista = new ArrayList();
+        if(jtTabla.getRowCount()>0)
+        {
+            for(int i = 0; i<jtTabla.getRowCount(); i++)
+            {
+                System.out.println("Insertar clvprod: "+jtTabla.getModel().getValueAt(i, 0).toString());
+                lista.add(new DetalleDevVentas(Integer.parseInt(jtTabla.getModel().getValueAt(i, 0).toString()), Integer.parseInt(jtTabla.getModel().getValueAt(i, 1).toString())));
+            }
+            String estado = CONTROL.insertar(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+""), lista);
+            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+            for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
+                modelo.removeRow(i);
+            txtTotalVenta.setText("");
+            total = 0;
+}
+        }
+        else {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor y/o agregue un producto", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            
+        }
     }//GEN-LAST:event_btnRealizarDevolucionActionPerformed
+
+    private void cmbClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveActionPerformed
+        if(cmbClave.getSelectedIndex()>-1)
+        {
+            jtTabla.setModel(CONTROL.listarDetalle(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"")));
+        }
+    }//GEN-LAST:event_cmbClaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnInsertarProducto;
     private javax.swing.JButton btnRealizarDevolucion;
     private javax.swing.JComboBox<String> cmbClave;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTextField jtCantidad;
     private javax.swing.JTable jtTabla;
-    private javax.swing.JTextField jtTotalVenta;
     private javax.swing.JLabel titulo;
+    private javax.swing.JTextField txtTotalVenta;
     // End of variables declaration//GEN-END:variables
 }
