@@ -25,7 +25,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Proveedores, Empleados>{
+public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Producto, Proveedores, Empleados> {
 
     private final Conexion CON;
     private PreparedStatement ps;
@@ -368,7 +368,7 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
             rs = ps.executeQuery();
             while (rs.next()) {
                 //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
-                registros.add(new Empleados(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
+                //registros.add(new Empleados(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5), rs.getString(6), rs.getString(7)));
             }
             ps.close();
             rs.close();

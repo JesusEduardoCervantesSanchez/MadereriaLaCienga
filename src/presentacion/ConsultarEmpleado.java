@@ -7,6 +7,7 @@ package presentacion;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import negocio.EmpleadosControl;
 
 /**
  *
@@ -17,8 +18,13 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
+    private EmpleadosControl control;
+
     public ConsultarEmpleado() {
         initComponents();
+        control = new EmpleadosControl();
+        cmbClave.setModel(control.ListarC());
+        jtListado.setModel(control.listar(""));
     }
 
     /**
@@ -70,12 +76,21 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 560, 260));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        jtListado.setModel(control.listar(cmbClave.getItemAt(cmbClave.getSelectedIndex())));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

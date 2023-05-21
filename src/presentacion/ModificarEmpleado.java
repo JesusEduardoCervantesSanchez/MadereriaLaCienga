@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+import negocio.EmpleadosControl;
+
 /**
  *
  * @author cp
@@ -13,8 +16,12 @@ public class ModificarEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form AltaEmpleado
      */
+    private EmpleadosControl control;
+
     public ModificarEmpleado() {
         initComponents();
+        control = new EmpleadosControl();
+        cmbClave.setModel(control.ListarC());
     }
 
     /**
@@ -35,15 +42,11 @@ public class ModificarEmpleado extends javax.swing.JPanel {
         telefono = new javax.swing.JLabel();
         direccion = new javax.swing.JLabel();
         colonia = new javax.swing.JLabel();
-        nomUsuario = new javax.swing.JLabel();
-        contraceña = new javax.swing.JLabel();
         txtNombres = new javax.swing.JTextField();
         txtApellidos = new javax.swing.JTextField();
         txtTelefono = new javax.swing.JTextField();
         txtDireccion = new javax.swing.JTextField();
         txtColonia = new javax.swing.JTextField();
-        txtNomUsuario = new javax.swing.JTextField();
-        txtContraseña = new javax.swing.JTextField();
         btnAceptar = new javax.swing.JButton();
         btnCancelar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
@@ -74,19 +77,11 @@ public class ModificarEmpleado extends javax.swing.JPanel {
 
         colonia.setText("Colonia");
         jPanel1.add(colonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 280, 120, -1));
-
-        nomUsuario.setText("Nombre de usuario");
-        jPanel1.add(nomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 340, 120, -1));
-
-        contraceña.setText("Contraseña");
-        jPanel1.add(contraceña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 400, 120, -1));
         jPanel1.add(txtNombres, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 280, 30));
         jPanel1.add(txtApellidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 120, 280, 30));
         jPanel1.add(txtTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 280, 30));
         jPanel1.add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 240, 280, 30));
         jPanel1.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 280, 30));
-        jPanel1.add(txtNomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 280, 30));
-        jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 280, 30));
 
         btnAceptar.setBackground(new java.awt.Color(5, 93, 38));
         btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,6 +106,11 @@ public class ModificarEmpleado extends javax.swing.JPanel {
         jLabel2.setText("Clave");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 40, 120, -1));
 
+        cmbClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmbClaveActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmbClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 80, 30));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(this);
@@ -140,8 +140,38 @@ public class ModificarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        if (!txtNombres.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty()
+                && !txtColonia.getText().isEmpty() && cmbClave.getSelectedIndex() > -1) {
+            control.actualizar(Integer.parseInt(cmbClave.getItemAt(cmbClave.getSelectedIndex())), txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(),
+                    txtDireccion.getText(), txtColonia.getText());
+            JOptionPane.showMessageDialog(this, "Empleado modificado con exito", "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+            txtNombres.setText("");
+            txtApellidos.setText("");
+            txtTelefono.setText("");
+            txtDireccion.setText("");
+            txtColonia.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos vacios, favor de verificar", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void cmbClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveActionPerformed
+        String accion = cmbClave.getSelectedItem() + "";
+        if (!accion.equals("")) {
+            String[] arreglo = control.Buscar(accion);
+            txtNombres.setText(arreglo[0]);
+            txtApellidos.setText(arreglo[1]);
+            txtTelefono.setText(arreglo[2]);
+            txtDireccion.setText(arreglo[3]);
+            txtColonia.setText(arreglo[4]);
+        } else {
+            txtNombres.setText("");
+            txtApellidos.setText("");
+            txtTelefono.setText("");
+            txtDireccion.setText("");
+            txtColonia.setText("");
+        }
+    }//GEN-LAST:event_cmbClaveActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -150,21 +180,17 @@ public class ModificarEmpleado extends javax.swing.JPanel {
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbClave;
     private javax.swing.JLabel colonia;
-    private javax.swing.JLabel contraceña;
     private javax.swing.JLabel direccion;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel nomUsuario;
     private javax.swing.JLabel nombres;
     private javax.swing.JLabel telefono;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtApellidos;
     private javax.swing.JTextField txtColonia;
-    private javax.swing.JTextField txtContraseña;
     private javax.swing.JTextField txtDireccion;
     private javax.swing.JTextField txtMedidas1;
-    private javax.swing.JTextField txtNomUsuario;
     private javax.swing.JTextField txtNombres;
     private javax.swing.JTextField txtTelefono;
     // End of variables declaration//GEN-END:variables

@@ -4,6 +4,9 @@
  */
 package presentacion;
 
+import javax.swing.JOptionPane;
+import negocio.EmpleadosControl;
+
 /**
  *
  * @author cp
@@ -13,8 +16,11 @@ public class AltaEmpleado extends javax.swing.JPanel {
     /**
      * Creates new form AltaEmpleado
      */
+    private final EmpleadosControl control;
+    
     public AltaEmpleado() {
         initComponents();
+        this.control = new EmpleadosControl();
     }
 
     /**
@@ -139,7 +145,21 @@ public class AltaEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        if (!txtNombres.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty()
+                && !txtColonia.getText().isEmpty() && !txtNomUsuario.getText().isEmpty() && !txtContraseña.getText().isEmpty()) {
+            control.insertar(txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(),
+                    txtDireccion.getText(), txtColonia.getText(), txtNomUsuario.getText(), txtContraseña.getText());
+            JOptionPane.showMessageDialog(this, "Empleado y Usuario creado con exito", "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+            txtNombres.setText("");
+            txtApellidos.setText("");
+            txtTelefono.setText("");
+            txtDireccion.setText("");
+            txtColonia.setText("");
+            txtNomUsuario.setText("");
+            txtContraseña.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos vacios, favor de verificar", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
