@@ -9,91 +9,127 @@ package entidades;
  * @author Cristianss
  */
 public class Empleados {
-   private int idEmpleado;
-   private String nombreEmpleado; 
-   private String apellidoEmpleado;
-   private String telefonoEmpleado;
-   private String domicilioEmpleado;
-   private String coloniaEmpleado;
-   private boolean activo;
+   private int clvemp;
+   private String nombree; 
+   private String apellidoe;
+   private String telefonoe;
+   private String direccione;
+   private String coloniae;
+   private String nombreu;
+   private String contrasenau;
+   private String rolu;
 
     public Empleados() 
     {
     
     }
 
-    public Empleados(int idEmpleado, String nombreEmpleado, String apellidoEmpleado, String telefonoEmpleado, String domicilioEmpleado, String coloniaEmpleado) {
-        this.idEmpleado = idEmpleado;
-        this.nombreEmpleado = nombreEmpleado;
-        this.apellidoEmpleado = apellidoEmpleado;
-        this.telefonoEmpleado = telefonoEmpleado;
-        this.domicilioEmpleado = domicilioEmpleado;
-        this.coloniaEmpleado = coloniaEmpleado;
+    public Empleados(int clvemp, String nombree, String apellidoe, String telefonoe, String direccione, String coloniae, String nombreu, String contrasenau, String rolu) {
+        this.clvemp = clvemp;
+        this.nombree = nombree;
+        this.apellidoe = apellidoe;
+        this.telefonoe = telefonoe;
+        this.direccione = direccione;
+        this.coloniae = coloniae;
+        this.nombreu = nombreu;
+        this.contrasenau = contrasenau;
+        this.rolu = rolu;
     }
+
+    public Empleados(int clvemp, String nombree, String apellidoe, String telefonoe, String direccione, String coloniae) {
+        this.clvemp = clvemp;
+        this.nombree = nombree;
+        this.apellidoe = apellidoe;
+        this.telefonoe = telefonoe;
+        this.direccione = direccione;
+        this.coloniae = coloniae;
+    }
+
+
     
-//    public Empleados(int idEmpleado, String NombreEmpleado, String apellidoEmpleado, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
-//        this.idEmpleado = idEmpleado;
-//        this.nombreEmpleado = NombreEmpleado;
-//        this.apellidoEmpleado = apellidoEmpleado;
-//        this.telefonoEmpleado = TelefonoEmpleado;
-//        this.domicilioEmpleado = DomicilioEmpleado;
-//        this.coloniaEmpleado = ColoniaEmpleado;
+//    public Empleados(int clvemp, String NombreEmpleado, String apellidoe, String TelefonoEmpleado, String DomicilioEmpleado, String ColoniaEmpleado) {
+//        this.clvemp = clvemp;
+//        this.nombree = NombreEmpleado;
+//        this.apellidoe = apellidoe;
+//        this.telefonoe = TelefonoEmpleado;
+//        this.direccione = DomicilioEmpleado;
+//        this.coloniae = ColoniaEmpleado;
 //    }
 
    
 
-    public int getIdEmpleado() {
-        return idEmpleado;
+    public int getClvemp() {
+        return clvemp;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public void setClvemp(int clvemp) {
+        this.clvemp = clvemp;
     }
 
-    public String getNombreEmpleado() {
-        return nombreEmpleado;
+    public String getNombree() {
+        return nombree;
     }
 
-    public void setNombreEmpleado(String nombreEmpleado) {
-        this.nombreEmpleado = nombreEmpleado;
+    public void setNombree(String nombree) {
+        this.nombree = nombree;
     }
     
-    public String getApellidoEmpleado() {
-        return apellidoEmpleado;
+    public String getApellidoe() {
+        return apellidoe;
     }
 
-    public void setApellidoEmpleado(String apellidoEmpleado) {
-        this.apellidoEmpleado = apellidoEmpleado;
+    public void setApellidoe(String apellidoe) {
+        this.apellidoe = apellidoe;
     }
 
-    public String getTelefonoEmpleado() {
-        return telefonoEmpleado;
+    public String getTelefonoe() {
+        return telefonoe;
     }
 
-    public void setTelefonoEmpleado(String telefonoEmpleado) {
-        this.telefonoEmpleado = telefonoEmpleado;
+    public void setTelefonoe(String telefonoe) {
+        this.telefonoe = telefonoe;
     }
 
-    public String getDomicilioEmpleado() {
-        return domicilioEmpleado;
+    public String getDireccione() {
+        return direccione;
     }
 
-    public void setDomicilioEmpleado(String domicilioEmpleado) {
-        this.domicilioEmpleado = domicilioEmpleado;
+    public void setDireccione(String direccione) {
+        this.direccione = direccione;
     }
 
-    public String getColoniaEmpleado() {
-        return coloniaEmpleado;
+    public String getColoniae() {
+        return coloniae;
     }
     
-    public void setColoniaEmpleado(String coloniaEmpleado){
-        this.coloniaEmpleado = coloniaEmpleado;
+    public void setColoniae(String coloniae){
+        this.coloniae = coloniae;
+    }
+
+    public String getNombreu() {
+        return nombreu;
+    }
+
+    public void setNombreu(String nombreu) {
+        this.nombreu = nombreu;
+    }
+
+    public String getContrasenau() {
+        return contrasenau;
+    }
+
+    public void setContrasenau(String contrasenau) {
+        this.contrasenau = contrasenau;
+    }
+
+    public String getRolu() {
+        return rolu;
+    }
+
+    public void setRolu(String rolu) {
+        this.rolu = rolu;
     }
     
-    @Override
-    public String toString()
-    {
-        return "Empleado{" + "idEmpleado=" + idEmpleado + ", nombreEmpleado=" + nombreEmpleado + ", apellidoEmpleado=" + apellidoEmpleado +", telefonoEmpleado=" + telefonoEmpleado + ", domicilioEmpleado=" + domicilioEmpleado + ", coloniaEmpleado=" + coloniaEmpleado +'}';
-    }
+    
    
 }

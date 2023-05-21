@@ -135,11 +135,11 @@ public class VentasControl {
         String registro[] = new String[5];
         registrosMostrados = 0;
         for (Empleados item : lista) {
-            registro[0] = Integer.toString(item.getIdEmpleado());
-            registro[1] = item.getNombreEmpleado();
-            registro[2] = item.getTelefonoEmpleado();
-            registro[3] = item.getDomicilioEmpleado();
-            registro[4] = item.getColoniaEmpleado();
+            registro[0] = Integer.toString(item.getClvemp());
+            registro[1] = item.getNombree();
+            registro[2] = item.getTelefonoe();
+            registro[3] = item.getDireccione();
+            registro[4] = item.getColoniae();
             modeloTabla.addRow(registro);
             registrosMostrados += 1;
         }
