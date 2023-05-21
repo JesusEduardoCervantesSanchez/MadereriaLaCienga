@@ -4,19 +4,37 @@
  */
 package presentacion;
 
+import Negocio.ComprasControl;
+import entidades.CompraDetalle;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GenerarCompras extends javax.swing.JPanel {
 
     /**
      * Creates new form NewJPanel
      */
+    private final ComprasControl control;
+    private ArrayList<CompraDetalle> detallec = new ArrayList<>();
+
     public GenerarCompras() {
         initComponents();
+        control = new ComprasControl();
+        listarCombos();
     }
-    
+
+    public void listarCombos() {
+        cmbClvProducto.setModel(control.ListarProductos());
+        cmbClvProveedor.setModel(control.ListarProvedor());
+    }
+
+    public void agregarDetalle(CompraDetalle obj) {
+        detallec.add(obj);
+    }
+
     /*private void setImageLabel(JLabel labelname, String root)
     {
         ImageIcon image = new ImageIcon(root);
@@ -25,7 +43,6 @@ public class GenerarCompras extends javax.swing.JPanel {
                 image.getImage().getScaledInstance(labelname.getWidth(), labelname.getHeight(), Image.Scale)
         );
     }*/
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,12 +59,17 @@ public class GenerarCompras extends javax.swing.JPanel {
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
-        txtFecha = new javax.swing.JTextField();
+        txtMedidas = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
         btnCancelar = new javax.swing.JButton();
-        btnAceptar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         cmbClvProducto = new javax.swing.JComboBox<>();
         cmbClvProveedor = new javax.swing.JComboBox<>();
+        jLabel7 = new javax.swing.JLabel();
+        txtPrecio = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txtGanancia = new javax.swing.JTextField();
+        btnAceptar1 = new javax.swing.JButton();
 
         setBackground(new java.awt.Color(255, 255, 255));
         setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -65,15 +87,15 @@ public class GenerarCompras extends javax.swing.JPanel {
         add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 60, 140, -1));
 
         jLabel4.setText("Clave Producto");
-        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 120, -1));
+        add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 60, 120, -1));
 
         jLabel5.setText("Cantidad");
-        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
+        add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 120, 120, -1));
 
-        jLabel6.setText("Fecha");
-        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 120, -1));
-        add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 280, 30));
-        add(txtFecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 280, 30));
+        jLabel6.setText("Medidas");
+        add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
+        add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 280, 30));
+        add(txtMedidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 280, 30));
         add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 80, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
@@ -86,17 +108,17 @@ public class GenerarCompras extends javax.swing.JPanel {
         });
         add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 410, 160, -1));
 
-        btnAceptar.setBackground(new java.awt.Color(5, 93, 38));
-        btnAceptar.setForeground(new java.awt.Color(255, 255, 255));
-        btnAceptar.setText("Realizar Compra");
-        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setBackground(new java.awt.Color(5, 93, 38));
+        btnAgregar.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregar.setText("Agregar Producto");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-        add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 160, -1));
+        add(btnAgregar, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 370, 160, -1));
 
-        add(cmbClvProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, -1, 30));
+        add(cmbClvProducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 80, -1, 30));
 
         cmbClvProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         cmbClvProveedor.addActionListener(new java.awt.event.ActionListener() {
@@ -105,23 +127,65 @@ public class GenerarCompras extends javax.swing.JPanel {
             }
         });
         add(cmbClvProveedor, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, -1, 30));
+
+        jLabel7.setText("Precio");
+        add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 240, 120, -1));
+        add(txtPrecio, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 260, 280, 30));
+
+        jLabel8.setText("Ganancia");
+        add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 300, 120, -1));
+        add(txtGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 320, 280, 30));
+
+        btnAceptar1.setBackground(new java.awt.Color(5, 93, 38));
+        btnAceptar1.setForeground(new java.awt.Color(255, 255, 255));
+        btnAceptar1.setText("Realizar Compra");
+        btnAceptar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptar1ActionPerformed(evt);
+            }
+        });
+        add(btnAceptar1, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 410, 160, -1));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnCancelarActionPerformed
 
-    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_btnAceptarActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        if (cmbClvProducto.getSelectedIndex() >= 0 && !txtCantidad.getText().isEmpty() && !txtMedidas.getText().isEmpty()
+                && !txtPrecio.getText().isEmpty() && !txtGanancia.getText().isEmpty()) {
+            agregarDetalle(new CompraDetalle(Integer.parseInt(cmbClvProducto.getItemAt(cmbClvProducto.getSelectedIndex())), Integer.parseInt(txtCantidad.getText()),
+                    Double.parseDouble(txtMedidas.getText()), Double.parseDouble(txtPrecio.getText()),
+                    Double.parseDouble(txtGanancia.getText())));
+            cmbClvProducto.setSelectedIndex(0);
+            txtCantidad.setText("");
+            txtMedidas.setText("");
+            txtPrecio.setText("");
+            txtGanancia.setText("");
+        } else {
+            JOptionPane.showMessageDialog(this, "Campos vacios, favor de verificar", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void cmbClvProveedorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClvProveedorActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cmbClvProveedorActionPerformed
 
+    private void btnAceptar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptar1ActionPerformed
+        if (!detallec.isEmpty() && cmbClvProveedor.getSelectedIndex() >= 0) {
+            System.err.println("Valor clvprov: " + (cmbClvProveedor.getSelectedIndex() + 1));
+            System.out.println(cmbClvProveedor.getSelectedIndex() + 1);
+            String estado = control.Insertar(Integer.parseInt(cmbClvProveedor.getItemAt(cmbClvProveedor.getSelectedIndex())), detallec);
+            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione un proveedor y/o agregue un producto", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
+    }//GEN-LAST:event_btnAceptar1ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptar;
+    private javax.swing.JButton btnAceptar1;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JComboBox<String> cmbClvProducto;
     private javax.swing.JComboBox<String> cmbClvProveedor;
@@ -130,9 +194,13 @@ public class GenerarCompras extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel titulo;
     private javax.swing.JTextField txtCantidad;
     private javax.swing.JTextField txtClave;
-    private javax.swing.JTextField txtFecha;
+    private javax.swing.JTextField txtGanancia;
+    private javax.swing.JTextField txtMedidas;
+    private javax.swing.JTextField txtPrecio;
     // End of variables declaration//GEN-END:variables
 }

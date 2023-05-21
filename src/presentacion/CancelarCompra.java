@@ -4,9 +4,11 @@
  */
 package presentacion;
 
+import Negocio.ComprasControl;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -17,8 +19,13 @@ public class CancelarCompra extends javax.swing.JPanel {
     /**
      * Creates new form NewJPanel
      */
+    private final ComprasControl control;
+
     public CancelarCompra() {
         initComponents();
+        control = new ComprasControl();
+        jtListado.setModel(control.Listar());
+        cmbClave.setModel(control.ListarC());
     }
 
     /**
@@ -92,20 +99,36 @@ public class CancelarCompra extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 560, 260));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        if (jtListado.getSelectedRow() > -1) {
+            String estado = control.Cancelar(Integer.parseInt(jtListado.getModel().getValueAt(jtListado.getSelectedRow(), 0).toString()));
+            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            jtListado.setModel(control.Listar());
+            cmbClave.setModel(control.ListarC());
+        } else {
+            JOptionPane.showMessageDialog(this, "Seleccione una fila de la tabla", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        jtListado.setModel(control.Listar(Integer.parseInt(cmbClave.getItemAt(cmbClave.getSelectedIndex()))));
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

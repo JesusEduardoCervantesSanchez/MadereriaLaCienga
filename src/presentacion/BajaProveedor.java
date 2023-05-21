@@ -4,9 +4,9 @@
  */
 package presentacion;
 
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
-import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
+import negocio.ProveedorControl;
 
 /**
  *
@@ -14,12 +14,36 @@ import javax.swing.JLabel;
  */
 public class BajaProveedor extends javax.swing.JPanel {
 
-    /**
-     * Creates new form NewJPanel
-     */
+    private final ProveedorControl control;
+    
     public BajaProveedor() {
         initComponents();
+        control = new ProveedorControl();
+        Listar("");
+        comboProv();
     }
+    
+    public void Listar(String texto)
+    {
+        jtListado.setModel(control.Listar(texto));
+        TableRowSorter modeloOrdenado = new TableRowSorter(jtListado.getModel());
+        jtListado.setRowSorter(modeloOrdenado);
+       
+        //lblRegistrosMostrados.setText("Mostrados " + control.TotalMostrados() + " registros de " + control.Total());
+    }
+    
+    public void comboProv(){
+        cmbClave.setModel(control.seleccionarProveedores(1));
+    }
+    
+    public void mensajeOK(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
+    }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -92,20 +116,52 @@ public class BajaProveedor extends javax.swing.JPanel {
         add(jScrollPane3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 560, 260));
 
         btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenesMadereria/lupa.png"))); // NOI18N
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
+            }
+        });
         add(btnBuscar, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 80, 30, 30));
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Listar("");
+        comboProv();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
-        // TODO add your handling code here:
+        String resp;
+        if(jtListado.getSelectedRowCount()==1){
+                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el proveedor: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Sistema Compras-Ventas", JOptionPane.YES_NO_OPTION)==0){
+                    resp=control.Desactivar(Integer.parseInt(jtListado.getValueAt(jtListado.getSelectedRow(), 0).toString()));
+                    if(resp.equals("OK")){
+                        mensajeOK("Proveedor eliminado.");
+                        Listar("");
+                        comboProv();
+                    }
+                    else
+                        mensajeError(resp);
+                }
+            else
+                mensajeError("Eliminación cancelada.");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un proveedor","Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_btnBajaActionPerformed
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
         // TODO add your handling code here:
     }//GEN-LAST:event_jtListadoMouseClicked
+
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        String accion = cmbClave.getSelectedItem().toString();
+        if(accion.equals("Todos")){
+            Listar("");
+        }else{
+            Listar(accion);
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

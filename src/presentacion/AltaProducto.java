@@ -4,17 +4,69 @@
  */
 package presentacion;
 
+import entidades.Producto;
+import java.awt.Image;
+import negocio.ProductoControl;
+import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 
 public class AltaProducto extends javax.swing.JPanel {
+    
+    private final ProductoControl CONTROL;
+    String nombreAnt;
 
     /**
      * Creates new form NewJPanel
      */
     public AltaProducto() {
         initComponents();
+        CONTROL=new ProductoControl();
+        txtExistencia.setText("0");
+        txtExistencia.setEditable(false);
+        txtGanancia.setText("0.0");
+        txtGanancia.setEditable(false);
+        txtPrecioCompra.setText("0.0");
+        txtPrecioCompra.setEditable(false);
+        txtMedidas.setText("0.0");
+        txtMedidas.setEditable(false);
+        if(CONTROL.clvmax()==0)
+        {
+            txtClave.setText("");
+            txtClave.setEditable(false);
+        }
+        else
+        {
+            txtClave.setText((CONTROL.clvmax())+"");
+            txtClave.setEditable(false);
+        }
+    }
+    
+    public void Limpiar(){
+        txtTipo.setText("");
+        txtExistencia.setText("0");
+        txtExistencia.setEditable(false);
+        txtCategoria.setText("");
+        txtGanancia.setText("0.0");
+        txtGanancia.setEditable(false);
+        txtPrecioCompra.setText("0.0");
+        txtPrecioCompra.setEditable(false);
+        txtMedidas.setText("0.0");
+        txtMedidas.setEditable(false);
+    }
+    
+    public void mensajeOK(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
     }
     
     /*private void setImageLabel(JLabel labelname, String root)
@@ -43,7 +95,7 @@ public class AltaProducto extends javax.swing.JPanel {
         jLabel7 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txtCategoria = new javax.swing.JTextField();
-        txtGanacia = new javax.swing.JTextField();
+        txtGanancia = new javax.swing.JTextField();
         txtPrecioCompra = new javax.swing.JTextField();
         txtTipo = new javax.swing.JTextField();
         txtClave = new javax.swing.JTextField();
@@ -80,10 +132,18 @@ public class AltaProducto extends javax.swing.JPanel {
         jLabel6.setText("Ganancia");
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 230, 120, -1));
         add(txtCategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 190, 280, 30));
-        add(txtGanacia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 280, 30));
+
+        txtGanancia.setForeground(new java.awt.Color(204, 204, 204));
+        add(txtGanancia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 280, 30));
+
+        txtPrecioCompra.setForeground(new java.awt.Color(204, 204, 204));
         add(txtPrecioCompra, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 310, 280, 30));
         add(txtTipo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 280, 30));
+
+        txtClave.setForeground(new java.awt.Color(204, 204, 204));
         add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, 30));
+
+        txtExistencia.setForeground(new java.awt.Color(204, 204, 204));
         add(txtExistencia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 280, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
@@ -105,6 +165,8 @@ public class AltaProducto extends javax.swing.JPanel {
             }
         });
         add(btnAceptar, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 370, 160, -1));
+
+        txtMedidas.setForeground(new java.awt.Color(204, 204, 204));
         add(txtMedidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 370, 280, 30));
 
         jLabel8.setText("Medidas LxA");
@@ -116,7 +178,51 @@ public class AltaProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        // TODO add your handling code here:
+        String resp;
+        if(txtTipo.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir el tipo de producto.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtTipo.requestFocus();
+            return;
+        }
+        if(txtExistencia.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir las existencias.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtExistencia.requestFocus();
+            return;
+        }
+        if(txtCategoria.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir la categoria.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtCategoria.requestFocus();
+            return;
+        }
+        if(txtGanancia.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir la ganancia.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtGanancia.requestFocus();
+            return;
+        }
+        if(txtPrecioCompra.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir el precio de compra.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtPrecioCompra.requestFocus();
+            return;
+        }
+        if(txtMedidas.getText().isBlank()){
+            JOptionPane.showMessageDialog(this, "Debe escribir las medidas.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtMedidas.requestFocus();
+            return;
+        }/*
+        if(Double.valueOf(txtGanancia.getText().toString())<=1){
+            JOptionPane.showMessageDialog(this, "El precio de venta no puede ser mayor o igual al precio de compra.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            txtGanancia.requestFocus();
+        return;
+        }*/
+        resp=CONTROL.insertar(txtTipo.getText(), 0, txtCategoria.getText(), 0.0, 0.0, 0.0, 0.0);
+        if(resp.equals("OK"))
+            {
+                this.mensajeOK("Registro insertado correctamente.");
+                this.Limpiar();
+            }    
+            else{
+                this.mensajeError(resp);
+            }
     }//GEN-LAST:event_btnAceptarActionPerformed
 
 
@@ -134,7 +240,7 @@ public class AltaProducto extends javax.swing.JPanel {
     private javax.swing.JTextField txtCategoria;
     private javax.swing.JTextField txtClave;
     private javax.swing.JTextField txtExistencia;
-    private javax.swing.JTextField txtGanacia;
+    private javax.swing.JTextField txtGanancia;
     private javax.swing.JTextField txtMedidas;
     private javax.swing.JTextField txtPrecioCompra;
     private javax.swing.JTextField txtTipo;

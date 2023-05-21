@@ -229,6 +229,28 @@ public class ProveedorDAO implements CrudProveedor<Proveedores,DetalleProveedor>
         //throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
     
+    public boolean existe2(int id) {
+        resp = false;
+        try {
+            ps = CON.Conectar().prepareStatement("select * from Proveedores where clvprov=?;");
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                resp = true;
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+
+        return resp;        
+    }
+    
     
 
 }

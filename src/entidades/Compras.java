@@ -1,177 +1,83 @@
-
 package entidades;
 
+import java.util.Date;
 import java.util.List;
 
 public class Compras {
-    private int idCompras;
-    private int idProvedores;
-    private String nombreProvedor;
-    private int idEmpleado;
-    private String NombreEmpleado;
-    private String FolioCompra;
-    private double Descuento;
-    private double SubtotalCompra;
-    private double IVA;
-    private String FechaCompra;
-    private double Total;
-    private String Estado;
-    private List<CompraDetalle> detalle;
+
+    private int clvprov;
+    private int clvprod;
+    private int cantidadc;
+    private int clvco;
+    private String fechac;
+    private int estadoc;
 
     public Compras() {
     }
 
-    public Compras(int idCompras, int idProvedores, String nombreProvedor, int idEmpleado, String NombreEmpleado, String FolioCompra, double Descuento, double SubtotalCompra, double IVA, String FechaCompra, double Total, String Estado, List<CompraDetalle> detalle) {
-        this.idCompras = idCompras;
-        this.idProvedores = idProvedores;
-        this.nombreProvedor = nombreProvedor;
-        this.idEmpleado = idEmpleado;
-        this.NombreEmpleado = NombreEmpleado;
-        this.FolioCompra = FolioCompra;
-        this.Descuento = Descuento;
-        this.SubtotalCompra = SubtotalCompra;
-        this.IVA = IVA;
-        this.FechaCompra = FechaCompra;
-        this.Total = Total;
-        this.Estado = Estado;
-        this.detalle = detalle;
+    public Compras(int clvco, int clvprov, int clvprod, int cantidadc, String fechac, int estadoc) {
+        this.clvprov = clvprov;
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
+        this.clvco = clvco;
+        this.fechac = fechac;
+        this.estadoc = estadoc;
     }
 
-    public Compras(int idCompras, int idProvedores, String nombreProvedor, int idEmpleado, String NombreEmpleado, String FolioCompra, double Descuento, double SubtotalCompra, double IVA, String FechaCompra, double Total, String Estado) {
-        this.idCompras = idCompras;
-        this.idProvedores = idProvedores;
-        this.nombreProvedor = nombreProvedor;
-        this.idEmpleado = idEmpleado;
-        this.NombreEmpleado = NombreEmpleado;
-        this.FolioCompra = FolioCompra;
-        this.Descuento = Descuento;
-        this.SubtotalCompra = SubtotalCompra;
-        this.IVA = IVA;
-        this.FechaCompra = FechaCompra;
-        this.Total = Total;
-        this.Estado = Estado;
-    }
-    
-    
-
-    public Compras(int idCompras, String FolioCompra, double Descuento, double SubtotalCompra, double IVA, String FechaCompra, double Total, String Estado, List<CompraDetalle> detalle) {
-        this.idCompras = idCompras;
-        this.idProvedores = idProvedores;
-        this.idEmpleado = idEmpleado;
-        this.FolioCompra = FolioCompra;
-        this.Descuento = Descuento;
-        this.SubtotalCompra = SubtotalCompra;
-        this.IVA = IVA;
-        this.FechaCompra = FechaCompra;
-        this.Total = Total;
-        this.Estado = Estado;
-        this.detalle = detalle;
+    public Compras(int clvprov, int clvprod, int cantidadc, String fechac, int estadoc) {
+        this.clvprov = clvprov;
+        this.clvprod = clvprod;
+        this.cantidadc = cantidadc;
+        this.fechac = fechac;
+        this.estadoc = estadoc;
     }
 
-    public List<CompraDetalle> getDetalle() {
-        return detalle;
+    public int getClvprov() {
+        return clvprov;
     }
 
-    public void setDetalle(List<CompraDetalle> detalle) {
-        this.detalle = detalle;
-    }
-    
-    public int getIdCompras() {
-        return idCompras;
+    public void setClvprov(int clvprov) {
+        this.clvprov = clvprov;
     }
 
-    public void setIdCompras(int idCompras) {
-        this.idCompras = idCompras;
+    public int getClvprod() {
+        return clvprod;
     }
 
-    public int getIdProvedores() {
-        return idProvedores;
+    public void setClvprod(int clvprod) {
+        this.clvprod = clvprod;
     }
 
-    public void setIdProvedores(int idProvedores) {
-        this.idProvedores = idProvedores;
+    public int getCantidadc() {
+        return cantidadc;
     }
 
-    public String getNombreProvedor() {
-        return nombreProvedor;
+    public void setCantidadc(int cantidadc) {
+        this.cantidadc = cantidadc;
     }
 
-    public void setNombreProvedor(String nombreProvedor) {
-        this.nombreProvedor = nombreProvedor;
+    public int getClvco() {
+        return clvco;
     }
 
-    public int getIdEmpleado() {
-        return idEmpleado;
+    public void setClvco(int clvco) {
+        this.clvco = clvco;
     }
 
-    public void setIdEmpleado(int idEmpleado) {
-        this.idEmpleado = idEmpleado;
+    public String getFechac() {
+        return fechac;
     }
 
-    public String getNombreEmpleado() {
-        return NombreEmpleado;
+    public void setFechac(String fechac) {
+        this.fechac = fechac;
     }
 
-    public void setNombreEmpleado(String NombreEmpleado) {
-        this.NombreEmpleado = NombreEmpleado;
+    public int getEstadoc() {
+        return estadoc;
     }
 
-    public String getFolioCompra() {
-        return FolioCompra;
+    public void setEstadoc(int estadoc) {
+        this.estadoc = estadoc;
     }
 
-    public void setFolioCompra(String FolioCompra) {
-        this.FolioCompra = FolioCompra;
-    }
-
-    public double getDescuento() {
-        return Descuento;
-    }
-
-    public void setDescuento(double Descuento) {
-        this.Descuento = Descuento;
-    }
-
-    public double getSubtotalCompra() {
-        return SubtotalCompra;
-    }
-
-    public void setSubtotalCompra(double SubtotalCompra) {
-        this.SubtotalCompra = SubtotalCompra;
-    }
-
-    public double getIVA() {
-        return IVA;
-    }
-
-    public void setIVA(double IVA) {
-        this.IVA = IVA;
-    }
-
-    public String getFechaCompra() {
-        return FechaCompra;
-    }
-
-    public void setFechaCompra(String FechaCompra) {
-        this.FechaCompra = FechaCompra;
-    }
-
-    public double getTotal() {
-        return Total;
-    }
-
-    public void setTotal(double Total) {
-        this.Total = Total;
-    }
-
-    public String getEstado() {
-        return Estado;
-    }
-
-    public void setEstado(String Estado) {
-        this.Estado = Estado;
-    }
-    
-    
-    
 }

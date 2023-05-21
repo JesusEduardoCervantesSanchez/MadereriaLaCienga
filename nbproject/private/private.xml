@@ -2,12 +2,27 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+<<<<<<< HEAD
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/cp/Documents/NetBeansProjects/MalenaProye/MadereriaLaCienga/src/entidades/Empleados.java</file>
             <file>file:/C:/Users/cp/Documents/NetBeansProjects/MalenaProye/MadereriaLaCienga/src/datos/EmpleadosDAO.java</file>
             <file>file:/C:/Users/cp/Documents/NetBeansProjects/MalenaProye/MadereriaLaCienga/src/negocio/EmpleadosControl.java</file>
             <file>file:/C:/Users/cp/Documents/NetBeansProjects/MalenaProye/MadereriaLaCienga/src/database/Conexion.java</file>
             <file>file:/C:/Users/cp/Documents/NetBeansProjects/MalenaProye/MadereriaLaCienga/src/datos/interfaces/CrudEmpleadosInterface.java</file>
+=======
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/negocio/ComprasControl.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ProveedorDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ComprasDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ProductoDAO.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/interfaces/CrudSimpleCompras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/presentacion/GenerarCompras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/entidades/Compras.java</file>
+            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/database/Conexion.java</file>
+>>>>>>> 727712c83b80811dd26ea3e1f0152291a0528f6b
         </group>
+=======
+        <group/>
+>>>>>>> refs/remotes/origin/main
     </open-files>
 </project-private>
