@@ -8,6 +8,7 @@ import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableRowSorter;
 import negocio.EmpleadosControl;
 
 /**
@@ -24,8 +25,21 @@ public class BajaEmpleado extends javax.swing.JPanel {
     public BajaEmpleado() {
         initComponents();
         control = new EmpleadosControl();
-        cmbClave.setModel(control.ListarC());
-        jtListado.setModel(control.listar(""));
+        //cmbClave.setModel(control.ListarC());
+        //jtListado.setModel(control.listar(""));
+        Listar("");
+        comboProd();
+    }
+    
+    public void Listar(String texto)
+    {
+        jtListado.setModel(control.listar(texto));
+        TableRowSorter modeloOrdenado = new TableRowSorter(jtListado.getModel());
+        jtListado.setRowSorter(modeloOrdenado);
+    }
+    
+    public void comboProd(){
+        cmbClave.setModel(control.seleccionarProductos(1));
     }
 
     /**
@@ -52,7 +66,7 @@ public class BajaEmpleado extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Baja Empleado");
+        titulo.setText("Eliminar Empleado");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 200, 40));
 
         jLabel2.setText("Clave");
@@ -113,12 +127,21 @@ public class BajaEmpleado extends javax.swing.JPanel {
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
         if (jtListado.getSelectedRow() > -1) {
+            if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el empleado?","Madereria La Cienega", JOptionPane.YES_NO_OPTION)==0){
             String estado = control.eliminar(Integer.parseInt(jtListado.getModel().getValueAt(jtListado.getSelectedRow(), 0).toString()));
-            JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-            jtListado.setModel(control.listar(""));
-            cmbClave.setModel(control.ListarC());
-        } else {
-            JOptionPane.showMessageDialog(this, "Seleccione una fila de la tabla", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+            if(estado.equalsIgnoreCase("OK")){
+                        mensajeOK("Empleado eliminado.");
+                        Listar("");
+                        comboProd();
+                    }
+                    else
+                        mensajeError(estado);
+                }
+            else
+                mensajeError("Eliminación cancelada.");
+        }
+        else{
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un empleado","Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
         }    }//GEN-LAST:event_btnBajaActionPerformed
 
     private void jtListadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtListadoMouseClicked
@@ -126,9 +149,20 @@ public class BajaEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_jtListadoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        jtListado.setModel(control.listar(cmbClave.getItemAt(cmbClave.getSelectedIndex())));
+        String accion = cmbClave.getSelectedItem().toString();
+        if(accion.equals("Todos"))
+            Listar("");
+        else
+            Listar(accion);
     }//GEN-LAST:event_btnBuscarActionPerformed
 
+public void mensajeOK(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+    }
+    
+    public void mensajeError(String mensaje){
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBaja;

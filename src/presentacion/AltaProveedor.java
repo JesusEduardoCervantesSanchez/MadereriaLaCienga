@@ -77,8 +77,8 @@ public class AltaProveedor extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Alta Proveedor");
-        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 140, 40));
+        titulo.setText("Eliminar Proveedor");
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 190, 40));
 
         jLabel2.setText("Clave");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 60, 120, -1));

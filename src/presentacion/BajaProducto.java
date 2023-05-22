@@ -70,7 +70,7 @@ public class BajaProducto extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Baja Producto");
+        titulo.setText("Eliminar Producto");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 200, 40));
 
         jLabel2.setText("Clave");
@@ -132,7 +132,7 @@ public class BajaProducto extends javax.swing.JPanel {
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
         String resp;
         if(jtListado.getSelectedRowCount()==1){
-                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el producto: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Sistema Compras-Ventas", JOptionPane.YES_NO_OPTION)==0){
+                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el producto: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Madereria La Cienega", JOptionPane.YES_NO_OPTION)==0){
                     resp=CONTROL.eliminar(Integer.parseInt(jtListado.getValueAt(jtListado.getSelectedRow(), 0).toString()));
                     if(resp.equals("OK")){
                         mensajeOK("Producto eliminado.");
@@ -146,7 +146,7 @@ public class BajaProducto extends javax.swing.JPanel {
                 mensajeError("Eliminación cancelada.");
         }
         else{
-            JOptionPane.showMessageDialog(this, "Debes seleccionar un producto","Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debes seleccionar un producto","Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
         }
     }//GEN-LAST:event_btnBajaActionPerformed
 
@@ -163,11 +163,11 @@ public class BajaProducto extends javax.swing.JPanel {
     }//GEN-LAST:event_btnBuscarActionPerformed
 
      public void mensajeOK(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void mensajeError(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

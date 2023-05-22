@@ -2,6 +2,7 @@ package negocio;
 
 import datos.EmpleadosDAO;
 import entidades.Empleados;
+import entidades.Producto;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.ComboBoxModel;
@@ -78,9 +79,9 @@ public class EmpleadosControl {
 
     public String eliminar(int idEmpleado) {
         if (DATOS.eliminar(idEmpleado)) {
-            return "OK.";
+            return "OK";
         } else {
-            return "Error al actualizar el registro.";
+            return "Error al eliminar...";
         }
     }
 
@@ -117,5 +118,23 @@ public class EmpleadosControl {
             return "OK.";
         else
             return "Error al actualizar el registro.";
+    }
+    
+    public int clvmax(){
+        return DATOS.clvmax();
+    }
+    
+    public DefaultComboBoxModel seleccionarProductos(int i){
+        DefaultComboBoxModel items = new DefaultComboBoxModel();
+        List<Empleados> registros = new ArrayList();
+        if(i==1)
+            items.addElement("Todos");
+        else
+            items.addElement("Elige");
+        registros = DATOS.ListarEs();
+        for(Empleados pro:registros){
+            items.addElement(new Producto(pro.getClvemp()));
+        }
+        return items;
     }
 }

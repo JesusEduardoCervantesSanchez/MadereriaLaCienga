@@ -62,11 +62,11 @@ public class AltaProducto extends javax.swing.JPanel {
     }
     
     public void mensajeOK(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void mensajeError(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
     }
     
     /*private void setImageLabel(JLabel labelname, String root)
@@ -111,8 +111,8 @@ public class AltaProducto extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Alta Producto");
-        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 40));
+        titulo.setText("Registrar Producto");
+        add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 200, 40));
 
         jLabel2.setText("Clave");
         add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 120, -1));
@@ -180,32 +180,32 @@ public class AltaProducto extends javax.swing.JPanel {
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         String resp;
         if(txtTipo.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir el tipo de producto.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir el tipo de producto.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtTipo.requestFocus();
             return;
         }
         if(txtExistencia.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir las existencias.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir las existencias.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtExistencia.requestFocus();
             return;
         }
         if(txtCategoria.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir la categoria.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir la categoria.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtCategoria.requestFocus();
             return;
         }
         if(txtGanancia.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir la ganancia.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir la ganancia.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtGanancia.requestFocus();
             return;
         }
         if(txtPrecioCompra.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir el precio de compra.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir el precio de compra.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtPrecioCompra.requestFocus();
             return;
         }
         if(txtMedidas.getText().isBlank()){
-            JOptionPane.showMessageDialog(this, "Debe escribir las medidas.", "Papelería Yolis", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Debe escribir las medidas.", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
             txtMedidas.requestFocus();
             return;
         }/*

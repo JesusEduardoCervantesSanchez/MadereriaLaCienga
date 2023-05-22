@@ -24,6 +24,10 @@ public class Empleados {
     
     }
 
+    public Empleados(int clvemp) {
+        this.clvemp = clvemp;
+    }
+
     public Empleados(int clvemp, String nombree, String apellidoe, String telefonoe, String direccione, String coloniae, String nombreu, String contrasenau, String rolu) {
         this.clvemp = clvemp;
         this.nombree = nombree;

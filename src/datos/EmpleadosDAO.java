@@ -190,11 +190,32 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados> {
     public ArrayList<String> ListarE() {
         ArrayList<String> registros = new ArrayList();
         try {
-            String sql = "SELECT clvemp FROM Empleados";
+            String sql = "SELECT clvemp FROM Empleados ORDER BY clvemp ASC;";
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
                 registros.add(rs.getString(1));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+    
+    public ArrayList<Empleados> ListarEs() {
+        ArrayList<Empleados> registros = new ArrayList();
+        try {
+            String sql = "SELECT clvemp FROM Empleados ORDER BY clvemp ASC;";
+            ps = CON.Conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                registros.add(new Empleados(rs.getInt(1)));
             }
             ps.close();
             rs.close();
@@ -229,5 +250,27 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados> {
             CON.Desconectar();
         }
         return resp;  
+    }
+    
+    public int clvmax() {
+        int numeroMax=0;
+        try{
+            ps=CON.Conectar().prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'LaCienegaBD' AND TABLE_NAME = 'Empleados';");
+            rs=ps.executeQuery();
+            while(rs.next()){
+            numeroMax=rs.getInt(1);  // getString(String)
+        }
+        ps.close();
+        rs.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            rs=null;
+            CON.Desconectar();
+        }
+        return numeroMax;    
     }
 }

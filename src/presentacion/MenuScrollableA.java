@@ -37,7 +37,7 @@ public class MenuScrollableA extends JComponent {
     private EventoMenu event;
     private MigLayout layout;
     private String[][] componentesMenu = new String[][]{
-        {"Usuarios", "Registrar empleado", "Eliminar Empleado", "Registrar proveedor", "Eliminar proveedor"},
+        {"Usuarios", "Registrar empleado", "Eliminar empleado", "Registrar proveedor", "Eliminar proveedor"},
         {"Inventario", "Registrar producto", "Eliminar producto"},
         {"Cerrar Sesión"}
     };

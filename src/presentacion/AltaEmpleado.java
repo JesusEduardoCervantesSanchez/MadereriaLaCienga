@@ -21,6 +21,16 @@ public class AltaEmpleado extends javax.swing.JPanel {
     public AltaEmpleado() {
         initComponents();
         this.control = new EmpleadosControl();
+        if(control.clvmax()==0)
+        {
+            txtClave.setText("");
+            txtClave.setEditable(false);
+        }
+        else
+        {
+            txtClave.setText((control.clvmax())+"");
+            txtClave.setEditable(false);
+        }
     }
 
     /**
@@ -63,8 +73,8 @@ public class AltaEmpleado extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Alta Empleado");
-        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(360, 10, 140, 40));
+        titulo.setText("Registrar Empleado");
+        jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 190, 40));
 
         clave.setText("Clave");
         jPanel1.add(clave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 50, 120, -1));
@@ -96,6 +106,8 @@ public class AltaEmpleado extends javax.swing.JPanel {
         jPanel1.add(txtColonia, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 300, 280, 30));
         jPanel1.add(txtNomUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 360, 280, 30));
         jPanel1.add(txtContraseña, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 420, 280, 30));
+
+        txtClave.setForeground(new java.awt.Color(204, 204, 204));
         jPanel1.add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 70, 80, 30));
 
         btnAceptar.setBackground(new java.awt.Color(5, 93, 38));
