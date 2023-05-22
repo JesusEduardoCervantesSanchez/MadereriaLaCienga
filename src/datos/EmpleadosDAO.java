@@ -208,8 +208,6 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados> {
         return registros;
     }
 
-<<<<<<< HEAD
-=======
     public boolean ActualizarContra(int clave, String contra, String nueva)
     {
         resp=false;
@@ -232,6 +230,4 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados> {
         }
         return resp;  
     }
-    
->>>>>>> refs/remotes/origin/main
 }

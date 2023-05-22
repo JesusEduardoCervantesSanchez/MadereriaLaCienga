@@ -38,7 +38,7 @@ public class VentasControl {
 
     public DefaultTableModel listar(String texto) {
         List<Ventas> lista = new ArrayList();
-        lista.addAll(DATOS.listar(texto));
+        //lista.addAll(DATOS.listar(texto));
         //Crear el modelo y establecer los titulos del modelo
         String titulos[] = {"IdVenta", "Id Cliente", "Nombre del Cliente", "Id Empleado", "Nombre Empleado", "Folio de Venta", "Fecha", "SubTotal", "IVA"};
         modeloTabla = new DefaultTableModel(null, titulos);
@@ -46,7 +46,7 @@ public class VentasControl {
         String registro[] = new String[9];
         registrosMostrados = 0;
         for (Ventas item : lista) {
-            registro[0] = Integer.toString(item.getIdVentas());
+            /*registro[0] = Integer.toString(item.getIdVentas());
             registro[1] = Integer.toString(item.getIdCliente());
             registro[2] = item.getClienteNombre();
             registro[3] = Integer.toString(item.getIdEmpleado());
@@ -54,7 +54,7 @@ public class VentasControl {
             registro[5] = item.getFolioVenta();
             registro[6] = "" + item.getFechaVenta();
             registro[7] = Double.toString(item.getSubTotal());
-            registro[8] = Double.toString(item.getIVA());
+            registro[8] = Double.toString(item.getIVA());*/
             //Insertar el registro en el modelo
             modeloTabla.addRow(registro);
             registrosMostrados += 1;
@@ -64,7 +64,7 @@ public class VentasControl {
 
     public DefaultTableModel listarDetalle(int idVenta) {
         List<Pro_Ven> lista = new ArrayList();
-        lista.addAll(DATOS.listarDetalle(idVenta));
+       // lista.addAll(DATOS.listarDetalle(idVenta));
         //Crear el modelo y establecer los titulos del modelo"
         String titulos[] = {"ID Producto", "Producto", "Cantidad", "Precio", "SubTotal"};
         modeloTabla = new DefaultTableModel(null, titulos);
@@ -87,7 +87,7 @@ public class VentasControl {
 
     public DefaultTableModel ListarProductos(String valor) {
         List<Producto> lista = new ArrayList();
-        lista.addAll(DATOS.ListarProductos(valor));
+       // lista.addAll(DATOS.ListarProductos(valor));
         String titulos[] = {"Id", "Id Categotia", "Producto", "Categoria", "Existencias", "P. Compra", "P. Venta", "Ganancia", "Imagen"};
         modeloTabla3 = new DefaultTableModel(null, titulos);
         String registro[] = new String[9];
@@ -112,7 +112,7 @@ public class VentasControl {
 
     public DefaultTableModel ListarCliente(String valor) {
         List<Clientes> lista = new ArrayList();
-        lista.addAll(DATOS.ListarCliente(valor));
+       // lista.addAll(DATOS.ListarCliente(valor));
         //int idCliente, String nombreCliente, String apellidosCliente, String telefonoCliente, String correoCliente
         String titulos[] = {"Id", "Nombre", "Apellidos", "Telefono", "Correo"};
         modeloTabla = new DefaultTableModel(null, titulos);
@@ -132,7 +132,7 @@ public class VentasControl {
 
     public DefaultTableModel ListarEmpleados(String valor) {
         List<Empleados> lista = new ArrayList();
-        lista.addAll(DATOS.ListarEmpleado(valor));
+       // lista.addAll(DATOS.ListarEmpleado(valor));
         String titulos[] = {"Id", "Nombre", "Telefono", "Domicilio", "Colonia"};
         modeloTabla = new DefaultTableModel(null, titulos);
         String registro[] = new String[5];
@@ -172,44 +172,8 @@ public class VentasControl {
         return combo;
     }
 
-    public String InsertarEmp_Ven(int idVenta, int idEmpleado)
-    {
-            if(DATOS.insertarEmP_Ven(idVenta, idEmpleado))
-                return "OK";
-            else
-                return "Error al generar la nueva venta";    
-    }
-    
-    public String InsertarCli_Ven(int idVenta, int idCliente){
-        if(DATOS.insertarCli_Ven(idVenta, idCliente)){
-            return "OK";
-        }
-        else
-        {
-            return "Error al generar la nueva venta";
-        }
-    }
-    
-    public int total() {
-        return DATOS.total();
-    }
-    
-    public int RegresarIdVenta(String Folio){
-        return DATOS.RegresarIdVenta(Folio);
-    }
-
     public int totalMostrados() {
         return registrosMostrados;
-    }
-
-     public int ActualizarExistenciaProd(int cant, int idProducto)
-    {
-        return DATOS.ActualizarStock(cant, idProducto);
-    }
-    
-    public int ObtenerStock(int idProducto)
-    {
-        return DATOS.ObtenerStock(idProducto);
     }
     
     public String NombreProducto(int idProducto)

@@ -106,7 +106,7 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
             while (rs.next()) {
-                registros.add(new Ventas(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
+               // registros.add(new Ventas(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
             }
             ps.close();
             rs.close();
@@ -128,10 +128,10 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
                     + " FROM comprov P INNER JOIN (compras C INNER JOIN prodcomp DC ON DC.clvco=C.clvco) ON C.clvco=C.clvco\n"
                     + " WHERE C.clvco = ? AND C.estadoc = 1 ORDER BY C.clvco ASC";
             ps = CON.Conectar().prepareStatement(sql);
-            ps.setInt(1, idCompra);
+            //ps.setInt(1, idCompra);
             rs = ps.executeQuery();
             while (rs.next()) {
-                registros.add(new Compras(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
+               // registros.add(new Compras(rs.getInt(1), rs.getInt(2), rs.getInt(3), rs.getInt(4), rs.getString(5), rs.getInt(6)));
             }
             ps.close();
             rs.close();
@@ -301,8 +301,10 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
     public double precio(int id)
     {
         double preciop = 0.0;
+        return preciop;
     }
 
+    /*
     @Override
     public List<Empleados> ListarEmpleado(String valor) {
         List<Empleados> registros = new ArrayList();
@@ -330,103 +332,11 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
         }
         return registros;
     }
+*/
 
-    @Override
-    public boolean insertarEmP_Ven(int idVenta, int idEmpleado) {
-        resp = false;
-        String consultaSQL = "Insert into Emp_Ven(idVentas, idEmpleado)";
-        consultaSQL += "VALUES(?, ?)";
-        try {
-            ps = CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, idVenta);
-            ps.setInt(2, idEmpleado);
-            if (ps.executeUpdate() > 0) {
-                resp = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            CON.Desconectar();
-        }
-        return resp;
-    }
+    
 
-    @Override
-    public boolean insertarCli_Ven(int idVenta, int idCliente) {
-        resp = false;
-        String consultaSQL = "Insert into Cli_Ven(idVentas, idCliente)";
-        consultaSQL += "VALUES(?, ?)";
-        try {
-            ps = CON.Conectar().prepareStatement(consultaSQL);
-            ps.setInt(1, idVenta);
-            ps.setInt(2, idCliente);
-            if (ps.executeUpdate() > 0) {
-                resp = true;
-            }
-            ps.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            CON.Desconectar();
-        }
-        return resp;
-    }
-
-    @Override
-    public List<Clientes> ListarCliente(String valor) {
-        List<Clientes> registros = new ArrayList();
-        try {
-            //int idCliente, String nombreCliente, String apellidosCliente, String telefonoCliente, String correoCliente
-            String sql = "SELECT idCliente, NombreCliente, ApellidosCliente, TelefonoCliente, CorreoCliente FROM Clientes ORDER BY idCliente ASC";
-            String buscar = "SELECT idCliente, NombreCliente, ApellidoCliente, TelefonoCliente, CorreoCliente FROM Clientes WHERE NombreCliente LIKE '%" + valor + "%' ORDER BY idClientes ASC";
-            if (valor.equalsIgnoreCase("")) {
-                ps = CON.Conectar().prepareStatement(sql);
-            } else {
-                ps = CON.Conectar().prepareStatement(buscar);
-            }
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                //la linea siguiente probablememtne tiene error en rs.getInt(2), tal vez deberia ser con String
-                registros.add(new Clientes(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4), rs.getString(5)));
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            rs = null;
-            CON.Desconectar();
-        }
-        return registros;
-    }
-
-    @Override
-    public int ActualizarStock(int cant, int id) {
-        int r = 0;
-        String sql = "UPDATE Productos SET Existencias=? WHERE idProductos=?";
-        try {
-            String sql = "SELECT preciovp FROM Productos where clvprod = ?";
-            ps = CON.Conectar().prepareStatement(sql);
-            ps.setInt(1, id);
-            rs = ps.executeQuery();
-            while (rs.next()) {
-                preciop = rs.getDouble(1);
-            }
-            ps.close();
-            rs.close();
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e.getMessage());
-        } finally {
-            ps = null;
-            rs = null;
-            CON.Desconectar();
-        }
-        return preciop;
-    }
+    
     
    public int Existencia(int id)
    {
