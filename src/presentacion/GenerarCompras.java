@@ -6,11 +6,13 @@ package presentacion;
 
 import Negocio.ComprasControl;
 import entidades.CompraDetalle;
+import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 public class GenerarCompras extends javax.swing.JPanel {
 
@@ -24,6 +26,8 @@ public class GenerarCompras extends javax.swing.JPanel {
         initComponents();
         control = new ComprasControl();
         listarCombos();
+        txtClave.setEditable(false);
+        txtClave.setText(control.Clave()+"");
     }
 
     public void listarCombos() {
@@ -96,6 +100,8 @@ public class GenerarCompras extends javax.swing.JPanel {
         add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 180, 120, -1));
         add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 140, 280, 30));
         add(txtMedidas, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 200, 280, 30));
+
+        txtClave.setForeground(new java.awt.Color(204, 204, 204));
         add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(480, 80, 80, 30));
 
         btnCancelar.setBackground(new java.awt.Color(204, 38, 38));
@@ -148,7 +154,10 @@ public class GenerarCompras extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Window w = SwingUtilities.getWindowAncestor(GenerarCompras.this);
+        w.dispose();
+        MenuPropietario oba = new MenuPropietario();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed

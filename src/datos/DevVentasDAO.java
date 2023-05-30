@@ -56,6 +56,7 @@ public class DevVentasDAO implements CrudSimpleVentas<DevVentas, DetalleDevVenta
             String sql = "SELECT clvve FROM Ventas";
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
+            registros.add("Elige");
             while (rs.next()) {
                 registros.add(rs.getString(1));
             }

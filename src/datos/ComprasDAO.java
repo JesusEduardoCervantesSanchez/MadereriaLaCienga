@@ -460,6 +460,7 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
             String sql = "SELECT clvco FROM compras";
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
+            registros.add("Todos");
             while (rs.next()) {
                 registros.add(rs.getString(1));
             }
@@ -473,5 +474,27 @@ public class ComprasDAO implements CrudSimpleCompras<Compras, CompraDetalle, Pro
             CON.Desconectar();
         }
         return registros;
+    }
+    
+    public int clvmax() {
+        int numeroMax=0;
+        try{
+            ps=CON.Conectar().prepareStatement("SELECT AUTO_INCREMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = 'LaCienegaBD' AND TABLE_NAME = 'Compras';");
+            rs=ps.executeQuery();
+            while(rs.next()){
+            numeroMax=rs.getInt(1);  // getString(String)
+        }
+        ps.close();
+        rs.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            rs=null;
+            CON.Desconectar();
+        }
+        return numeroMax;    
     }
 }

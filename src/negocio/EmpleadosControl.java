@@ -98,6 +98,11 @@ public class EmpleadosControl {
         return combo;
     }
     
+    public ComboBoxModel<String> ListarC2() {
+        ComboBoxModel<String> combo = new DefaultComboBoxModel<>(DATOS.ListarE2().toArray(new String[0]));
+        return combo;
+    }
+    
         public String[] Buscar(String texto) {
         List<Empleados> Lista = new ArrayList();
         Lista.addAll(DATOS.listar(texto));

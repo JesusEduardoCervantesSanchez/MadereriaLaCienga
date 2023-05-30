@@ -5,11 +5,13 @@
 package presentacion;
 
 import entidades.VentaDetalle;
+import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import negocio.VentasControl;
 
@@ -67,7 +69,7 @@ public class TablaRemicion extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Tabla de Remisión");
+        titulo.setText("Realizar Venta");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, 200, 40));
 
         jLabel2.setText("Total de la venta");
@@ -136,13 +138,18 @@ public class TablaRemicion extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Window w = SwingUtilities.getWindowAncestor(TablaRemicion.this);
+        w.dispose();
+        MenuEmpleado oba = new MenuEmpleado(clave);
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarProductoActionPerformed
         String registro[] = new String[5];
-        if(cmbClave.getSelectedIndex()<0)
+        if(cmbClave.getSelectedIndex()<1)
             JOptionPane.showMessageDialog(this, "Debes de agregar productos...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
+        else if(txtCantidad.getText().isEmpty())
+            JOptionPane.showMessageDialog(this, "Selecciona una cantidad valida...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
         else if(Integer.parseInt(txtCantidad.getText()) < 1)
             JOptionPane.showMessageDialog(this, "Selecciona una cantidad valida...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
         else if(Integer.parseInt(txtCantidad.getText())>CONTROL.Existencia(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"")))
@@ -156,7 +163,7 @@ public class TablaRemicion extends javax.swing.JPanel {
             registro[4] = Double.toString(Double.parseDouble(registro[1])*Double.parseDouble(registro[3]));
             modelo.addRow(registro);
             total += Double.parseDouble(registro[4]);
-            txtTotalVenta.setText(total+"");
+            txtTotalVenta.setText("$"+total+"");
             txtCantidad.setText("");
             cmbClave.setSelectedIndex(0);
         }

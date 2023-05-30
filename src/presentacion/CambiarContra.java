@@ -4,10 +4,12 @@
  */
 package presentacion;
 
+import java.awt.Window;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import negocio.EmpleadosControl;
 
 /**
@@ -81,7 +83,10 @@ int clave;
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Window w = SwingUtilities.getWindowAncestor(CambiarContra.this);
+        w.dispose();
+        MenuEmpleado oba = new MenuEmpleado(clave);
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed

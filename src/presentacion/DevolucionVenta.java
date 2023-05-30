@@ -6,11 +6,13 @@ package presentacion;
 
 import entidades.DetalleDevVentas;
 import entidades.VentaDetalle;
+import java.awt.Window;
 import java.util.ArrayList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.DefaultTableModel;
 import negocio.DevVentasControl;
 
@@ -22,11 +24,17 @@ public class DevolucionVenta extends javax.swing.JPanel {
     private final DevVentasControl CONTROL=new DevVentasControl();
     DefaultTableModel modelo;
     int total = 0;
+    int clave;
     /**
      * Creates new form NewJPanel
      */
+    
     public DevolucionVenta() {
+    }
+
+    public DevolucionVenta(int clave) {
         initComponents();
+        this.clave = clave;
         String titulos[] = {"Clave", "Cantidad", "Nombre", "Precio", "Monto"};
         modelo=new DefaultTableModel(null, titulos);
         cmbClave.setModel(CONTROL.ListaClaves());
@@ -118,7 +126,10 @@ public class DevolucionVenta extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Window w = SwingUtilities.getWindowAncestor(DevolucionVenta.this);
+        w.dispose();
+        MenuEmpleado oba = new MenuEmpleado(clave);
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void jtTablaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jtTablaMouseClicked
@@ -149,9 +160,12 @@ public class DevolucionVenta extends javax.swing.JPanel {
     }//GEN-LAST:event_btnRealizarDevolucionActionPerformed
 
     private void cmbClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveActionPerformed
-        if(cmbClave.getSelectedIndex()>-1)
+        if(cmbClave.getSelectedIndex()>0)
         {
             jtTabla.setModel(CONTROL.listarDetalle(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"")));
+            for(int i = 0; i<jtTabla.getRowCount(); i++)
+                total += Double.parseDouble(jtTabla.getModel().getValueAt(i, 4)+"");
+            txtTotalVenta.setText("$"+total+"");
         }
     }//GEN-LAST:event_cmbClaveActionPerformed
 

@@ -174,6 +174,7 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
             String sql = "SELECT clvprod FROM Productos";
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
+            registros.add("Elige");
             while (rs.next()) {
                 registros.add(rs.getString(1));
             }
@@ -301,6 +302,23 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
     public double precio(int id)
     {
         double preciop = 0.0;
+        try {
+            String sql = "SELECT preciovp FROM Productos where clvprod = ?";
+            ps = CON.Conectar().prepareStatement(sql);
+            ps.setInt(1, id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                preciop = rs.getDouble(1);
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
         return preciop;
     }
 

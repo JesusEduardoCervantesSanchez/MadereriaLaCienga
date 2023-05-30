@@ -5,10 +5,12 @@
 package presentacion;
 
 import Negocio.ComprasControl;
+import java.awt.Window;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -108,7 +110,10 @@ public class CancelarCompra extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnRegresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegresarActionPerformed
-        
+    Window w = SwingUtilities.getWindowAncestor(CancelarCompra.this);
+        w.dispose();
+        MenuPropietario oba = new MenuPropietario();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnRegresarActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
@@ -127,7 +132,10 @@ public class CancelarCompra extends javax.swing.JPanel {
     }//GEN-LAST:event_jtListadoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        jtListado.setModel(control.Listar(Integer.parseInt(cmbClave.getItemAt(cmbClave.getSelectedIndex()))));
+       if(cmbClave.getSelectedIndex() > 0) 
+            jtListado.setModel(control.Listar(Integer.parseInt(cmbClave.getItemAt(cmbClave.getSelectedIndex()))));
+       else
+           jtListado.setModel(control.Listar());
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

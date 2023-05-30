@@ -186,6 +186,10 @@ public class ComprasControl {
     public int Total() {
         return datos.total();
     }
+    
+    public int Clave() {
+        return datos.clvmax();
+    }
 
     public int TotalMostrados() {
         return registrosMostrados;

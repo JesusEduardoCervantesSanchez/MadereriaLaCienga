@@ -31,7 +31,7 @@ int clvemp;
                                 System.out.println("Clave Menu "+clvemp);
                                 break;
                             case 2:
-                                new CambiaPanel(jpAlmacenador, new DevolucionVenta());
+                                new CambiaPanel(jpAlmacenador, new DevolucionVenta(clvemp));
                                 break;
                         }
                         break;

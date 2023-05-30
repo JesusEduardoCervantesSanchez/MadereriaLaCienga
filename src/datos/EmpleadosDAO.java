@@ -193,6 +193,29 @@ public class EmpleadosDAO implements CrudEmpleadosInterface<Empleados> {
             String sql = "SELECT clvemp FROM Empleados ORDER BY clvemp ASC;";
             ps = CON.Conectar().prepareStatement(sql);
             rs = ps.executeQuery();
+            registros.add("Elige");
+            while (rs.next()) {
+                registros.add(rs.getString(1));
+            }
+            ps.close();
+            rs.close();
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } finally {
+            ps = null;
+            rs = null;
+            CON.Desconectar();
+        }
+        return registros;
+    }
+    
+    public ArrayList<String> ListarE2() {
+        ArrayList<String> registros = new ArrayList();
+        try {
+            String sql = "SELECT clvemp FROM Empleados ORDER BY clvemp ASC;";
+            ps = CON.Conectar().prepareStatement(sql);
+            rs = ps.executeQuery();
+            registros.add("Todos");
             while (rs.next()) {
                 registros.add(rs.getString(1));
             }

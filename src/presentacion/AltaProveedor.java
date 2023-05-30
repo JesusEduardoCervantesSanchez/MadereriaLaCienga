@@ -5,10 +5,12 @@
 package presentacion;
 
 import Negocio.ComprasControl;
+import java.awt.Window;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import negocio.ProveedorControl;
 
 /**
@@ -24,6 +26,7 @@ public class AltaProveedor extends javax.swing.JPanel {
         initComponents();
         control = new ProveedorControl();
         Clave();
+        txtClave.setEditable(false);
     }
 
     public void MensajeOK(String mensaje)
@@ -77,7 +80,7 @@ public class AltaProveedor extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Eliminar Proveedor");
+        titulo.setText("Registrar Proveedor");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 190, 40));
 
         jLabel2.setText("Clave");
@@ -103,6 +106,8 @@ public class AltaProveedor extends javax.swing.JPanel {
         add(txtDireccion, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 140, 280, 30));
 
         txtClave.setEditable(false);
+        txtClave.setBackground(new java.awt.Color(255, 255, 255));
+        txtClave.setForeground(new java.awt.Color(204, 204, 204));
         add(txtClave, new org.netbeans.lib.awtextra.AbsoluteConstraints(520, 80, 80, 30));
         add(txtNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 280, 30));
 
@@ -129,6 +134,10 @@ public class AltaProveedor extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Limpiar();
+        Window w = SwingUtilities.getWindowAncestor(AltaProveedor.this);
+        w.dispose();
+        MenuAdministrador oba = new MenuAdministrador();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed

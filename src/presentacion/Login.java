@@ -352,11 +352,11 @@ public class Login extends javax.swing.JFrame {
                 }
 
             } else {
-                JOptionPane.showMessageDialog(this, "Escribir una contrasea (8 Caracteres)", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(this, "Escribir una contraseña (8 Caracteres)", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
                 PasswordContrasena.requestFocus();
             }
         } else {
-            JOptionPane.showMessageDialog(this, "Escribir un correo valido", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Escribir un nombre de usuario valido...", "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
             txtboxCorreo.requestFocus();
         }
     }//GEN-LAST:event_jPanel3MouseClicked

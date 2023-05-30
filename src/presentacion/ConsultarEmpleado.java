@@ -23,7 +23,7 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
     public ConsultarEmpleado() {
         initComponents();
         control = new EmpleadosControl();
-        cmbClave.setModel(control.ListarC());
+        cmbClave.setModel(control.ListarC2());
         jtListado.setModel(control.listar(""));
     }
 
@@ -89,7 +89,10 @@ public class ConsultarEmpleado extends javax.swing.JPanel {
     }//GEN-LAST:event_jtListadoMouseClicked
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        jtListado.setModel(control.listar(cmbClave.getItemAt(cmbClave.getSelectedIndex())));
+        if(cmbClave.getSelectedIndex() > 0)
+            jtListado.setModel(control.listar(cmbClave.getItemAt(cmbClave.getSelectedIndex())));
+        else
+           jtListado.setModel(control.listar(""));
     }//GEN-LAST:event_btnBuscarActionPerformed
 
 

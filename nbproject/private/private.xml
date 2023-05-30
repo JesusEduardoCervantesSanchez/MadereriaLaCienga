@@ -2,28 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/CancelarCompra.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/MenuEmpleado.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/EmpleadosDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/negocio/EmpleadosControl.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/CambiarContra.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/negocio/ComprasControl.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/ComprasDAO.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/entidades/CompraDetalle.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/negocio/VentasControl.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/presentacion/CancelarCompra.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/presentacion/GenerarCompras.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/entidades/Compras.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/interfaces/CrudVentaInterface.java</file>
-            <file>file:/C:/Users/CSjes/Documents/NetBeansProjects/MadereriaLaCienega/src/datos/VentasDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/entidades/DetalleDevVentas.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/VentasDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/DevVentasDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/TablaRemicion.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/datos/ProductoDAO.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/negocio/DevVentasControl.java</file>
-            <file>file:/C:/Users/hg710/OneDrive/Documentos/NetBeansProjects/LyA/MadereriaLaCienga/src/presentacion/DevolucionVenta.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>

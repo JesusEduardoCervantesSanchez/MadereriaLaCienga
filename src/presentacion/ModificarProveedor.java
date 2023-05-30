@@ -4,10 +4,12 @@
  */
 package presentacion;
 
+import java.awt.Window;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import negocio.ProveedorControl;
 
 /**
@@ -79,7 +81,7 @@ public class ModificarProveedor extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Modificar Proveedor");
+        titulo.setText("Actualizar Proveedor");
         add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(300, 10, 200, 40));
 
         jLabel2.setText("Clave");
@@ -135,6 +137,10 @@ public class ModificarProveedor extends javax.swing.JPanel {
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         Limpiar();
+        Window w = SwingUtilities.getWindowAncestor(ModificarProveedor.this);
+        w.dispose();
+        MenuPropietario oba = new MenuPropietario();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed

@@ -4,10 +4,12 @@
  */
 package presentacion;
 
+import java.awt.Window;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableRowSorter;
 import negocio.EmpleadosControl;
 
@@ -122,7 +124,10 @@ public class BajaEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+       Window w = SwingUtilities.getWindowAncestor(BajaEmpleado.this);
+        w.dispose();
+        MenuAdministrador oba = new MenuAdministrador();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed

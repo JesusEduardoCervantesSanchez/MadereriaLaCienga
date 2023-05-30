@@ -4,7 +4,9 @@
  */
 package presentacion;
 
+import java.awt.Window;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import javax.swing.table.TableRowSorter;
 import negocio.ProveedorControl;
 
@@ -37,11 +39,11 @@ public class BajaProveedor extends javax.swing.JPanel {
     }
     
     public void mensajeOK(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
     }
     
     public void mensajeError(String mensaje){
-        JOptionPane.showMessageDialog(this, mensaje, "Papelería Yolis", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(this, mensaje, "Madereria La Cienega", JOptionPane.ERROR_MESSAGE);
     }
 
 
@@ -125,6 +127,10 @@ public class BajaProveedor extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
+        Window w = SwingUtilities.getWindowAncestor(BajaProveedor.this);
+        w.dispose();
+        MenuAdministrador oba = new MenuAdministrador();
+        oba.setVisible(true);
         Listar("");
         comboProv();
     }//GEN-LAST:event_btnCancelarActionPerformed
@@ -132,7 +138,7 @@ public class BajaProveedor extends javax.swing.JPanel {
     private void btnBajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBajaActionPerformed
         String resp;
         if(jtListado.getSelectedRowCount()==1){
-                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el proveedor: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Sistema Compras-Ventas", JOptionPane.YES_NO_OPTION)==0){
+                if(JOptionPane.showConfirmDialog(this, "¿Deseas eliminar el proveedor: "+jtListado.getValueAt(jtListado.getSelectedRow(), 1).toString()+"?","Madereria La Cienega", JOptionPane.YES_NO_OPTION)==0){
                     resp=control.Desactivar(Integer.parseInt(jtListado.getValueAt(jtListado.getSelectedRow(), 0).toString()));
                     if(resp.equals("OK")){
                         mensajeOK("Proveedor eliminado.");

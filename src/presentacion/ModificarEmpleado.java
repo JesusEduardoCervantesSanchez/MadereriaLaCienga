@@ -4,7 +4,9 @@
  */
 package presentacion;
 
+import java.awt.Window;
 import javax.swing.JOptionPane;
+import javax.swing.SwingUtilities;
 import negocio.EmpleadosControl;
 
 /**
@@ -60,7 +62,7 @@ public class ModificarEmpleado extends javax.swing.JPanel {
         titulo.setFont(new java.awt.Font("Segoe UI", 1, 19)); // NOI18N
         titulo.setForeground(new java.awt.Color(5, 93, 38));
         titulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        titulo.setText("Modificar Empleado");
+        titulo.setText("Actualizar Empleado");
         jPanel1.add(titulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, 190, 40));
 
         nombres.setText("Nombre[s]");
@@ -136,12 +138,15 @@ public class ModificarEmpleado extends javax.swing.JPanel {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        // TODO add your handling code here:
+        Window w = SwingUtilities.getWindowAncestor(ModificarEmpleado.this);
+        w.dispose();
+        MenuPropietario oba = new MenuPropietario();
+        oba.setVisible(true);
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         if (!txtNombres.getText().isEmpty() && !txtApellidos.getText().isEmpty() && !txtTelefono.getText().isEmpty() && !txtDireccion.getText().isEmpty()
-                && !txtColonia.getText().isEmpty() && cmbClave.getSelectedIndex() > -1) {
+                && !txtColonia.getText().isEmpty() && cmbClave.getSelectedIndex() > 0) {
             control.actualizar(Integer.parseInt(cmbClave.getItemAt(cmbClave.getSelectedIndex())), txtNombres.getText(), txtApellidos.getText(), txtTelefono.getText(),
                     txtDireccion.getText(), txtColonia.getText());
             JOptionPane.showMessageDialog(this, "Empleado modificado con exito", "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
@@ -157,7 +162,7 @@ public class ModificarEmpleado extends javax.swing.JPanel {
 
     private void cmbClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmbClaveActionPerformed
         String accion = cmbClave.getSelectedItem() + "";
-        if (!accion.equals("")) {
+        if (!accion.equals("Elige")) {
             String[] arreglo = control.Buscar(accion);
             txtNombres.setText(arreglo[0]);
             txtApellidos.setText(arreglo[1]);

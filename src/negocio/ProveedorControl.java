@@ -148,7 +148,7 @@ public class ProveedorControl {
     }
      
     public int id() {
-        return datos.ultimoid();
+        return datos.ultimoid()+1;
     }
     
     
