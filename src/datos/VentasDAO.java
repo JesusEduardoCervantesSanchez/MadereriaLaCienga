@@ -378,4 +378,26 @@ public class VentasDAO implements CrudSimpleVentas<Ventas, VentaDetalle, Product
         }
        return existencia;
    }
+   
+      public int clvmax() {
+        int numeroMax=0;
+        try{
+            ps=CON.Conectar().prepareStatement("SELECT MAX(clvve) FROM Ventas;");
+            rs=ps.executeQuery();
+            while(rs.next()){
+            numeroMax=rs.getInt(1);  // getString(String)
+        }
+        ps.close();
+        rs.close();
+        }
+        catch(SQLException e){
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        finally{
+            ps=null;
+            rs=null;
+            CON.Desconectar();
+        }
+        return numeroMax;    
+    }
 }

@@ -3,3 +3,319 @@ Color Verde: 055D26
 Color gris: D9D9D9
 Color blanco: FFFFFF
 Color rojo: CC2626
+
+Script BD
+
+create database LaCienegaBD
+
+use LaCienegaBD
+
+drop database LaCienegaBD
+
+create table Ventas
+(
+	clvve int auto_increment,
+	iva decimal(11,2) default 0 not null,
+    subtotalv decimal(11,2) default 0 not null,
+    fechav datetime default now() not null,
+    primary key (clvve)
+);
+select * from Ventas;
+create table Productos
+(
+	clvprod int auto_increment,
+	tipop varchar(30) not null,
+    existenciap int default 0 not null,
+    categoriap varchar(10) not null,
+    preciovp decimal(11,2) default 0 not null,
+    gananciap decimal(11,2) default 0 not null,
+    preciop decimal(11,2) default 0 not null,
+    medidasp decimal(11,2) default 0 not null, -- Cambiar
+    primary key (clvprod)
+);
+
+create table Compras
+(
+	clvco int auto_increment,
+	totalc decimal(11,2) default 0 not null,
+    fechac datetime default now() not null, -- cambiar
+    estadoc bit default 1 not null,
+    primary key (clvco)
+);
+
+create table Proveedores
+(
+	clvprov int auto_increment,
+	nombrep varchar(40) unique not null,
+    direccionp varchar(30) not null,
+    estadop varchar(20) not null,
+    telefonop varchar(10) not null,
+    localidadp varchar(25) not null,
+    primary key (clvprov)
+);
+
+create table Empleados
+(
+	clvemp int auto_increment,
+	nombree varchar(40) not null,
+    apellidoe varchar(40) not null,
+    telefonoe varchar(10) not null,
+    direccione varchar(30) not null,
+    coloniae varchar(30) not null,
+    primary key (clvemp)
+);
+
+create table Usuarios
+(
+	clvu int auto_increment,
+    clvemp int not null,
+	nombreu varchar(40) unique not null,
+    contrasenau varchar(30) not null,
+    rolu varchar(20) not null,
+    primary key (clvu),
+    foreign key (clvemp) references Empleados(clvemp)
+);
+
+create table DevVentas
+(
+	clvdv int auto_increment,
+    clvve int not null,
+	iva decimal(11,2) default 0 not null,
+    subtotalv decimal(11,2) default 0 not null,
+    fechav datetime default now() not null,
+    primary key (clvdv),
+    foreign key (clvve) references Ventas(clvve)
+);
+
+create table ProdVen
+(
+	clvprod int not null,
+    clvve int not null,
+    cantidadv int not null,
+    foreign key (clvprod) references Productos(clvprod),
+    foreign key (clvve) references Ventas(clvve)
+);
+
+create table ProdComp
+(
+	clvprod int not null,
+    clvco int not null,
+    cantidadc int not null,
+    foreign key (clvprod) references Productos(clvprod),
+    foreign key (clvco) references Compras(clvco)
+);
+
+create table ProdDevVent
+(
+	clvprod int not null,
+    clvdv int not null,
+    cantidaddv int not null,
+    foreign key (clvprod) references Productos(clvprod),
+    foreign key (clvdv) references DevVentas(clvdv)
+);
+
+create table ComProv
+(
+	clvco int not null,
+    clvprov int not null,
+    foreign key (clvco) references Compras(clvco),
+    foreign key (clvprov) references Proveedores(clvprov)
+);
+
+create table EmpVen
+(
+	clvve int not null,
+    clvemp int not null,
+    foreign key (clvve) references Ventas(clvve),
+    foreign key (clvemp) references Empleados(clvemp)
+);
+    
+select  clvprod, tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp from Productos;
+
+insert into Productos(tipop, existenciap, categoriap, preciovp, gananciap, preciop, medidasp)
+values('a',0,'a',0.0,0.0,0.0,0.0)
+
+update Productos set medidasp=1.0 where clvprod=1;
+
+delete from Proveedores where clvprod < 11;
+delete from Empleados where clvemp < 11;
+delete from Usuarios where clvu < 11;
+delete from Productos where clvprod < 20;
+
+-- Inserciones Empleados <--> Usuarios
+insert into Empleados(nombree, apellidoe, telefonoe, direccione, coloniae)
+values ('Jose', 'Perez', '3931266325', 'Orquidea #11', 'Santa Cecilia')
+select * from Empleados
+
+insert into Usuarios(clvemp, nombreu, contrasenau, rolu)
+values (6, 'Jose19', 'jo12345J','Empleado')
+select * from Usuarios
+
+-- Inserciones a Proveedores
+insert into Proveedores(nombrep, direccionp, estadop, telefonop, localidadp)
+values('La Blanca', 'Heroe #32', 'Michoacan', 4521349878, 'Uruapan')
+select * from Proveedores
+
+-- Inserciones Productos
+insert into Productos(tipop, categoriap, preciovp, gananciap, preciop, medidasp)
+values('Tabla', 0, 'Primera', 0, 0, 0, 0)
+select * from Productos
+
+-- Inserción Compras
+insert into Compras(totalc, fechac, estadoc)
+values(0,'2022-10-1',1)
+select * from Compras
+
+-- Inserción a ProdComp
+insert into ProdComp(clvprod, clvco, cantidadc)
+values(11,1,5)
+
+-- Inserción a ComProv
+insert into ComProv(clvco, clvprov)
+values(1,1)
+
+delimiter //
+CREATE PROCEDURE InsertarCompra (
+    IN clvprov INT,
+    OUT clvco INT
+)
+BEGIN
+    -- Declarar la variable clvco
+    DECLARE clvco_temp INT;
+    
+    -- Asignar un valor inicial a la variable clvco
+    SET clvco_temp = 0;
+    
+    -- Insertar en la tabla Compras
+    INSERT INTO Compras (totalc, fechac, estadoc) VALUES (0, NOW(), 1);
+    
+    -- Obtener el último valor generado para clvco
+    SET clvco_temp = LAST_INSERT_ID();
+    
+    -- Insertar en la tabla ComProv
+    INSERT INTO ComProv (clvco, clvprov) VALUES (clvco_temp, clvprov);
+    
+    -- Asignar el valor de clvco_temp a clvco (variable de salida)
+    SET clvco = clvco_temp;
+END //
+DELIMITER ;
+
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS InsertarDetalleCom //
+ CREATE PROCEDURE InsertarDetalleCom (
+    IN clvprode INT,
+    IN clvcoe INT,
+    IN cantidadce INT,
+    IN medidaspe DECIMAL(11,2),
+    IN preciope DECIMAL(11,2),
+    IN gananciape DECIMAL(11,2)
+)
+BEGIN
+    INSERT INTO ProdComp (clvprod, clvco, cantidadc) VALUES (clvprode, clvcoe, cantidadce);
+    UPDATE Productos 
+    SET existenciap = existenciap + cantidadce,
+        preciop = preciope,
+        gananciap = gananciape,
+        medidasp = medidaspe
+    WHERE clvprod = clvprode;
+    UPDATE Productos 
+    SET preciovp = (preciope * gananciape) * 1.16
+    WHERE clvprod = clvprode;
+    UPDATE Compras 
+    SET totalc = totalc + (preciope * cantidadce)
+    WHERE clvco = clvcoe;
+END //
+DELIMITER ;
+
+delimiter //
+CREATE PROCEDURE InsertaVenta
+(
+IN clvempe INT,
+OUT clvven INT
+)
+BEGIN    
+DECLARE clvve_temp INT; 
+INSERT INTO Ventas(fechav) VALUES (NOW());    
+SET clvve_temp = LAST_INSERT_ID();    
+INSERT INTO EmpVen(clvve, clvemp) 
+VALUES (clvve_temp, clvempe);   
+SET clvven = clvve_temp; 
+END; //
+delimiter ;
+
+select * from Empleados;
+select * from Usuarios;
+select * from EmpVen;
+
+delimiter //
+DROP PROCEDURE IF EXISTS InsertaDetalleVen //
+CREATE PROCEDURE 
+InsertaDetalleVen(    
+IN clvprode INT,    
+IN clvvee INT,    
+IN cantidadve INT
+)
+BEGIN    
+INSERT INTO ProdVen VALUES(clvprode, clvvee, cantidadve);    
+UPDATE Productos     
+SET existenciap = existenciap - cantidadve     
+WHERE clvprod = clvprode;    
+UPDATE Ventas     
+SET subtotalv = subtotalv + (((SELECT preciovp FROM Productos WHERE clvprod = clvprode) * cantidadve) / 1.16)     
+WHERE clvve = clvvee;    
+UPDATE Ventas     
+SET iva = subtotalv * 0.16     
+WHERE clvve = clvvee;
+END; //
+delimiter ;
+
+select * from Ventas;
+select * from ProdVen;
+select * from Usuarios;
+select * from Empleados;
+select * from Proveedores;
+select * from Productos;
+select * from Compras;
+
+Insert into Empleados(nombree, apellidoe, telefonoe, direccione, coloniae) values ("Pro", "Pro", "1111111111", "Oficina", "Edificio");
+insert into Usuarios (clvemp, nombreu, contrasenau, rolu) values (6, "pro", "pro", "Propietario");
+
+DELIMITER //
+DROP PROCEDURE IF EXISTS InsertaDevVenta // 
+CREATE PROCEDURE InsertaDevVenta(
+     IN clvve INT,
+     OUT devven INT
+     ) 
+     BEGIN  
+     DECLARE devven_temp INT;
+     INSERT INTO DevVentas(clvve, fechav) 
+     VALUES (clvve, NOW());  
+     SET devven_temp = LAST_INSERT_ID(); 
+     set devven = devven_temp;
+     END; //
+     DELIMITER ;
+     
+DELIMITER // 
+DROP PROCEDURE IF EXISTS InsertaDetalleDevVen //    
+CREATE PROCEDURE InsertaDetalleDevVen(     
+IN clvprode INT,     
+IN clvdve INT,     
+IN cantidaddve INT 
+) 
+BEGIN     
+INSERT INTO ProdDevVent
+VALUES(clvprode, clvdve, cantidaddve);     
+UPDATE Productos      
+SET existenciap = existenciap + cantidaddve      
+WHERE clvprod = clvprode;     
+UPDATE DevVentas      
+SET subtotalv = subtotalv + (((SELECT preciovp FROM Productos WHERE clvprod = clvprode) * cantidaddve) / 1.16)      
+WHERE clvdv = clvdve;     
+UPDATE DevVentas      
+SET iva = subtotalv * 0.16      
+WHERE clvdv = clvdve; 
+END; //
+DELIMITER ;
+
+

@@ -64,7 +64,7 @@ public class VentasControl {
 
     public DefaultTableModel listarDetalle(int idVenta) {
         List<Pro_Ven> lista = new ArrayList();
-       // lista.addAll(DATOS.listarDetalle(idVenta));
+        // lista.addAll(DATOS.listarDetalle(idVenta));
         //Crear el modelo y establecer los titulos del modelo"
         String titulos[] = {"ID Producto", "Producto", "Cantidad", "Precio", "SubTotal"};
         modeloTabla = new DefaultTableModel(null, titulos);
@@ -87,7 +87,7 @@ public class VentasControl {
 
     public DefaultTableModel ListarProductos(String valor) {
         List<Producto> lista = new ArrayList();
-       // lista.addAll(DATOS.ListarProductos(valor));
+        // lista.addAll(DATOS.ListarProductos(valor));
         String titulos[] = {"Id", "Id Categotia", "Producto", "Categoria", "Existencias", "P. Compra", "P. Venta", "Ganancia", "Imagen"};
         modeloTabla3 = new DefaultTableModel(null, titulos);
         String registro[] = new String[9];
@@ -105,14 +105,14 @@ public class VentasControl {
             registro[8] = item.getImagenProducto();
             modeloTabla3.addRow(registro);
             registrosMostrados += 1;
-*/
+             */
         }
         return modeloTabla3;
     }
 
     public DefaultTableModel ListarCliente(String valor) {
         List<Clientes> lista = new ArrayList();
-       // lista.addAll(DATOS.ListarCliente(valor));
+        // lista.addAll(DATOS.ListarCliente(valor));
         //int idCliente, String nombreCliente, String apellidosCliente, String telefonoCliente, String correoCliente
         String titulos[] = {"Id", "Nombre", "Apellidos", "Telefono", "Correo"};
         modeloTabla = new DefaultTableModel(null, titulos);
@@ -132,7 +132,7 @@ public class VentasControl {
 
     public DefaultTableModel ListarEmpleados(String valor) {
         List<Empleados> lista = new ArrayList();
-       // lista.addAll(DATOS.ListarEmpleado(valor));
+        // lista.addAll(DATOS.ListarEmpleado(valor));
         String titulos[] = {"Id", "Nombre", "Telefono", "Domicilio", "Colonia"};
         modeloTabla = new DefaultTableModel(null, titulos);
         String registro[] = new String[5];
@@ -152,22 +152,21 @@ public class VentasControl {
     public String insertar(int clvemp, ArrayList detalles) {
         //ArrayList<VentaDetalle> listaProductos = new ArrayList();
         //Verificar si existe la categoria else {
-            //Llenar el objeto
-            //Convertir el Default Table Model a una lista
-            //for (int i = 0; i < detalles.getRowCount(); i++) {
-                //Insertar los valores en la lista
-                //listaProductos.add(new VentaDetalle(Integer.parseInt(""+detalles.getValueAt(i, 0)), Integer.parseInt(""+detalles.getValueAt(i, 1))));
-           // }
-            //Insertar el objeto en la base de datos
-            if (DATOS.insertar(clvemp, detalles)) {
-                return "OK";
-            } else {
-                return "Error al insertar el registro";
-            }
+        //Llenar el objeto
+        //Convertir el Default Table Model a una lista
+        //for (int i = 0; i < detalles.getRowCount(); i++) {
+        //Insertar los valores en la lista
+        //listaProductos.add(new VentaDetalle(Integer.parseInt(""+detalles.getValueAt(i, 0)), Integer.parseInt(""+detalles.getValueAt(i, 1))));
+        // }
+        //Insertar el objeto en la base de datos
+        if (DATOS.insertar(clvemp, detalles)) {
+            return "OK";
+        } else {
+            return "Error al insertar el registro";
         }
+    }
 
-    public ComboBoxModel<String> ListaProductos()
-    {
+    public ComboBoxModel<String> ListaProductos() {
         ComboBoxModel<String> combo = new DefaultComboBoxModel<>(DATOS.ListarProductos().toArray(new String[0]));
         return combo;
     }
@@ -175,19 +174,20 @@ public class VentasControl {
     public int totalMostrados() {
         return registrosMostrados;
     }
-    
-    public String NombreProducto(int idProducto)
-    {
+
+    public String NombreProducto(int idProducto) {
         return DATOS.nombrep(idProducto);
     }
-    
-    public double PrecioProducto(int idProducto)
-    {
+
+    public double PrecioProducto(int idProducto) {
         return DATOS.precio(idProducto);
     }
-    
-    public int Existencia(int idProducto)
-    {
-        return DATOS.Existencia( idProducto);
+
+    public int Existencia(int idProducto) {
+        return DATOS.Existencia(idProducto);
+    }
+
+    public int clvMax() {
+        return DATOS.clvmax();
     }
 }

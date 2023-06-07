@@ -164,8 +164,8 @@ public class GenerarCompras extends javax.swing.JPanel {
         if (cmbClvProducto.getSelectedIndex() >= 0 && !txtCantidad.getText().isEmpty() && !txtMedidas.getText().isEmpty()
                 && !txtPrecio.getText().isEmpty() && !txtGanancia.getText().isEmpty()) {
             agregarDetalle(new CompraDetalle(Integer.parseInt(cmbClvProducto.getItemAt(cmbClvProducto.getSelectedIndex())), Integer.parseInt(txtCantidad.getText()),
-                    Double.parseDouble(txtMedidas.getText()), Double.parseDouble(txtPrecio.getText()),
-                    Double.parseDouble(txtGanancia.getText())));
+                    Double.parseDouble(txtPrecio.getText()), Double.parseDouble(txtGanancia.getText()),
+                    Double.parseDouble(txtMedidas.getText())));
             cmbClvProducto.setSelectedIndex(0);
             txtCantidad.setText("");
             txtMedidas.setText("");

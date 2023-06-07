@@ -20,23 +20,26 @@ import negocio.VentasControl;
  * @author hg710
  */
 public class TablaRemicion extends javax.swing.JPanel {
+
     DefaultTableModel modelo;
-    private final VentasControl CONTROL=new VentasControl();
+    private final VentasControl CONTROL = new VentasControl();
     private int clave;
-    double total=0;
+    double total = 0;
+    private NotaVenta nota;
+
     /**
      * Creates new form NewJPanel
      */
     public TablaRemicion() {
-        
+
     }
 
     public TablaRemicion(int clave) {
         this.clave = clave;
-        System.out.println("Clave Tabla "+clave);
+        System.out.println("Clave Tabla " + clave);
         initComponents();
         String titulos[] = {"Clave", "Cantidad", "Nombre", "Precio", "Monto"};
-        modelo=new DefaultTableModel(null, titulos);
+        modelo = new DefaultTableModel(null, titulos);
         cmbClave.setModel(CONTROL.ListaProductos());
         jtTabla.setModel(modelo);
     }
@@ -146,24 +149,23 @@ public class TablaRemicion extends javax.swing.JPanel {
 
     private void btnInsertarProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInsertarProductoActionPerformed
         String registro[] = new String[5];
-        if(cmbClave.getSelectedIndex()<1)
+        if (cmbClave.getSelectedIndex() < 1)
             JOptionPane.showMessageDialog(this, "Debes de agregar productos...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-        else if(txtCantidad.getText().isEmpty())
+        else if (txtCantidad.getText().isEmpty())
             JOptionPane.showMessageDialog(this, "Selecciona una cantidad valida...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-        else if(Integer.parseInt(txtCantidad.getText()) < 1)
+        else if (Integer.parseInt(txtCantidad.getText()) < 1)
             JOptionPane.showMessageDialog(this, "Selecciona una cantidad valida...", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-        else if(Integer.parseInt(txtCantidad.getText())>CONTROL.Existencia(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"")))
+        else if (Integer.parseInt(txtCantidad.getText()) > CONTROL.Existencia(Integer.parseInt(cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex()) + "")))
             JOptionPane.showMessageDialog(this, "La cantidad no puede ser mayor a lo que hay en existencia", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-        else
-        {
-            registro[0] = cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex())+"";
+        else {
+            registro[0] = cmbClave.getModel().getElementAt(cmbClave.getSelectedIndex()) + "";
             registro[1] = txtCantidad.getText();
             registro[2] = CONTROL.NombreProducto(Integer.parseInt(registro[0]));
             registro[3] = Double.toString(CONTROL.PrecioProducto(Integer.parseInt(registro[0])));
-            registro[4] = Double.toString(Double.parseDouble(registro[1])*Double.parseDouble(registro[3]));
+            registro[4] = Double.toString(Double.parseDouble(registro[1]) * Double.parseDouble(registro[3]));
             modelo.addRow(registro);
             total += Double.parseDouble(registro[4]);
-            txtTotalVenta.setText("$"+total+"");
+            txtTotalVenta.setText("$" + total + "");
             txtCantidad.setText("");
             cmbClave.setSelectedIndex(0);
         }
@@ -175,24 +177,23 @@ public class TablaRemicion extends javax.swing.JPanel {
 
     private void btnRealizarVenta1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRealizarVenta1ActionPerformed
         ArrayList<VentaDetalle> lista = new ArrayList();
-        if(jtTabla.getRowCount()>0)
-        {
-            for(int i = 0; i<jtTabla.getRowCount(); i++)
-            {
-                System.out.println("Insertar clvprod: "+jtTabla.getModel().getValueAt(i, 0).toString());
+        if (jtTabla.getRowCount() > 0) {
+            for (int i = 0; i < jtTabla.getRowCount(); i++) {
+                System.out.println("Insertar clvprod: " + jtTabla.getModel().getValueAt(i, 0).toString());
                 lista.add(new VentaDetalle(Integer.parseInt(jtTabla.getModel().getValueAt(i, 0).toString()), Integer.parseInt(jtTabla.getModel().getValueAt(i, 1).toString())));
             }
             String estado = CONTROL.insertar(clave, lista);
             JOptionPane.showMessageDialog(this, estado, "Madereria La Cienega", JOptionPane.INFORMATION_MESSAGE);
+            nota = new NotaVenta(CONTROL.clvMax());
+            nota.setVisible(true);
             for (int i = modelo.getRowCount() - 1; i >= 0; i--) {
                 modelo.removeRow(i);
-            txtTotalVenta.setText("");
-            total = 0;
-}
-        }
-        else {
+                txtTotalVenta.setText("");
+                total = 0;
+            }
+        } else {
             JOptionPane.showMessageDialog(this, "Seleccione un proveedor y/o agregue un producto", "Madereria La Cienega", JOptionPane.WARNING_MESSAGE);
-            
+
         }
     }//GEN-LAST:event_btnRealizarVenta1ActionPerformed
 
